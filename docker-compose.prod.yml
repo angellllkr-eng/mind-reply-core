@@ -1,0 +1,65 @@
+version: '3.9'
+
+services:
+  web-replycontrol:
+    build:
+      context: ./apps/replycontrol-web
+      dockerfile: Dockerfile
+    container_name: replycontrol-web-prod
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: 1
+    networks:
+      - app-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      - rwa-bridge
+    labels:
+      - "com.app=mind-reply"
+      - "com.service=web"
+      - "com.environment=production"
+
+  rwa-bridge:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rwa-bridge-prod
+    ports:
+      - "8000:8000"
+    environment:
+      LEGAL_ENTITY_API_URL: ${LEGAL_ENTITY_API_URL}
+      AGENT_WALLET_ADDRESS: ${AGENT_WALLET_ADDRESS}
+      AGENT_SESSION_KEY: ${AGENT_SESSION_KEY}
+      PYTHONUNBUFFERED: 1
+      PYTHONDONTWRITEBYTECODE: 1
+    networks:
+      - app-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    labels:
+      - "com.app=mind-reply"
+      - "com.service=rwa-bridge"
+      - "com.environment=production"
+    volumes:
+      - rwa-logs:/app/logs
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  rwa-logs:
+    driver: local
