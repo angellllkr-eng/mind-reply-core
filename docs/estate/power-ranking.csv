@@ -1,0 +1,16 @@
+rank,repo,production readiness,business utility,maintainability,deployment clarity,route cleanliness,support burden,revenue potential,weighted total,decision
+1,mind-reply-core,4,5,3,2,2,3,5,3.55,canonical production repo
+2,nexus-core,2,2,3,2,4,4,1,2.45,restricted support only
+3,a11k-surface,2,3,2,2,2,2,3,2.30,migration source then archive
+4,forge,1,3,3,3,4,3,4,2.55,experimental support, not production
+5,pointer-ai-landing-page,2,2,3,2,4,3,3,2.50,marketing source then disconnect
+6,brushworks,1,2,2,2,3,2,3,1.95,experiment
+7,own,1,2,2,2,3,2,3,1.90,disconnected experiment
+8,agent-control-plane,1,2,1,1,1,1,1,1.25,archive
+9,chatbot,1,2,1,1,2,1,2,1.35,archive
+10,chatbot1,1,1,1,1,2,1,1,1.10,archive
+11,linear-card-interaction,1,1,2,1,3,2,1,1.45,archive
+12,EPHEMERAL,1,1,1,1,2,1,1,1.10,archive
+13,angellllkr-eng,1,1,3,1,4,3,1,1.85,documentation only
+14,source1,1,1,5,5,5,5,1,2.45,placeholder archive
+15,source2,1,1,5,5,5,5,1,2.45,placeholder archive
