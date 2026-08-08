@@ -8,6 +8,22 @@ MindReply is a unified AI/LLM platform with a monorepo architecture supporting t
 
 ---
 
+## Elysium Stack (Sovereign Control Plane)
+
+The **Elysium Stack** is the sovereign enterprise intelligence substrate that sits above product surfaces. It interlocks three layers under a single control plane so that expert intent, runtime quality, and cryptographic provenance become executable law.
+
+| Layer | Role | Package |
+|-------|------|---------|
+| **Aurelia** | Domain Expert Sovereignty (NL/visual → deterministic config) | `packages/aurelia` |
+| **Lumenforge** | Quality as Executable Law (Edge Middleware contracts) | `packages/lumenforge` |
+| **Veridex** | Provenance-First Ledger (immutable `.epack` receipts) | `packages/veridex` |
+| **Elysium Core** | Shared types + Helix Protocol | `packages/elysium-core` |
+
+Full architecture, orchestration loop, and commercial positioning: **[docs/ELYSIUM_STACK.md](./ELYSIUM_STACK.md)**  
+Epic: **#38**
+
+---
+
 ## Technology Stack
 
 | Layer | Technology | Purpose |
@@ -19,6 +35,8 @@ MindReply is a unified AI/LLM platform with a monorepo architecture supporting t
 | **Orchestration** | Docker Compose | Local & production deployment |
 | **CI/CD** | GitHub Actions | Automated testing & deployment |
 | **Hosting** | Docker (mindreply.com) + Vercel (a11-k.space) | Production deployment |
+| **Edge Quality** | Vercel Edge Middleware (Lumenforge) | Runtime contract enforcement |
+| **Immutable Ledger** | Supabase + RLS + SHA-256 (Veridex) | Cryptographic provenance |
 
 ---
 
@@ -59,6 +77,7 @@ MindReply is a unified AI/LLM platform with a monorepo architecture supporting t
 │ PostgreSQL 16 (mindreply_db)    │
 │ Redis 7 (session & cache)       │
 │ Health Check Monitor            │
+│ Veridex Ledger (Supabase)       │
 └─────────────────────────────────┘
 ```
 
@@ -88,6 +107,14 @@ MindReply is a unified AI/LLM platform with a monorepo architecture supporting t
 - User profiles, settings → PostgreSQL
 - Session tokens, temporary data → Redis
 - Audit logs, transactions → PostgreSQL (write-once)
+- Elysium envelopes → Veridex / Supabase append-only (SHA-256)
+
+### Elysium Orchestration Loop
+
+1. Intent Capture (Aurelia)
+2. Contract Verification (Lumenforge vs Helix Protocol)
+3. Cryptographic Stamping (Veridex)
+4. Execution & Delivery
 
 ---
 
@@ -112,9 +139,10 @@ All services run in single Docker network (`mindreply-network`) on localhost.
 ### Production (a11-k.space)
 
 - **Hosting:** Vercel (serverless)
-- **Edge:** Vercel's global edge network
+- **Edge:** Vercel's global edge network + Lumenforge Middleware
 - **Database:** PostgreSQL (shared with mindreply.com)
 - **Cache:** Redis (shared with mindreply.com)
+- **Ledger:** Supabase (Veridex)
 - **Backups:** Vercel snapshots + manual backups
 
 ---
@@ -164,6 +192,11 @@ services/
 
 ```
 packages/
+├── elysium-core/            # Helix Protocol + shared types
+├── aurelia/                 # Expert intent compiler
+├── lumenforge/              # Edge contract evaluator
+├── veridex/                 # Cryptographic ledger
+├── a11-fleet/               # Fleet registry & tasks
 ├── shared-ui/               # Reusable React components
 ├── shared-config/           # Environment & schemas
 └── shared-types/            # TypeScript definitions
@@ -192,6 +225,12 @@ packages/
 - HTTPS enforced (both domains)
 - CORS headers properly configured
 - Rate limiting on sensitive endpoints
+- Lumenforge enforces Helix contracts at the edge before delivery
+
+### Provenance
+
+- Veridex writes append-only, SHA-256 hashed envelopes under Supabase RLS
+- Every high-stakes action produces a signed `.epack` receipt
 
 ---
 
@@ -255,6 +294,8 @@ docker compose logs -f rwa-bridge
 
 ## References
 
+- [Elysium Stack](./ELYSIUM_STACK.md)
 - [Deployment Guide](./DEPLOYMENT.md)
+- [Operating Model](./OPERATING_MODEL.md)
 - [Operations Runbook](./OPERATIONS.md)
 - [Troubleshooting](./TROUBLESHOOTING.md)
