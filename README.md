@@ -15,6 +15,13 @@ MindReply Proofline is the canonical product repository for building reliable op
 | **Patternwright** | Visual-system and component experimentation | `apps/experimental/brushworks/` |
 | **Venture Foundry** | Concept-to-deployment workflow experiments | `apps/experimental/forge/` |
 
+## Operating docs
+
+- [`docs/OPERATING_MODEL.md`](docs/OPERATING_MODEL.md) — product vs operations boundary and state vocabulary
+- [`docs/AUTOMATION_MESH.md`](docs/AUTOMATION_MESH.md) — n8n, Zapier, vector search, and sub-agent roles
+- [`docs/DOMAIN_AND_SEO_POLICY.md`](docs/DOMAIN_AND_SEO_POLICY.md) — domain selection and indexable surface rules
+- [`docs/AGENT_FLEET_TEMPLATE.md`](docs/AGENT_FLEET_TEMPLATE.md) — template for bounded sub-agents
+
 ## Commercial focus
 
 ### GitHub + Python Profit Audit
@@ -42,8 +49,6 @@ We use branded terms only when they improve recall. Every branded term keeps a p
 - **ReplyRail** — approved messaging, voice, and delivery workflows.
 - **Operator Guild** — constrained specialist automations with named permissions.
 - **Reality Delta** — the gap between a claim and verified system state.
-
-See [`docs/VOCABULARY.md`](docs/VOCABULARY.md) for usage rules.
 
 ## Development
 
