@@ -6,7 +6,7 @@
 
 ## Why this document exists
 
-The structural consolidation created a useful product monorepo, but GitHub evidence shows the private control plane is still active and holds the fleet, orchestration, security and owner-control backlog. Therefore “single repository complete” is not an accurate description of the entire operating estate.
+The estate works best with a clean split between product runtime and owner operations. Product code, customer surfaces, and prototype work belong here. Release governance, fleet policy, and owner-only command surfaces belong in the operational root.
 
 ## Source-of-truth split
 
@@ -17,7 +17,7 @@ The structural consolidation created a useful product monorepo, but GitHub evide
 - product-facing infrastructure definitions;
 - product tests and deployment configuration;
 - product documentation;
-- **Elysium Stack packages** (`elysium-core`, `aurelia`, `lumenforge`, `veridex`) and their architecture docs.
+- Elysium Stack packages and architecture docs.
 
 ### `agent-control-plane` owns
 - fleet definitions and task contracts;
@@ -25,22 +25,37 @@ The structural consolidation created a useful product monorepo, but GitHub evide
 - model/provider routing policy;
 - ownership and approval policy;
 - security and secret-handling policy;
-- evidence, audit and Reality Delta reporting;
+- evidence, audit, and Reality Delta reporting;
 - owner-only command surfaces.
 
-## Elysium Stack authority
+## Product architecture
 
-The Elysium Stack (Aurelia → Lumenforge → Veridex) is the sovereign intelligence substrate. Implementation lives in this product monorepo; runtime policy and high-stakes approval gates remain under dual-root discipline. See [docs/ELYSIUM_STACK.md](./ELYSIUM_STACK.md) and epic #38.
+The product should be organized around four planes:
 
-- **Aurelia** compiles expert intent into version-controlled contracts (product surface).
-- **Lumenforge** enforces those contracts at the edge (runtime quality law).
-- **Veridex** records immutable provenance (ledger under Supabase RLS).
+| Plane | Job |
+|---|---|
+| **Control** | owner-facing decisions, approvals, and release gates |
+| **Data** | storage, retrieval, analytics, and evidence |
+| **Agent** | bounded assistant workflows and sub-agents |
+| **Edge** | phone-first UI, web delivery, and external touchpoints |
 
-No automatic promotion of Helix contracts or production surface changes without human review.
+## Product vocabulary
+
+Use the following names here:
+
+- **Proofline** — verified path from change to release
+- **Reality Delta** — difference between a claim and the current verified state
+- **ReplyRail** — approved communications and delivery path
+- **Continuity Ledger** — durable operational memory and decision history
+- **Signal Watch** — runtime monitoring and anomaly review
+
+## Execution rule
+
+Any claim about health, delivery, or automation should be backed by evidence from at least two sources when possible: system response, database record, or artifact hash. That mirrors the tri-agent validation model, which requires independent evidence sources rather than a single trust path.
 
 ## Change path
 
-The control plane may propose bounded pull requests into this repository. Every proposal must include scope, tests, evidence, risks and rollback. Human review is required before merge. Production deployment, billing, DNS, credentials and external communication remain owner-approved actions.
+The control plane may propose bounded pull requests into this repository. Every proposal should include scope, tests, evidence, risks, and rollback. Human review is required before merge. Production deployment, billing, DNS, credentials, and external communication remain owner-approved actions.
 
 ## State vocabulary
 
@@ -48,30 +63,10 @@ Use these terms precisely:
 - **planned:** documented intent only;
 - **built:** code or configuration exists at a commit;
 - **tested:** repeatable checks passed for that commit;
-- **deployed:** an identified environment reports the commit/version;
+- **deployed:** an identified environment reports the commit or version;
 - **live:** the intended user path works and has fresh operational evidence.
 
 Do not promote a claim without the evidence required by the next state.
-
-## Revenue-first priority
-
-The live GitHub + Python Profit Audit is the immediate revenue path. Product work should first support:
-1. one unambiguous buyer-facing CTA;
-2. secure post-purchase intake without collecting secrets;
-3. a reproducible, read-only audit workflow;
-4. a seven-day evidence-backed delivery pack;
-5. clear remediation and rollback guidance.
-
-The Elysium orchestration loop (Intent → Contract → Stamp → Execution) is intended to become the quality and provenance backbone of that audit path. Work unrelated to selling or delivering that offer is secondary until the owner changes priority.
-
-## Deployment safety
-
-- No secret values are committed.
-- No automatic merge from fleet automation.
-- No automatic production deployment from control-plane tasks.
-- Existing surfaces remain available until parity and health checks pass.
-- Repository and Vercel cleanup occurs only after traffic, dependency and rollback review.
-- Lumenforge contracts and Veridex writes are additive; they must not break existing paths until explicitly promoted.
 
 ## Acceptance criteria for operational consolidation
 
@@ -80,7 +75,6 @@ Operational consolidation is complete only when:
 - cross-repository pull requests work with least privilege;
 - required product checks run consistently;
 - production surfaces are explicitly named and verified;
-- stale/duplicate repositories have evidence-backed dispositions;
+- stale or duplicate repositories have evidence-backed dispositions;
 - Reality Delta reporting catches documentation/runtime contradictions;
-- the owner retains final approval for high-risk actions;
-- Elysium Stack documentation and package scaffolds are present and linked (epic #38).
+- the owner retains final approval for high-risk actions.
