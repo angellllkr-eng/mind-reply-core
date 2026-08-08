@@ -60,3 +60,16 @@ export interface OrchestrationEvent {
   envelope?: VeridexEnvelope;
   error?: string;
 }
+
+export {
+  runOrchestrationLoop,
+  type OrchestrationDeps,
+  type OrchestrationResult,
+} from "./orchestration";
+
+export {
+  gateProfitAuditDraft,
+  isAuditLoopEnabled,
+  PROFIT_AUDIT_CONTRACT,
+  type AuditDraftInput,
+} from "./profit-audit";
