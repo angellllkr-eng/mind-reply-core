@@ -9,7 +9,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         with: { version: 9.15.0 }
       - uses: actions/setup-node@v4
-        with: { node-version: 20, cache: pnpm, cache-dependency-path: phone-first-saas-starter/pnpm-lock.yaml }
+        with: { node-version: 20 }
       - run: pnpm install --no-frozen-lockfile
       - run: pnpm prisma:generate
       - run: pnpm lint
