@@ -1,0 +1,7 @@
+"use server";
+import { requireAuth } from "@/lib/clerk";
+import { prisma } from "@/lib/prisma";
+import { stripe, stripePriceId } from "@/lib/stripe";
+import { checkoutSchema } from "../middleware/validation";
+export async function createCheckout(input?:unknown){const clerkId=await requireAuth();const parsed=checkoutSchema.safeParse(input??{priceId:stripePriceId()});if(!parsed.success)return {ok:false,error:parsed.error.flatten()};const user=await prisma.user.findUnique({where:{clerkId}});if(!user)return {ok:false,error:"User not synced"};const session=await stripe.checkout.sessions.create({mode:"subscription",line_items:[{price:parsed.data.priceId,quantity:1}],success_url:`${process.env.NEXT_PUBLIC_APP_URL}/dashboard?checkout=success`,cancel_url:`${process.env.NEXT_PUBLIC_APP_URL}/pricing?checkout=cancelled`,customer:user.subscription?.stripeCustomerId??undefined,customer_creation:user.subscription?.stripeCustomerId?undefined:"always",metadata:{clerkId}});return {ok:true,url:session.url};}
+export async function createPortal(){const clerkId=await requireAuth();const user=await prisma.user.findUnique({where:{clerkId},include:{subscription:true}});if(!user?.subscription?.stripeCustomerId)return {ok:false,error:"No Stripe customer yet"};const session=await stripe.billingPortal.sessions.create({customer:user.subscription.stripeCustomerId,return_url:`${process.env.NEXT_PUBLIC_APP_URL}/settings`});return {ok:true,url:session.url};}
