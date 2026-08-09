@@ -1,6 +1,6 @@
 # Automation Mesh
 
-This document explains how the product root should handle automation without pretending every integration is the same.
+This document describes how the product root should handle automation without pretending every integration is the same.
 
 ## Tool choices
 
