@@ -1,31 +1,56 @@
-# Multi-stage build: dependencies → build → runtime
+# Monorepo-aware multi-stage build for web-replycontrol
+# Build context MUST be the repository root (see docker-compose.yml).
+
 FROM node:20-alpine AS deps
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm install --frozen-lockfile --prod=false
+RUN npm install -g pnpm@10.32.1 --silent
 
-# Build stage
+# Workspace manifests first for better layer caching
+COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
+COPY apps/web-replycontrol/package.json ./apps/web-replycontrol/
+# Copy package manifests for workspace deps so install resolves correctly
+COPY packages ./packages
+
+RUN pnpm install --frozen-lockfile --filter=web-replycontrol...
+
+# ---- Builder ----
 FROM node:20-alpine AS builder
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-RUN pnpm run build --filter=web-replycontrol
+RUN npm install -g pnpm@10.32.1 --silent
 
-# Production runtime
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/apps/web-replycontrol/node_modules ./apps/web-replycontrol/node_modules
+COPY . .
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Build only this app
+RUN pnpm --filter web-replycontrol build
+
+# ---- Production runtime ----
 FROM node:20-alpine AS production
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 ENV NODE_ENV=production
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./
-EXPOSE 3000
-CMD ["pnpm", "start"]
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
 
-# Development stage (for docker-compose dev)
-FROM node:20-alpine AS development
-WORKDIR /app
-ENV NODE_ENV=development
-COPY pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
+RUN npm install -g pnpm@10.32.1 --silent
+
+# Copy the built app and minimal runtime needs
+COPY --from=builder /app/apps/web-replycontrol/.next ./apps/web-replycontrol/.next
+COPY --from=builder /app/apps/web-replycontrol/package.json ./apps/web-replycontrol/package.json
+COPY --from=builder /app/apps/web-replycontrol/public ./apps/web-replycontrol/public
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/apps/web-replycontrol/node_modules ./apps/web-replycontrol/node_modules
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
+
+WORKDIR /app/apps/web-replycontrol
 EXPOSE 3000
-CMD ["pnpm", "dev"]
+
+# Health endpoint is /api/health
+CMD ["pnpm", "start"]
