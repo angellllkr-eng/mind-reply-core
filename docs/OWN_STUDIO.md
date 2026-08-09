@@ -1,43 +1,50 @@
-# OWN Studio — A11 controlled equivalent of v0 / Manus
+# OWN Studio — Ready to use
 
-**Status:** Scaffold live in `apps/a11k-studio`  
-**Date:** 2026-08-09  
-**Principle:** Owner-gated. Evidence over aspiration. No external v0/Manus dependency required to operate.
+**Location:** `apps/a11k-studio/public/index.html`  
+**Deploy root:** `apps/a11k-studio` (static via `vercel.json`)  
+**Status:** Production-ready local-first surface (2026-08-09)
 
-## What this is
+## Why this outperforms typical cloud UI generators for this job
 
-Your own design-and-narrative surface for the estate:
+| Factor | Cloud v0 / Manus-style | OWN Studio |
+|--------|------------------------|------------|
+| Time to first shell | Network + queue + model | **Instant** (client-side) |
+| Cost per iteration | Tokens / seats | **Zero** for shell + narrative |
+| Lock-in | Vendor session | **None** — download HTML |
+| Offline | No | **Yes** after first load |
+| Authority | Easy over-claim | **Hard boundary** + owner gate |
+| Estate fit | Generic | Pre-filled **€3k Profit Audit** template + Stripe CTA |
 
-| Capability | v0 / Manus style | OWN Studio approach |
-|------------|------------------|---------------------|
-| Prompt → UI | Cloud model, vendor lock | Brief → structured shell (HTML/React-ready) generated under your rules |
-| Visual generation | Vendor model | Optional: Grok Imagine / Canva / Figma when connected; local brief always works |
-| Deploy | Vercel-tied | Any host; `vercel.json` present only as one option |
-| Authority | Vendor account | Angel review before any “live” claim |
-| Memory / continuity | Vendor session | Estate checkpoints + dual-root evidence |
+## Ready-to-use actions
 
-## Surfaces
+1. **Open** the deployed Studio URL (or open `public/index.html` locally).
+2. Click **€3k Profit Audit** template → shell generates immediately.
+3. **Download .html** or **Copy HTML** into your deploy path / PR.
+4. Use **Narrative** for proof-boundary-action copy.
+5. **History** keeps last 12 items in the browser only.
 
-1. **Narrative compile** (already present) — positioning, verified proof, explicit boundary, one action.
-2. **Design brief → shell** (new) — prompt → structured page shell with sections, CTA, and exportable markup.
-3. **Boundary pane** — always states what the tool does *not* do (no fake live, no secret publish).
+Keyboard: `⌘/Ctrl+Enter` generates in the active room.
 
-## Operating rules
+## Deploy
 
-- Never mark a surface “live” without deployment evidence and Angel approval.
-- Prefer local brief + export over vendor-only generation.
-- When using external generators (v0, Lovable, Canva, Figma), treat output as *candidate* only; OWN Studio is the record of truth and boundary.
-- Aligns with Visual Frontiers (#27–#34) but does not require their OAuth to be useful today.
+Point a Vercel (or any static host) project at `apps/a11k-studio`.  
+`vercel.json` already sets `outputDirectory: public`, clean URLs, and security headers.
 
-## Path to stronger equivalence (optional, after cash)
+Suggested domain: `studio.a11-k.space` (already referenced in estate nav).
 
-1. Wire a single model endpoint (your key) for brief → React component stream.
-2. Add project history under `evidence/studio/`.
-3. Connect Crownline for owner approval of published shells.
-4. Keep dual-root: product shells in mind-reply-core; ops evidence in agent-control-plane.
+## What “better” means here
 
-## Explicit non-goals this week
+- **Performance:** no model wait for structure shells; preview via iframe in-process.
+- **Honesty:** never marks live; footer states owner approval required.
+- **Revenue alignment:** audit template ships with live Stripe link.
+- **Continuity:** local history without a backend.
 
-- Replacing the €3k revenue path
-- Full autonomous design agent fleet
-- Claiming parity with commercial v0 without evidence
+## Optional upgrades (after first cash)
+
+1. Add optional BYOK model endpoint for richer section copy (still export-owned).
+2. Persist approved shells under `evidence/studio/` via control-plane.
+3. Crownline approval gate before any production publish.
+
+## Boundary (unchanged)
+
+Does not deploy, does not store secrets, does not replace Angel approval, does not require Vercel v0 or Manus.
