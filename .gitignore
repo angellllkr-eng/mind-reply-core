@@ -21,6 +21,9 @@
 # misc
 .DS_Store
 *.pem
+*.key
+credentials/
+secrets/
 
 # debug
 npm-debug.log*
@@ -29,8 +32,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files — real environment files must never be committed
-.env
-.env.*
+.env*
 !.env.example
 !.env.production.example
 
