@@ -1,0 +1,84 @@
+schema_version: 1
+reviewed_at: "2026-08-10T20:55:00+03:00"
+owner: angellllkr-eng
+
+# Repository ownership is the architectural source of truth. Runtime status is
+# only VERIFIED when backed by recent machine-observed evidence.
+products:
+  - id: mindreply
+    repo: angellllkr-eng/mind-reply-core
+    role: commercial-product
+    visibility: public
+    status: IMPLEMENTED
+    note: Canonical customer/product root; runtime deployment is not asserted here.
+  - id: agent-control-plane
+    repo: angellllkr-eng/agent-control-plane
+    role: private-operations-and-command
+    visibility: private
+    status: IMPLEMENTED
+    note: Canonical owner/control/orchestration root.
+
+repositories:
+  canonical:
+    - angellllkr-eng/mind-reply-core
+    - angellllkr-eng/agent-control-plane
+  keep_temporarily_extract_value:
+    - angellllkr-eng/saas-starter
+    - angellllkr-eng/forge
+    - angellllkr-eng/nexus-core
+    - angellllkr-eng/own
+  consolidate_or_supersede:
+    - angellllkr-eng/a11k-surface
+    - angellllkr-eng/mindreply
+    - angellllkr-eng/copy-of-a11-k-command-center
+  review_or_archive:
+    - angellllkr-eng/Own1
+    - angellllkr-eng/EPHEMERAL
+    - angellllkr-eng/source1
+    - angellllkr-eng/source2
+
+architecture:
+  product_root: angellllkr-eng/mind-reply-core
+  control_root: angellllkr-eng/agent-control-plane
+  rule: One canonical owner per capability; private telemetry never becomes public product state.
+
+status_model:
+  - PLANNED
+  - IMPLEMENTED
+  - BUILT
+  - PREVIEW
+  - VERIFIED
+  - PRODUCTION
+  - DEGRADED
+  - DOWN
+  - BLOCKED
+  - STALE
+  - UNKNOWN
+  - RECOVERING
+
+production_truth:
+  evidence_required: true
+  evidence_fields:
+    - target
+    - checked_at
+    - source
+    - result
+    - freshness
+    - state
+  rule: Repository presence, README claims, or historical deployment notes are not proof of production health.
+
+domains: []
+deployments: []
+integrations: []
+owners:
+  product: angellllkr-eng
+  control_plane: angellllkr-eng
+
+dependencies:
+  mind-reply-core:
+    control_plane: agent-control-plane
+
+access_note:
+  organization_membership_api: no_memberships_returned
+  repository_access: organization_repositories_are_visible_to_the_connected_github_app
+  implication: Organization-level settings, secrets, branch protections, and integrations remain UNKNOWN unless directly exposed by the connected GitHub actions.
