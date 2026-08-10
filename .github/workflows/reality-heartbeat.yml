@@ -9,30 +9,22 @@ permissions:
   contents: read
 
 jobs:
-  heartbeat:
+  reality-gate:
     runs-on: ubuntu-latest
     steps:
-      - name: Check declared public endpoints
-        shell: bash
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify declared public routes
         env:
-          PUBLIC_URLS: ${{ vars.PUBLIC_URLS }}
+          BASE_URL: ${{ vars.PUBLIC_BASE_URL }}
+          REALITY_ROUTES: ${{ vars.REALITY_ROUTES }}
+          EXPECTED_RELEASE_SHA: ${{ vars.EXPECTED_RELEASE_SHA }}
+          RELEASE_SHA_URL: ${{ vars.RELEASE_SHA_URL }}
         run: |
           set -euo pipefail
-          if [ -z "${PUBLIC_URLS:-}" ]; then
-            echo "PUBLIC_URLS repository variable is not configured; no live claim is made."
+          if [ -z "${BASE_URL:-}" ]; then
+            echo "PUBLIC_BASE_URL is not configured; no production claim is made."
             exit 0
           fi
-          failures=0
-          while IFS= read -r url; do
-            [ -z "$url" ] && continue
-            code=$(curl -L -s -o /dev/null -w '%{http_code}' --max-time 20 "$url" || true)
-            echo "$url -> $code"
-            case "$code" in
-              2*|3*) ;;
-              *) failures=$((failures + 1)) ;;
-            esac
-          done <<< "$PUBLIC_URLS"
-          if [ "$failures" -gt 0 ]; then
-            echo "$failures endpoint(s) failed the heartbeat."
-            exit 1
-          fi
+          bash scripts/reality-gate.sh
