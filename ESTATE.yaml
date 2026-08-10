@@ -22,6 +22,8 @@ repositories:
   canonical:
     - angellllkr-eng/mind-reply-core
     - angellllkr-eng/agent-control-plane
+  consolidate_into_canonical:
+    - Mind-Reply/mind-reply-core
   keep_temporarily_extract_value:
     - angellllkr-eng/saas-starter
     - angellllkr-eng/forge
@@ -41,6 +43,7 @@ architecture:
   product_root: angellllkr-eng/mind-reply-core
   control_root: angellllkr-eng/agent-control-plane
   rule: One canonical owner per capability; private telemetry never becomes public product state.
+  duplicate_core_rule: The private Mind-Reply/mind-reply-core repository is an active duplicate/product branch. Its unique phone-first/auth/platform work must be reconciled into the canonical product root before any deletion or migration.
 
 status_model:
   - PLANNED
@@ -77,6 +80,7 @@ owners:
 dependencies:
   mind-reply-core:
     control_plane: agent-control-plane
+    phone_first_source: Mind-Reply/mind-reply-core
 
 access_note:
   organization_membership_api: no_memberships_returned
