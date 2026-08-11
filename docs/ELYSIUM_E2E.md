@@ -1,6 +1,6 @@
 # Elysium E2E Runbook
 
-**Status: complete on main** — gate, ledger writer, edge headers, delivery pack, operator UI, smoke script.
+**Status: complete on main** — gate, ledger writer, edge headers, delivery pack, operator UI, local self-test, HTTP smoke.
 
 ## Path
 
@@ -19,9 +19,31 @@ Draft
 | Pack | `POST /api/elysium/pack` |
 | Operator UI | `/operator` |
 | SQL ledger | `packages/veridex/sql/veridex_envelopes.sql` |
-| Smoke | `scripts/elysium-smoke.sh` |
+| Local self-test | `node scripts/elysium-e2e-local.mjs` |
+| HTTP smoke | `scripts/elysium-smoke.sh` |
 
-## Enable on a host
+## Acceptance checklist
+
+- [x] Aurelia contract resolution (`PROFIT_AUDIT_CONTRACT`)
+- [x] Lumenforge evaluate + `decideGateAction`
+- [x] Veridex SHA-256 stamp + signature
+- [x] Supabase append writer (fail-soft when env set)
+- [x] Edge middleware headers mounted
+- [x] Delivery pack `.epack` for customer artifacts
+- [x] Operator UI gate + pack
+- [x] Local Node self-test (no server)
+- [x] HTTP smoke script
+- [x] Human Signal lexicon on public surfaces + pack lines
+- [x] Public Stripe CTA unchanged
+
+## 1. Local self-test (no deploy)
+
+```bash
+node scripts/elysium-e2e-local.mjs
+# → elysium-e2e-local: PASS
+```
+
+## 2. Enable on a host
 
 1. Apply SQL in Supabase: `packages/veridex/sql/veridex_envelopes.sql`
 2. Env (server-only):
@@ -36,7 +58,7 @@ Draft
 
 Without Supabase env: stamps are local (`ledger: "local_only"`). Ledger failures never block the gate (fail-soft).
 
-## curl
+## 3. curl
 
 ```bash
 curl -s -X POST "$HOST/api/elysium/gate" \
