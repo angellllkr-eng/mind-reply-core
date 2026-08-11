@@ -4,7 +4,7 @@
  * cryptographic envelope. Emits signed .epack receipts.
  *
  * @see docs/ELYSIUM_STACK.md
- * @see epic #38 / issue #41
+ * @see docs/ELYSIUM_RUNTIME.md
  */
 
 import type {
@@ -22,7 +22,6 @@ export interface StampOptions {
   appendWriter?: (envelope: VeridexEnvelope) => Promise<void>;
 }
 
-/** Canonical JSON for hashing — stable key order for core fields */
 function canonicalString(
   payload: ElysiumPayload,
   evaluation: LumenforgeEvaluation,
@@ -46,13 +45,10 @@ function canonicalString(
   });
 }
 
-/** Real SHA-256 via Web Crypto (Edge / Node 18+ / Browser) */
 export async function sha256Hex(input: string): Promise<string> {
   const data = new TextEncoder().encode(input);
-  // globalThis.crypto is available in modern Node, Edge, and browsers
   const subtle = globalThis.crypto?.subtle;
   if (!subtle) {
-    // Extremely constrained environments — still produce a deterministic hex
     let h = 0x811c9dc5;
     for (let i = 0; i < input.length; i++) {
       h ^= input.charCodeAt(i);
@@ -65,10 +61,6 @@ export async function sha256Hex(input: string): Promise<string> {
   return Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-/**
- * Create a Veridex envelope with SHA-256 payload hash.
- * Optionally persists via appendWriter (Supabase RLS table recommended).
- */
 export async function stampEnvelope(
   options: StampOptions
 ): Promise<VeridexEnvelope> {
@@ -100,21 +92,6 @@ export async function stampEnvelope(
   return envelope;
 }
 
-/**
- * Build a Supabase-compatible row for an append-only ledger table.
- * Table suggestion:
- *   veridex_envelopes (
- *     envelope_id text primary key,
- *     payload_hash text not null,
- *     signature text,
- *     previous_hash text,
- *     prompt_version text,
- *     evaluation jsonb not null,
- *     signed_at timestamptz not null,
- *     request_id text not null
- *   )
- * RLS: insert for service role only; select for owner roles.
- */
 export function toSupabaseRow(envelope: VeridexEnvelope, requestId: string) {
   return {
     envelope_id: envelope.envelopeId,
@@ -127,5 +104,11 @@ export function toSupabaseRow(envelope: VeridexEnvelope, requestId: string) {
     request_id: requestId,
   };
 }
+
+export {
+  appendEnvelopeToSupabase,
+  createSupabaseAppendWriter,
+  isSupabaseWriterConfigured,
+} from "./supabase";
 
 export type { VeridexEnvelope, ElysiumPayload, LumenforgeEvaluation };
