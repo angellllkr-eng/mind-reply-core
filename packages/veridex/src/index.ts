@@ -5,6 +5,7 @@
  *
  * @see docs/ELYSIUM_STACK.md
  * @see docs/ELYSIUM_RUNTIME.md
+ * @see docs/ELYSIUM_E2E.md
  */
 
 import type {
@@ -110,5 +111,12 @@ export {
   createSupabaseAppendWriter,
   isSupabaseWriterConfigured,
 } from "./supabase";
+
+export {
+  buildDeliveryPack,
+  serializeDeliveryPack,
+  type DeliveryPack,
+  type DeliveryPackInput,
+} from "./delivery-pack";
 
 export type { VeridexEnvelope, ElysiumPayload, LumenforgeEvaluation };
