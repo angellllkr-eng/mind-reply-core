@@ -26,6 +26,7 @@ export function GET() {
         edge: "middleware_mounted",
         endpoints: {
           status: "GET /api/elysium/status",
+          compile: "POST /api/elysium/compile",
           gate: "POST /api/elysium/gate",
           pack: "POST /api/elysium/pack",
           operator: "/operator",
@@ -34,6 +35,7 @@ export function GET() {
           "docs/ELYSIUM_STACK.md",
           "docs/ELYSIUM_E2E.md",
           "docs/ELYSIUM_RUNTIME.md",
+          "docs/ELYSIUM_INVENTORY.md",
           "docs/HUMAN_SIGNAL_LEXICON.md",
         ],
       },
