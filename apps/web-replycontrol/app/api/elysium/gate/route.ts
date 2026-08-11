@@ -16,7 +16,7 @@ import {
  * Body: { requestId: string, draft: string, promptVersion?: string }
  *
  * Feature-flagged Elysium loop. When VERIDEX_SUPABASE_* is set, envelopes
- * append to the immutable ledger after stamp.
+ * append fail-soft to the immutable ledger after stamp.
  */
 export async function POST(request: Request) {
   let body: { requestId?: string; draft?: string; promptVersion?: string };
@@ -67,10 +67,16 @@ export async function POST(request: Request) {
       ? "block"
       : "allow";
 
+  const ledgerWrite =
+    result.envelope &&
+    (result.envelope as { metadata?: { ledgerWrite?: string } }).metadata
+      ?.ledgerWrite;
+
   return NextResponse.json(
     {
       enabled,
       ledger: ledgerConfigured ? "supabase" : "local_only",
+      ledgerWrite: ledgerWrite ?? null,
       requestId: result.requestId,
       stage: result.stage,
       passed: result.passed,
