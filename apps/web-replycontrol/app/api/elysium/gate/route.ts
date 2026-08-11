@@ -5,24 +5,25 @@ import {
   PROFIT_AUDIT_CONTRACT,
 } from "@mind-reply/elysium-core";
 import { evaluatePayload, decideGateAction } from "@mind-reply/lumenforge";
-import { stampEnvelope } from "@mind-reply/veridex";
+import {
+  stampEnvelope,
+  createSupabaseAppendWriter,
+  isSupabaseWriterConfigured,
+} from "@mind-reply/veridex";
 
 /**
  * POST /api/elysium/gate
  * Body: { requestId: string, draft: string, promptVersion?: string }
  *
- * Feature-flagged execution of the Elysium loop for Profit Audit drafts.
- * When ELYSIUM_AUDIT_LOOP is off, returns a safe no-op pass.
+ * Feature-flagged Elysium loop. When VERIDEX_SUPABASE_* is set, envelopes
+ * append to the immutable ledger after stamp.
  */
 export async function POST(request: Request) {
   let body: { requestId?: string; draft?: string; promptVersion?: string };
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json(
-      { error: "invalid_json" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "invalid_json" }, { status: 400 });
   }
 
   const requestId = body.requestId?.trim();
@@ -34,15 +35,12 @@ export async function POST(request: Request) {
     );
   }
 
-  // Cap draft size to protect edge / memory
   if (draft.length > 200_000) {
-    return NextResponse.json(
-      { error: "draft_too_large" },
-      { status: 413 }
-    );
+    return NextResponse.json({ error: "draft_too_large" }, { status: 413 });
   }
 
   const enabled = isAuditLoopEnabled();
+  const ledgerConfigured = isSupabaseWriterConfigured();
 
   const result = await gateProfitAuditDraft(
     {
@@ -53,7 +51,13 @@ export async function POST(request: Request) {
     {
       evaluate: (payload, contract) =>
         evaluatePayload(payload, { contract }),
-      stamp: (args) => stampEnvelope(args),
+      stamp: (args) =>
+        stampEnvelope({
+          ...args,
+          appendWriter: ledgerConfigured
+            ? createSupabaseAppendWriter(requestId)
+            : undefined,
+        }),
     }
   );
 
@@ -66,6 +70,7 @@ export async function POST(request: Request) {
   return NextResponse.json(
     {
       enabled,
+      ledger: ledgerConfigured ? "supabase" : "local_only",
       requestId: result.requestId,
       stage: result.stage,
       passed: result.passed,
@@ -84,7 +89,11 @@ export async function POST(request: Request) {
     },
     {
       status: 200,
-      headers: { "Cache-Control": "no-store" },
+      headers: {
+        "Cache-Control": "no-store",
+        "x-lumenforge-action": action,
+        "x-veridex-ledger": ledgerConfigured ? "supabase" : "local_only",
+      },
     }
   );
 }
