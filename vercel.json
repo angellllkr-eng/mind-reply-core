@@ -2,7 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "framework": "nextjs",
-  "buildCommand": "pnpm install && pnpm run db:migrate && pnpm run build",
+  "fluid": true,
+  "buildCommand": "pnpm run build",
   "installCommand": "pnpm install --frozen-lockfile",
   "devCommand": "pnpm dev --port $PORT",
   "outputDirectory": ".next",
@@ -10,68 +11,16 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" }
-      ]
-    },
-    {
-      "source": "/static/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    }
+    {"source":"/api/(.*)","headers":[{"key":"Cache-Control","value":"no-cache, no-store, must-revalidate"},{"key":"X-Content-Type-Options","value":"nosniff"},{"key":"X-Frame-Options","value":"SAMEORIGIN"},{"key":"X-XSS-Protection","value":"1; mode=block"}]},
+    {"source":"/static/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]}
   ],
-  "redirects": [
-    {
-      "source": "/old-path",
-      "destination": "/new-path",
-      "permanent": true
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/v1/(.*)",
-      "destination": "https://api.mind-reply.com/v1/$1"
-    }
-  ],
-  "env": [
-    "NEXTAUTH_URL",
-    "NEXTAUTH_SECRET",
-    "DATABASE_URL",
-    "REDIS_URL",
-    "STRIPE_SECRET_KEY",
-    "CLERK_SECRET_KEY",
-    "OPENAI_API_KEY"
-  ],
-  "regions": [
-    "iad1",
-    "fra1",
-    "sin1"
-  ],
+  "redirects": [{"source":"/old-path","destination":"/new-path","permanent":true}],
+  "rewrites": [{"source":"/api/v1/(.*)","destination":"https://api.mind-reply.com/v1/$1"}],
+  "env": ["NEXTAUTH_URL","NEXTAUTH_SECRET","DATABASE_URL","REDIS_URL","STRIPE_SECRET_KEY","CLERK_SECRET_KEY","OPENAI_API_KEY"],
+  "regions": ["iad1","fra1","sin1"],
   "functions": {
-    "api/**": {
-      "maxDuration": 60,
-      "memory": 1024
-    },
-    "api/webhooks/**": {
-      "maxDuration": 30,
-      "memory": 512
-    }
+    "api/**": {"maxDuration":300,"memory":1024},
+    "api/webhooks/**": {"maxDuration":300,"memory":512}
   },
-  "integrations": [
-    {
-      "service": "@vercel/analytics"
-    },
-    {
-      "service": "@vercel/web-analytics"
-    },
-    {
-      "service": "@vercel/otel"
-    }
-  ]
+  "integrations": [{"service":"@vercel/analytics"},{"service":"@vercel/web-analytics"},{"service":"@vercel/otel"}]
 }
