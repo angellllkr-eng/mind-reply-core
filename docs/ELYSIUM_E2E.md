@@ -1,51 +1,58 @@
 # Elysium E2E Runbook
 
-End-to-end path from draft → wall → receipt → delivery pack.
+**Status: complete on main** — gate, ledger writer, edge headers, delivery pack, operator UI, smoke script.
 
-## Architecture (runtime)
+## Path
 
 ```
 Draft
-  → POST /api/elysium/gate   (Lumenforge evaluate)
-  → Veridex stampEnvelope    (SHA-256 + optional Supabase append)
-  → POST /api/elysium/pack   (buildDeliveryPack → receipt.epack.json)
+  → POST /api/elysium/gate     Lumenforge evaluate
+  → Veridex stampEnvelope      SHA-256 + fail-soft Supabase append
+  → POST /api/elysium/pack     buildDeliveryPack → receipt.epack.json
   → Customer delivery artifact
 ```
 
-Edge: `middleware.ts` stamps `x-elysium-*` / `x-lumenforge-edge` headers.  
-Operator UI: `/operator` (same-origin exercise; no secrets in browser).
+| Piece | Location |
+|-------|----------|
+| Edge headers | `apps/web-replycontrol/middleware.ts` |
+| Gate | `POST /api/elysium/gate` |
+| Pack | `POST /api/elysium/pack` |
+| Operator UI | `/operator` |
+| SQL ledger | `packages/veridex/sql/veridex_envelopes.sql` |
+| Smoke | `scripts/elysium-smoke.sh` |
 
-## Enable
+## Enable on a host
 
-1. Apply SQL: `packages/veridex/sql/veridex_envelopes.sql`
-2. Set on host (Vercel / Docker):
-   - `ELYSIUM_AUDIT_LOOP=1`
-   - `VERIDEX_SUPABASE_URL`
-   - `VERIDEX_SUPABASE_SERVICE_ROLE_KEY`
-3. Confirm `GET /api/elysium/status`
-4. Exercise `POST /api/elysium/gate` or open `/operator`
+1. Apply SQL in Supabase: `packages/veridex/sql/veridex_envelopes.sql`
+2. Env (server-only):
+   ```
+   ELYSIUM_AUDIT_LOOP=1
+   VERIDEX_SUPABASE_URL=https://xxxx.supabase.co
+   VERIDEX_SUPABASE_SERVICE_ROLE_KEY=...
+   ```
+3. `GET /api/elysium/status` → `auditLoopEnabled: true`, `ledger: "supabase"`
+4. `HOST=https://<host> bash scripts/elysium-smoke.sh`
+5. Or open `/operator` and run gate + pack
 
-Without Supabase env, stamps are local-only (`ledger: "local_only"`).
+Without Supabase env: stamps are local (`ledger: "local_only"`). Ledger failures never block the gate (fail-soft).
 
 ## curl
 
 ```bash
-# Gate
 curl -s -X POST "$HOST/api/elysium/gate" \
   -H 'content-type: application/json' \
   -d '{"requestId":"audit_e2e_1","draft":"Findings are bounded and reversible."}'
 
-# Delivery pack (.epack)
 curl -s -X POST "$HOST/api/elysium/pack" \
   -H 'content-type: application/json' \
   -d '{"requestId":"audit_e2e_1","draft":"Findings are bounded and reversible.","clientLabel":"Demo Co"}'
 ```
 
-Attach `epackJson` / `pack` as `receipt.epack.json` in the customer delivery folder.
+Attach `epackJson` as `receipt.epack.json` in the customer delivery folder.
 
 ## Safety
 
 - Public CTA / Stripe unchanged
-- Service role never shipped to client
+- Service role never in the browser
 - Default loop off
-- Operator page is not linked from the public marketing nav (direct URL only)
+- Operator is direct-URL only (not in public nav)

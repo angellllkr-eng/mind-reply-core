@@ -22,15 +22,19 @@ export function isSupabaseWriterConfigured(): boolean {
   );
 }
 
+export type AppendResult =
+  | { ok: true; table: string }
+  | { ok: false; reason: string };
+
 /**
  * Append one envelope to Supabase via PostgREST.
- * Uses service role; fail-soft when not configured (returns without throw
- * only if caller prefers — this function throws on HTTP failure).
+ * Returns structured result; does not throw on config miss.
+ * Throws only on network/HTTP failure when configured (caller may catch).
  */
 export async function appendEnvelopeToSupabase(
   envelope: VeridexEnvelope,
   requestId: string
-): Promise<{ ok: true; table: string } | { ok: false; reason: string }> {
+): Promise<AppendResult> {
   const url = process.env.VERIDEX_SUPABASE_URL?.replace(/\/$/, "");
   const key = process.env.VERIDEX_SUPABASE_SERVICE_ROLE_KEY;
   const table = process.env.VERIDEX_SUPABASE_TABLE || "veridex_envelopes";
@@ -55,20 +59,44 @@ export async function appendEnvelopeToSupabase(
 
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    throw new Error(
-      `veridex_supabase_append_failed:${res.status}:${text.slice(0, 200)}`
-    );
+    return {
+      ok: false,
+      reason: `veridex_supabase_append_failed:${res.status}:${text.slice(0, 160)}`,
+    };
   }
 
   return { ok: true, table };
 }
 
 /**
- * Factory for stampEnvelope({ appendWriter })
+ * Factory for stampEnvelope({ appendWriter }).
+ * Fail-soft: ledger errors never throw into the orchestration loop.
+ * Sets envelope.metadata.ledgerWrite when possible via side-channel on the object.
  */
 export function createSupabaseAppendWriter(requestId: string) {
   return async (envelope: VeridexEnvelope) => {
-    if (!isSupabaseWriterConfigured()) return;
-    await appendEnvelopeToSupabase(envelope, requestId);
+    if (!isSupabaseWriterConfigured()) {
+      (envelope as VeridexEnvelope & { metadata?: Record<string, unknown> }).metadata =
+        {
+          ...((envelope as { metadata?: Record<string, unknown> }).metadata ?? {}),
+          ledgerWrite: "skipped_not_configured",
+        };
+      return;
+    }
+    try {
+      const result = await appendEnvelopeToSupabase(envelope, requestId);
+      (envelope as VeridexEnvelope & { metadata?: Record<string, unknown> }).metadata =
+        {
+          ...((envelope as { metadata?: Record<string, unknown> }).metadata ?? {}),
+          ledgerWrite: result.ok ? "supabase_ok" : result.reason,
+        };
+    } catch (err) {
+      const reason = err instanceof Error ? err.message : String(err);
+      (envelope as VeridexEnvelope & { metadata?: Record<string, unknown> }).metadata =
+        {
+          ...((envelope as { metadata?: Record<string, unknown> }).metadata ?? {}),
+          ledgerWrite: `error:${reason.slice(0, 120)}`,
+        };
+    }
   };
 }

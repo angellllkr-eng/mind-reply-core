@@ -8,13 +8,12 @@ export function GET() {
   const enabled =
     process.env.ELYSIUM_AUDIT_LOOP === "1" ||
     process.env.ELYSIUM_AUDIT_LOOP === "true";
-  const ledger =
-    Boolean(
-      process.env.VERIDEX_SUPABASE_URL &&
-        process.env.VERIDEX_SUPABASE_SERVICE_ROLE_KEY
-    )
-      ? "supabase"
-      : "local_only";
+  const ledger = Boolean(
+    process.env.VERIDEX_SUPABASE_URL &&
+      process.env.VERIDEX_SUPABASE_SERVICE_ROLE_KEY
+  )
+    ? "supabase"
+    : "local_only";
 
   return NextResponse.json(
     {
@@ -25,8 +24,15 @@ export function GET() {
         layers: ["aurelia", "lumenforge", "veridex"],
         contract: "helix/v1/profit-audit",
         edge: "middleware_mounted",
+        endpoints: {
+          status: "GET /api/elysium/status",
+          gate: "POST /api/elysium/gate",
+          pack: "POST /api/elysium/pack",
+          operator: "/operator",
+        },
         docs: [
           "docs/ELYSIUM_STACK.md",
+          "docs/ELYSIUM_E2E.md",
           "docs/ELYSIUM_RUNTIME.md",
           "docs/HUMAN_SIGNAL_LEXICON.md",
         ],
