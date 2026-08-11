@@ -2,6 +2,7 @@
   "name": "a11k-surface",
   "version": "3.1.0",
   "private": true,
+  "engines": {"node": ">=24 <25"},
   "scripts": {
     "dev": "next dev --turbo",
     "build": "tsx lib/db/migrate && next build",
@@ -107,8 +108,6 @@
     "typescript": "^5.6.3",
     "ultracite": "^7.8.4"
   },
-  "lint-staged": {
-    "*": "corepack pnpm run fix --"
-  },
+  "lint-staged": {"*": "corepack pnpm run fix --"},
   "packageManager": "pnpm@10.32.1"
 }
