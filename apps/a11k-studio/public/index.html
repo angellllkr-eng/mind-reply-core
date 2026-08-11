@@ -3,266 +3,69 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="OWN Studio — owner-gated design & narrative. Local-first, instant shells, no vendor lock. Wired to OWN Registrar.">
-<title>OWN Studio · A11</title>
-<style>
-:root{
-  --bg:#070a09;--panel:#0d1412;--line:#1a2a24;--text:#e8f0ec;--muted:#8aa396;
-  --accent:#57d2a7;--accent2:#3a9b7a;--warn:#c4a35a;--danger:#c45a5a;
-  --radius:10px;--font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:var(--font)}
-button,input,textarea{font:inherit;color:inherit}
-a{color:var(--accent);text-decoration:none}
-.app{display:grid;grid-template-rows:auto 1fr;height:100%}
-header{display:flex;align-items:center;gap:1rem;padding:.75rem 1.25rem;border-bottom:1px solid var(--line);background:var(--panel)}
-.brand{font-weight:700;letter-spacing:.02em}.brand i{color:var(--accent);font-style:normal}
-.badge{font-size:.65rem;border:1px solid var(--accent);color:var(--accent);padding:.15rem .5rem;border-radius:999px;margin-left:.5rem}
-.nav{display:flex;gap:.75rem;margin-left:auto;font-size:.85rem;color:var(--muted)}
-.nav a:hover{color:var(--text)}
-main{display:grid;grid-template-columns:220px 1fr 1fr;min-height:0}
-@media(max-width:960px){main{grid-template-columns:1fr;grid-template-rows:auto auto 1fr}}
-.rail{border-right:1px solid var(--line);padding:.75rem;background:var(--panel);overflow:auto}
-.rail h2{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:.25rem 0 .5rem}
-.rail button{display:block;width:100%;text-align:left;background:transparent;border:1px solid transparent;color:var(--muted);padding:.55rem .65rem;border-radius:8px;cursor:pointer;margin-bottom:.25rem}
-.rail button:hover,.rail button.active{background:#12201a;color:var(--text);border-color:var(--line)}
-.editor,.preview{padding:1rem;overflow:auto;min-height:0}
-.preview{border-left:1px solid var(--line);background:#050807}
-@media(max-width:960px){.preview{border-left:none;border-top:1px solid var(--line)}}
-h1{font-size:1.15rem;margin:0 0 .35rem}p.lede{color:var(--muted);font-size:.9rem;margin:0 0 1rem}
-.field{margin-bottom:.75rem}label{display:block;font-size:.7rem;letter-spacing:.06em;color:var(--muted);margin-bottom:.3rem}
-input,textarea{width:100%;background:#0a100e;border:1px solid var(--line);border-radius:8px;padding:.55rem .65rem}
-textarea{min-height:72px;resize:vertical}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-@media(max-width:600px){.row{grid-template-columns:1fr}}
-.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
-.btn{background:var(--accent);color:#04140e;border:none;border-radius:8px;padding:.55rem .9rem;font-weight:600;cursor:pointer}
-.btn:hover{filter:brightness(1.05)}
-.btn.alt{background:transparent;color:var(--text);border:1px solid var(--line)}
-.btn.ghost{background:transparent;color:var(--muted);border:1px dashed var(--line)}
-.pane{display:none}.pane.active{display:block}
-.hint{font-size:.75rem;color:var(--muted);margin-top:.5rem}
-kbd{font-family:var(--mono);font-size:.7rem;border:1px solid var(--line);padding:.05rem .3rem;border-radius:4px;color:var(--muted)}
-iframe{width:100%;height:calc(100% - 2.5rem);min-height:320px;border:1px solid var(--line);border-radius:8px;background:#fff}
-.toolbar{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;flex-wrap:wrap}
-.meta{font-size:.75rem;color:var(--muted)}
-.history{list-style:none;padding:0;margin:.5rem 0 0}
-.history li{font-size:.8rem;padding:.4rem .5rem;border:1px solid var(--line);border-radius:6px;margin-bottom:.35rem;cursor:pointer;color:var(--muted)}
-.history li:hover{color:var(--text);border-color:var(--accent2)}
-.out{font-family:var(--mono);font-size:.75rem;white-space:pre-wrap;background:#0a100e;border:1px solid var(--line);border-radius:8px;padding:.75rem;max-height:200px;overflow:auto}
-</style>
+<title>A11 Studio · Say only what you can defend</title>
+<link rel="stylesheet" href="https://a11-k.space/estate.css">
+<style>:root{--accent:#57d2a7;--soft:#0c503a}</style>
 </head>
 <body>
-<div class="app">
-  <header>
-    <div class="brand">A11<span style="opacity:.5">-</span>K / OWN STUDIO<span class="badge">LOCAL-FIRST</span></div>
-    <nav class="nav">
-      <a href="../own-registrar/">Registrar</a>
-      <a href="https://a11-k.space">Estate</a>
-      <a href="https://chat.a11-k.space">Chat</a>
-      <a href="https://forge.a11-k.space">Forge</a>
-    </nav>
-  </header>
-  <main>
+<nav class="shell nav">
+  <a class="brand" href="https://a11-k.space">A11<i>-K</i> / STUDIO</a>
+  <div class="navlinks">
+    <a href="https://chat.a11-k.space">Chat</a>
+    <a href="https://nexus.a11-k.space">Nexus</a>
+    <a href="https://forge.a11-k.space">Forge</a>
+    <a href="https://studio.a11-k.space">Studio</a>
+  </div>
+  <span class="status">AURELIA · DEFENSIBLE</span>
+</nav>
+<main class="shell">
+  <section class="hero">
+    <div>
+      <span class="ey">Aurelia · public language</span>
+      <h1>Say only what you can defend.</h1>
+      <p class="lede">Compose positioning from verified proof, an explicit boundary, and one useful next action. Aspiration stays in a different drawer. Clarity before amplification.</p>
+    </div>
+    <aside class="proof"><b>The strongest story is the one the product can already stand behind.</b></aside>
+  </section>
+  <section class="workspace">
     <aside class="rail">
-      <h2>Rooms</h2>
-      <button class="active" data-room="design" id="tab-design">Design shell</button>
-      <button data-room="narrative" id="tab-narrative">Narrative</button>
-      <button data-room="history" id="tab-history">History</button>
-      <button data-room="boundary" id="tab-boundary">Boundary</button>
-      <h2 style="margin-top:1.25rem">Templates</h2>
-      <button class="ghost" id="tpl-audit" style="width:100%;text-align:left;border:1px dashed var(--line);background:transparent;color:var(--muted);padding:.5rem;border-radius:8px;cursor:pointer">€3k Profit Audit</button>
-      <p class="hint" style="margin-top:1rem"><kbd>⌘/Ctrl+Enter</kbd> generate</p>
+      <h2>Narrative room</h2>
+      <button class="active" data-pane="compose">Compose</button>
+      <button data-pane="preview">Preview</button>
+      <button data-pane="boundarypane">Boundary</button>
     </aside>
-
-    <section class="editor">
-      <div id="room-design" class="pane active">
-        <h1>Design shell</h1>
-        <p class="lede">Instant local generation. Wired from OWN Registrar when opened with client params.</p>
-        <div class="field"><label>PAGE PURPOSE</label><input id="purpose" placeholder="e.g. Profit Audit landing"></div>
-        <div class="row">
-          <div class="field"><label>AUDIENCE</label><input id="audience" placeholder="Founders / CTOs"></div>
-          <div class="field"><label>TONE</label><input id="tone" placeholder="Direct, evidence-led"></div>
+    <div class="work">
+      <div id="compose" class="pane active">
+        <div class="workhead">
+          <h2>Separate true-now from intended-next</h2>
+          <p>Readers can tell the difference. So can you.</p>
         </div>
-        <div class="field"><label>SECTIONS (comma-separated)</label><input id="sections" placeholder="Hero, Proof, How it works, Pricing, CTA"></div>
-        <div class="row">
-          <div class="field"><label>PRIMARY CTA</label><input id="ctaLabel" value="Book the €3k audit"></div>
-          <div class="field"><label>CTA URL</label><input id="ctaUrl" value="https://book.stripe.com/8x2aER4owd8c1TG4Ku63K00"></div>
+        <div class="field"><label>POSITIONING</label><input id="positioning" placeholder="One line you are willing to be held to"></div>
+        <div class="split">
+          <div class="field"><label>VERIFIED PROOF</label><textarea id="proof" placeholder="What already exists and can be checked"></textarea></div>
+          <div class="field"><label>EXPLICIT BOUNDARY</label><textarea id="boundary" placeholder="What this is not, and will not claim"></textarea></div>
         </div>
-        <div class="actions">
-          <button class="btn" id="gen">Generate shell</button>
-          <button class="btn alt" id="download">Download .html</button>
-          <button class="btn alt" id="copyHtml">Copy HTML</button>
-        </div>
-        <p class="hint">Shell is local. Production claims need owner approval.</p>
+        <div class="field"><label>ONE ACTION</label><input id="cta" placeholder="A single useful next step for the reader"></div>
+        <button class="btn" id="render">Render narrative</button>
+        <button class="btn alt" id="copy">Copy Markdown</button>
       </div>
-
-      <div id="room-narrative" class="pane">
-        <h1>Narrative compile</h1>
-        <p class="lede">Proof · boundary · one action.</p>
-        <div class="field"><label>POSITIONING</label><input id="positioning" placeholder="One clear position"></div>
-        <div class="field"><label>VERIFIED PROOF</label><textarea id="proof" placeholder="What can already be evidenced"></textarea></div>
-        <div class="field"><label>EXPLICIT BOUNDARY</label><textarea id="boundary" placeholder="What this does not claim"></textarea></div>
-        <div class="field"><label>ONE ACTION</label><input id="oneAction" placeholder="Single next step"></div>
-        <div class="actions">
-          <button class="btn" id="renderMd">Render Markdown</button>
-          <button class="btn alt" id="copyMd">Copy Markdown</button>
-        </div>
+      <div id="preview" class="pane"><div class="output" id="out">Nothing rendered.</div></div>
+      <div id="boundarypane" class="pane">
+        <div class="output">Local copy only. Does not verify claims, publish, or approve private information.\n\nElysium: Studio = Aurelia narrative. For next visual generation see docs/ELYSIUM_FRONTEND_V0.md and docs/HUMAN_SIGNAL_LEXICON.md.</div>
       </div>
-
-      <div id="room-history" class="pane">
-        <h1>Local history</h1>
-        <p class="lede">Last 12 shells/narratives in this browser only.</p>
-        <ul class="history" id="hist"></ul>
-        <button class="btn alt" id="clearHist" style="margin-top:.75rem">Clear history</button>
-      </div>
-
-      <div id="room-boundary" class="pane">
-        <h1>Hard boundary</h1>
-        <div class="out">OWN Studio + OWN Registrar:
-• Instant shells, client registry, reseller brand
-• Export JSON for Stripe/CRM/auth
-• No auto-deploy, no secrets, no replace Angel approval
-
-docs/OWN_STUDIO.md · docs/OWN_REGISTRAR.md</div>
-      </div>
-    </section>
-
-    <section class="preview">
-      <div class="toolbar">
-        <span class="meta" id="status">Ready</span>
-        <button class="btn alt" id="toggleSrc" style="margin-left:auto">View source</button>
-      </div>
-      <iframe id="frame" title="Preview" sandbox="allow-same-origin"></iframe>
-      <div class="out" id="src" hidden></div>
-    </section>
-  </main>
-</div>
+    </div>
+  </section>
+</main>
+<footer class="shell">
+  <span>© 2026 A11-K · MindReply</span>
+  <span>PROOF · BOUNDARY · ONE ACTION</span>
+</footer>
 <script>
-(function(){
-  const $ = s => document.querySelector(s);
-  const $$ = s => [...document.querySelectorAll(s)];
-  const KEY = 'own-studio-history-v1';
-  let lastHtml = '', lastMd = '', showingSrc = false;
-
-  function setRoom(name){
-    $$('.rail button[data-room]').forEach(b => b.classList.toggle('active', b.dataset.room === name));
-    $$('.pane').forEach(p => p.classList.toggle('active', p.id === 'room-' + name));
-  }
-  $$('.rail button[data-room]').forEach(b => b.onclick = () => setRoom(b.dataset.room));
-
-  function esc(s){
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  function buildShell(){
-    const purpose = ($('#purpose').value || 'Untitled surface').trim();
-    const audience = ($('#audience').value || 'General').trim();
-    const tone = ($('#tone').value || 'Direct').trim();
-    const sections = ($('#sections').value || 'Hero, Proof, CTA').split(',').map(s => s.trim()).filter(Boolean);
-    const cta = ($('#ctaLabel').value || 'Continue').trim();
-    const url = ($('#ctaUrl').value || '#').trim();
-    const sectionHtml = sections.map(name => {
-      const id = name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
-      return `  <section id="${id}">\n    <h2>${esc(name)}</h2>\n    <p class="muted">${esc(name)} — evidence-led, ${esc(tone)} tone. Replace with verified content.</p>\n  </section>`;
-    }).join('\n');
-    return `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(purpose)}</title>
-<style>:root{--bg:#0b0f0e;--fg:#eef5f1;--muted:#8aa396;--accent:#57d2a7;--line:#1c2b24}*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.5}.wrap{max-width:720px;margin:0 auto;padding:2rem 1.25rem}.tag{font-size:.7rem;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.4rem 0 .6rem}.muted{color:var(--muted)}section{padding:1.5rem 0;border-top:1px solid var(--line)}a.cta{display:inline-block;margin-top:1rem;background:var(--accent);color:#04140e;padding:.7rem 1.1rem;border-radius:8px;font-weight:600;text-decoration:none}footer{margin-top:2rem;font-size:.8rem;color:var(--muted)}</style></head>
-<body><div class="wrap"><p class="tag">OWN Studio shell · not marked live</p><h1>${esc(purpose)}</h1><p class="muted">Audience: ${esc(audience)}. Tone: ${esc(tone)}.</p>
-${sectionHtml}
-<p><a class="cta" href="${esc(url)}">${esc(cta)}</a></p><footer>Generated by OWN Studio. Owner approval required before production claims.</footer></div></body></html>`;
-  }
-
-  function showPreview(html){
-    lastHtml = html;
-    $('#status').textContent = 'Generated · ' + new Date().toLocaleTimeString();
-    $('#src').textContent = html;
-    const doc = $('#frame').contentDocument;
-    doc.open(); doc.write(html); doc.close();
-    $('#frame').hidden = showingSrc; $('#src').hidden = !showingSrc;
-  }
-
-  function saveHistory(kind, title, payload){
-    let items = [];
-    try { items = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) {}
-    items.unshift({ id: Date.now(), kind, title, payload, at: new Date().toISOString() });
-    items = items.slice(0, 12);
-    localStorage.setItem(KEY, JSON.stringify(items));
-    renderHistory();
-  }
-
-  function renderHistory(){
-    let items = [];
-    try { items = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) {}
-    const ul = $('#hist');
-    ul.innerHTML = items.length ? '' : '<li style="cursor:default">Empty</li>';
-    items.forEach(it => {
-      const li = document.createElement('li');
-      li.textContent = (it.kind === 'shell' ? 'Shell' : 'Narrative') + ' · ' + it.title + ' · ' + new Date(it.at).toLocaleString();
-      li.onclick = () => {
-        if (it.kind === 'shell') showPreview(it.payload);
-        else { lastMd = it.payload; $('#src').textContent = it.payload; $('#src').hidden = false; $('#frame').hidden = true; showingSrc = true; }
-      };
-      ul.appendChild(li);
-    });
-  }
-
-  $('#gen').onclick = () => { const html = buildShell(); showPreview(html); saveHistory('shell', ($('#purpose').value || 'Untitled').trim(), html); };
-  $('#download').onclick = () => {
-    if (!lastHtml) $('#gen').click();
-    const blob = new Blob([lastHtml], { type: 'text/html' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = (($('#purpose').value || 'own-studio-shell').trim().replace(/\s+/g,'-').toLowerCase()) + '.html';
-    a.click(); URL.revokeObjectURL(a.href);
-  };
-  $('#copyHtml').onclick = async () => { if (!lastHtml) $('#gen').click(); await navigator.clipboard.writeText(lastHtml); $('#status').textContent = 'HTML copied'; };
-  $('#renderMd').onclick = () => {
-    const pos = ($('#positioning').value || '').trim(); if (!pos) return;
-    lastMd = `# ${pos}\n\n## Verified proof\n${($('#proof').value||'Not supplied.').trim()}\n\n## Explicit boundary\n${($('#boundary').value||'Not supplied.').trim()}\n\n## Recommended action\n${($('#oneAction').value||'Define one action.').trim()}`;
-    $('#src').textContent = lastMd; $('#src').hidden = false; $('#frame').hidden = true; showingSrc = true;
-    $('#status').textContent = 'Markdown ready'; saveHistory('narrative', pos, lastMd);
-  };
-  $('#copyMd').onclick = async () => { if (!lastMd) $('#renderMd').click(); await navigator.clipboard.writeText(lastMd); $('#status').textContent = 'Markdown copied'; };
-  $('#toggleSrc').onclick = () => { showingSrc = !showingSrc; $('#frame').hidden = showingSrc; $('#src').hidden = !showingSrc; if (showingSrc) $('#src').textContent = lastHtml || lastMd || ''; };
-  $('#clearHist').onclick = () => { localStorage.removeItem(KEY); renderHistory(); };
-  $('#tpl-audit').onclick = () => {
-    setRoom('design');
-    $('#purpose').value = 'GitHub + Python Profit Audit';
-    $('#audience').value = 'Founders and CTOs with GitHub + Python estates';
-    $('#tone').value = 'Direct, evidence-led, no hype';
-    $('#sections').value = 'Hero, What you get, Proof of approach, Pricing, CTA';
-    $('#ctaLabel').value = 'Book the €3k audit';
-    $('#ctaUrl').value = 'https://book.stripe.com/8x2aER4owd8c1TG4Ku63K00';
-    $('#gen').click();
-  };
-
-  // Registrar handoff: ?purpose=&audience=
-  try {
-    const q = new URLSearchParams(location.search);
-    if (q.get('purpose')) $('#purpose').value = q.get('purpose');
-    if (q.get('audience')) $('#audience').value = q.get('audience');
-    if (q.get('purpose') || q.get('audience')) {
-      setRoom('design');
-      $('#status').textContent = 'Prefill from Registrar';
-      if (q.get('autogen') === '1') $('#gen').click();
-    }
-  } catch(e) {}
-
-  document.addEventListener('keydown', e => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
-      e.preventDefault();
-      if ($('#room-design').classList.contains('active')) $('#gen').click();
-      else if ($('#room-narrative').classList.contains('active')) $('#renderMd').click();
-    }
-  });
-
-  renderHistory();
-})();
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+$('.rail').onclick=e=>{const b=e.target.closest('button');if(!b)return;$$('.rail button,.pane').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#'+b.dataset.pane).classList.add('active')};
+let current='';
+render.onclick=()=>{if(!positioning.value)return;current=`# ${positioning.value}\n\n## Verified proof\n${proof.value||'Not supplied.'}\n\n## Explicit boundary\n${boundary.value||'Not supplied.'}\n\n## One action\n${cta.value||'Define one action.'}`;out.textContent=current;$$('.rail button')[1].click()};
+copy.onclick=()=>navigator.clipboard.writeText(current);
 </script>
 </body>
 </html>
