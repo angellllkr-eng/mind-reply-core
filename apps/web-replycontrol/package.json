@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@mind-reply/aurelia": "workspace:*",
     "@mind-reply/elysium-core": "workspace:*",
     "@mind-reply/lumenforge": "workspace:*",
     "@mind-reply/veridex": "workspace:*",
