@@ -1,6 +1,8 @@
 /**
  * Veridex delivery pack — attach .epack receipt to customer-facing audit packs.
  * Pure data structure; no network. Caller embeds into ZIP/PDF/email pipeline.
+ *
+ * Human lines follow docs/HUMAN_SIGNAL_LEXICON.md
  */
 
 import type { VeridexEnvelope, LumenforgeEvaluation } from "@mind-reply/elysium-core";
@@ -49,7 +51,7 @@ export function buildDeliveryPack(input: DeliveryPackInput): DeliveryPack {
   const action = input.action ?? (passed ? "allow" : "block");
 
   const humanLine = passed
-    ? "This deliverable passed Lumenforge gates and carries a Veridex receipt."
+    ? "This deliverable cleared the quality wall and carries a Veridex receipt. People still own the last word."
     : "This draft did not clear the quality wall; do not treat it as final delivery.";
 
   return {

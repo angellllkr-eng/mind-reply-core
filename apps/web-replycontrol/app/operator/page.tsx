@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
- * Operator console — exercise gate + pack locally.
+ * Operator console — exercise gate + pack end-to-end.
  * No secrets in the browser. Uses same-origin API only.
  */
 export default function OperatorPage() {
@@ -16,6 +16,19 @@ export default function OperatorPage() {
   const [clientLabel, setClientLabel] = useState("");
   const [result, setResult] = useState<string>("");
   const [busy, setBusy] = useState(false);
+  const [status, setStatus] = useState<string>("Loading status…");
+
+  useEffect(() => {
+    fetch("/api/elysium/status")
+      .then((r) => r.json())
+      .then((j) => {
+        const e = j.elysium ?? {};
+        setStatus(
+          `loop=${e.auditLoopEnabled ? "on" : "off"} · ledger=${e.ledger ?? "?"} · edge=${e.edge ?? "?"}`
+        );
+      })
+      .catch(() => setStatus("status unreachable"));
+  }, []);
 
   async function run(path: "/api/elysium/gate" | "/api/elysium/pack") {
     setBusy(true);
@@ -47,19 +60,21 @@ export default function OperatorPage() {
         </a>
         <div className="navLinks">
           <a href="/">Public</a>
-          <a href="/api/elysium/status">Status</a>
+          <a href="/api/elysium/status">Status JSON</a>
         </div>
       </nav>
 
       <section className="section" style={{ paddingTop: 48 }}>
-        <p className="eyebrow">Operator room</p>
+        <p className="eyebrow">Operator room · e2e</p>
         <h2 style={{ fontSize: "clamp(28px,4vw,42px)" }}>
           Exercise the wall and the receipt
         </h2>
         <p className="lead" style={{ maxWidth: "40rem" }}>
-          Same-origin only. No service keys in the browser. Enable{" "}
-          <code>ELYSIUM_AUDIT_LOOP=1</code> on the host to leave no-op mode.
+          Same-origin only. No service keys in the browser. Host flag{" "}
+          <code>ELYSIUM_AUDIT_LOOP=1</code> leaves no-op mode. Optional{" "}
+          <code>VERIDEX_SUPABASE_*</code> appends the ledger fail-soft.
         </p>
+        <p className="op-status">{status}</p>
 
         <div className="op-grid">
           <div className="op-form">
@@ -113,7 +128,13 @@ export default function OperatorPage() {
 
       <style>{`
         .operator { width: min(calc(100% - 40px), 1160px); margin: auto; }
-        .op-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px; }
+        .op-status {
+          margin: 16px 0 0;
+          font: 600 12px ui-monospace, monospace;
+          color: #7eb0ff;
+          letter-spacing: 0.04em;
+        }
+        .op-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
         .op-form { display: flex; flex-direction: column; gap: 8px; }
         .op-label { font: 600 10px ui-monospace, monospace; letter-spacing: 0.12em; color: #7eb0ff; margin-top: 12px; }
         .op-input, .op-textarea {
