@@ -1,0 +1,62 @@
+name: Frontier Automation
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency:
+  group: frontier-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+        with: {fetch-depth: 1}
+      - name: Detect stack
+        id: detect
+        shell: bash
+        run: |
+          echo "node=$([ -f package.json ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "python=$([ -f pyproject.toml ] || [ -f requirements.txt ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "go=$([ -f go.mod ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "rust=$([ -f Cargo.toml ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-node@v6
+        if: steps.detect.outputs.node == 'true'
+        with: {node-version: 24, cache: npm}
+      - name: Node validation
+        if: steps.detect.outputs.node == 'true'
+        shell: bash
+        run: |
+          if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then npm ci --ignore-scripts; else npm install --ignore-scripts; fi
+          npm test --if-present
+      - uses: actions/setup-python@v6
+        if: steps.detect.outputs.python == 'true'
+        with: {python-version: '3.13', cache: pip}
+      - name: Python validation
+        if: steps.detect.outputs.python == 'true'
+        shell: bash
+        run: |
+          python -m compileall -q .
+          if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
+          if [ -f pyproject.toml ]; then python -m pip install -e . --no-deps || true; fi
+          if python -c 'import importlib.util; raise SystemExit(0 if importlib.util.find_spec("pytest") else 1)'; then pytest -q --disable-warnings --maxfail=1; else echo 'pytest not installed; compile validation passed'; fi
+      - uses: actions/setup-go@v6
+        if: steps.detect.outputs.go == 'true'
+        with: {go-version: stable, cache: true}
+      - name: Go validation
+        if: steps.detect.outputs.go == 'true'
+        run: go test ./...
+      - uses: dtolnay/rust-toolchain@stable
+        if: steps.detect.outputs.rust == 'true'
+      - name: Rust validation
+        if: steps.detect.outputs.rust == 'true'
+        run: cargo test --all-targets
+      - name: Repository hygiene
+        shell: bash
+        run: |
+          if find . -path './.git' -prune -o -type f \( -name '.env' -o -name '.env.*' \) -print | grep -vE '\.env\.example$|\.env\.sample$' | grep -q .; then exit 1; fi
+          git diff --check
