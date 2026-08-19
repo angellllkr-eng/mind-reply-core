@@ -32,5 +32,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/operator", "/api/elysium/:path*", "/api/health"],
+  matcher: ["/", "/(bg|de|fr|es)", "/operator", "/api/elysium/:path*", "/api/health"],
 };
