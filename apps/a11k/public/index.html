@@ -12,10 +12,13 @@
     (function () {
       var roots = ["a11-k.space", "www.a11-k.space", "a11-k-core.vercel.app", "a11-k-core-angelk.vercel.app", "a11-k-core-angellllkr-eng-angelk.vercel.app"];
       var isRoot = roots.indexOf(location.hostname) !== -1;
-      if (isRoot) {
-        document.write('<header id="nav"></header><main id="app"></main><script src="/foundation.js"><\/script>');
+      var isShowcase = location.pathname === "/showcase" || location.pathname === "/showcase/";
+      if (isShowcase) {
+        document.write('<main id="app"></main><script src="/showcase.js"><\\/script>');
+      } else if (isRoot) {
+        document.write('<header id="nav"></header><main id="app"></main><script src="/foundation.js"><\\/script>');
       } else {
-        document.write('<link rel="stylesheet" href="/styles.css"><canvas id="space"></canvas><header id="nav"></header><main id="app"></main><footer><span>© 2026 A11-K · MindReply</span><span>EVIDENCE-GATED · HUMAN-ACCOUNTABLE</span></footer><div id="toast" role="status"></div><script src="/app.js"><\/script>');
+        document.write('<link rel="stylesheet" href="/styles.css"><canvas id="space"></canvas><header id="nav"></header><main id="app"></main><footer><span>© 2026 A11-K · MindReply</span><span>EVIDENCE-GATED · HUMAN-ACCOUNTABLE</span></footer><div id="toast" role="status"></div><script src="/app.js"><\\/script>');
       }
     }());
   </script>
