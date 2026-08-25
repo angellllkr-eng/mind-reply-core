@@ -21,7 +21,7 @@
   const canvas = document.querySelector("#space");
   const footer = document.querySelector("body > footer");
 
-  const toTitle = (text) => text.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+  const toTitle = (text) => text.replace(/[&<>"']/g, (char) => ({ "&": "&", "<": "<", ">": ">", '"': """, "'": "&#39;" }[char]));
   const meta = (name, content) => { let node = document.querySelector(`meta[name="${name}"]`); if (!node) { node = document.createElement("meta"); node.name = name; document.head.appendChild(node); } node.content = content; };
   const addCss = () => { const link = document.createElement("link"); link.rel = "stylesheet"; link.href = "/foundation.css"; document.head.appendChild(link); };
   const scrollTo = (id) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -91,7 +91,7 @@
     document.title = "A11–K · Evidence-led operating foundation";
     meta("description", "A11-K is an evidence-led operating foundation for complex work, consequential choices, and humanly reviewable systems.");
     meta("robots", "index, follow");
-    canvas?.remove(); footer?.remove(); nav.innerHTML = `<a class="wordmark" href="#top">A11<span>–</span>K <small>Evidence-led operating foundation</small></a><div class="top-links"><a href="#mission">Mandate</a><a href="#services">Services</a><a href="#method">Method</a><a href="#records">Records</a></div><a class="brief-link" href="#entry">Start with a briefing ↗</a>`;
+    canvas?.remove(); footer?.remove(); nav.innerHTML = `<a class="wordmark" href="#top">A11<span>–</span>K <small>Evidence-led operating foundation</small></a><div class="top-links"><a href="#mission">Mandate</a><a href="#services">Services</a><a href="#method">Method</a><a href="#records">Records</a><a href="#trust">Trust</a></div><a class="brief-link" href="#entry">Start with a briefing ↗</a>`;
     app.innerHTML = `<main class="foundation" id="top">
       <section class="hero"><div class="hero-copy"><p class="micro">A11-K public foundation</p><h1>Make the work <em>clear</em><br>enough to carry.</h1><p class="hero-lede">A11-K is an evidence-led operating foundation for people navigating complex work, consequential choices, and systems that need to remain humanly reviewable.</p><div class="hero-actions"><a class="primary" href="#services">See service lines ↓</a><a class="text-link" href="#records">Read published records →</a></div></div><div class="signal-field"><span>01</span><div class="signal-grid"><i></i><i></i><i></i><b>A11<br><small>signal<br>archive</small></b></div><p>Public mandate<br>Protected depth</p></div></section>
       <section class="mandate" id="mission"><p class="micro">The mandate</p><div><h2>We build the space between pressure and action.</h2><p>A11-K brings structure to moments where information is incomplete, responsibilities cross, and a rushed response would create more work later. The goal is not more dashboards or louder automation. It is a system where context can become evidence, evidence can become a reviewable path, and the next move can be made with care.</p></div><aside><span>First question</span><b>What must be true before this can move?</b></aside></section>
@@ -99,6 +99,43 @@
       <section class="method" id="method"><div class="method-graphic"><span>FIELD<br>METHOD</span><div class="line-map"><i></i><i></i><i></i><i></i></div><b>A11</b></div><div><p class="micro">Working method</p><h2>A system is only useful when the next person can see where it came from.</h2><ol><li><b>Frame the question.</b><span>Identify the operating question, decision boundary, and information that must not be assumed.</span></li><li><b>Build the evidence path.</b><span>Organise inputs, sources, dependencies, and review gates so the work can be inspected.</span></li><li><b>Prepare the handoff.</b><span>Turn the result into a clear record of what changed, what remains open, and what needs accountable human review.</span></li></ol></div></section>
       <section class="principles" id="principles"><div><p class="micro">Operating principles</p><h2>Capability should arrive with a boundary.</h2><p>Public explanation is not a substitute for governance. A11-K makes the boundary visible before a workflow reaches a sensitive handoff.</p></div><div class="principle-list"><article><span>01</span><div><h3>Evidence before momentum</h3><p>A quick answer is not the same as a dependable one. Name missing evidence before accelerating the work.</p></div></article><article><span>02</span><div><h3>The boundary is part of the product</h3><p>Privacy, access, and accountability are treated as design material. Protected workspaces hold the record.</p></div></article><article><span>03</span><div><h3>A clear next step beats an inflated promise</h3><p>Favour traceable progress over autonomous theatre. Every handoff should show what changed, what remains open, and who reviews it.</p></div></article></div></section>
       <section class="records" id="records"><div class="section-head"><div><p class="micro">Case studies & field notes</p><h2>Published work, with the evidence left in view.</h2></div><p>These public records describe an operating question, documented practice, and boundary. They do not claim customer outcomes, confidential results, or autonomous decision-making.</p></div><div class="record-filter">${["All", "Product system", "Research record", "Decision practice", "Architecture record"].map((kind) => `<button data-kind="${kind}" class="${kind === "All" ? "selected" : ""}">${kind}</button>`).join("")}</div><div class="record-layout"><div class="study-list" id="study-list"></div><article class="study-detail" id="study-detail"></article></div><div class="field-notes"><article><span>01</span><h3>Source first</h3><p>Bring evidence and context before recommendation. A source map can make uncertainty legible.</p></article><article><span>02</span><h3>Review is a feature</h3><p>Every protected decision path needs a named owner and a visible condition for stopping.</p></article><article><span>03</span><h3>Public does not mean exposed</h3><p>Explain the method without exposing internal records, private workspaces, or client materials.</p></article></div></section>
+      <section class="trust" id="trust">
+        <div class="section-head">
+          <div>
+            <p class="micro">Founder / Trust</p>
+            <h2>Who built it, and what is actually true.</h2>
+          </div>
+          <p>Ambition can be enormous. Claims cannot exceed evidence. This section states the current public reality without inflation.</p>
+        </div>
+        <div class="trust-grid">
+          <article>
+            <span>Builder</span>
+            <h3>Angel L. Krastev · A.K.</h3>
+            <p>Operator of Mind-Reply and the A11-K evidence-led foundation. Organisation: Mind-Reply / Sofia Tech Register EOOD.</p>
+          </article>
+          <article>
+            <span>Live</span>
+            <h3>Public surfaces that respond</h3>
+            <p>a11-k.space (this foundation) · mind-reply.com · documented repositories on GitHub under angellllkr-eng and Mind-Reply.</p>
+          </article>
+          <article>
+            <span>Fixture</span>
+            <h3>Illustrative or staging material</h3>
+            <p>Demo scenarios, comparison ledgers, and field notes shown for method clarity. They are not live client results or autonomous decisions.</p>
+          </article>
+          <article>
+            <span>Blocked</span>
+            <h3>Not yet public or not yet verified</h3>
+            <p>Protected console routes · internal decision ledgers · any surface still behind Vercel SSO or missing required environment configuration.</p>
+          </article>
+          <article>
+            <span>Verified</span>
+            <h3>Evidence on record</h3>
+            <p>Canonical monorepo · 43-target operating machine · SEO technical base for this domain · public service boundaries · human-review protocol.</p>
+          </article>
+        </div>
+        <p class="trust-note">Every public claim on this foundation is intended to be checkable. If a statement cannot be verified from a live URL, commit, or explicit boundary note, treat it as open rather than settled.</p>
+      </section>
       <section class="entry" id="entry"><div><p class="micro">Entry point</p><h2>Bring the pressure.<br><em>We return the structure.</em></h2></div><aside><p>Start with a concise briefing: the operating question, relevant context, the decision owner, and the date it needs review.</p><a class="primary" href="mailto:info@mind-reply.com?subject=A11-K%20briefing">Request an A11-K briefing ↗</a><small>Private material should be shared only through an approved route.</small></aside></section>
       <footer class="foundation-footer"><a class="wordmark" href="#top">A11<span>–</span>K</a><p>Evidence-led operating foundation. Public explanation, protected work.</p><div><a href="#top">Back to top</a><a href="https://www.mind-reply.com" target="_blank" rel="noreferrer">MindReply ↗</a></div></footer>
     </main><div id="modal-layer"></div>`;
