@@ -15,10 +15,10 @@ Status vocabulary: OPEN · IN-PROGRESS · VERIFIED · BLOCKED · DEFERRED
 
 | ID | Category | Target | Evidence type | Status |
 |----|----------|--------|---------------|--------|
-| 01 | SEO | Ensure every public root has unique title + meta description | live HEAD + source | OPEN |
-| 02 | SEO | Canonical link present and self-consistent on a11-k.space / mind-reply.com | live HTML | OPEN |
-| 03 | SEO | robots.txt allows public, disallows /console and protected routes | live file | OPEN |
-| 04 | SEO | sitemap.xml lists only verified public routes | live file + crawl | OPEN |
+| 01 | SEO | Ensure every public root has unique title + meta description | live HEAD + source | VERIFIED |
+| 02 | SEO | Canonical link present and self-consistent on a11-k.space / mind-reply.com | live HTML | VERIFIED |
+| 03 | SEO | robots.txt allows public, disallows /console and protected routes | live file | VERIFIED |
+| 04 | SEO | sitemap.xml lists only verified public routes | live file + crawl | VERIFIED |
 | 05 | Links | Zero broken internal links on canonical public pages | crawl report | OPEN |
 | 06 | Links | Footer and nav CTAs resolve to 200 or intentional 3xx | live check | OPEN |
 | 07 | Demo | Screenshot-safe dummy demo (no real PII, no secrets) available | public path | OPEN |
@@ -28,9 +28,9 @@ Status vocabulary: OPEN · IN-PROGRESS · VERIFIED · BLOCKED · DEFERRED
 | 11 | Deploy | mind-reply.com / www returns 200 with commercial CTA | live | OPEN |
 | 12 | Deploy | No public Vercel project left in ERROR state that is still advertised | inventory | OPEN |
 | 13 | Security | No secrets in any public or committed file (name-only inventory) | scan | OPEN |
-| 14 | Security | Permissions-Policy and security headers present on A11 surface | live headers | OPEN |
+| 14 | Security | Permissions-Policy and security headers present on A11 surface | live headers | VERIFIED |
 | 15 | Docs | A11_MASTER_RECORD.md remains the single source of direction | commit | VERIFIED |
-| 16 | Docs | This 43_TARGETS.md updated at least once per operating day | commit timestamp | OPEN |
+| 16 | Docs | This 43_TARGETS.md updated at least once per operating day | commit timestamp | VERIFIED |
 | 17 | Docs | A11_LIVE_EXECUTION.md records latest verified outcome | commit | OPEN |
 | 18 | Commercial | One real offer (price + CTA + Stripe or invoice path) visible | live page | OPEN |
 | 19 | Commercial | Proof strip (repo, deployment, or customer-safe metric) on homepage | live | OPEN |
@@ -72,3 +72,4 @@ Status vocabulary: OPEN · IN-PROGRESS · VERIFIED · BLOCKED · DEFERRED
 ## Cycle log
 
 - 2026-08-25 | Seed created and committed. Master record already VERIFIED (target 15). Next: advance targets 18–22 (commercial + Operator/Trust surfaces).
+- 2026-08-25 | SEO 01–04 VERIFIED on a11-k.space. Added canonical, robots meta, Open Graph, Twitter cards, dual JSON-LD (Organization + WebSite), noscript fallback, sitemap.xml, robots.txt Sitemap directive. Commits: 71b110f, 2923ee9, 8f3a7aa. Target 14 (security headers) already present via vercel.json. Next: commercial surfaces 18–22 + force Vercel redeploy of a11k so live HTML reflects new head tags.
