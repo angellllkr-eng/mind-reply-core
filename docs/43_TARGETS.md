@@ -34,7 +34,7 @@ Status vocabulary: OPEN · IN-PROGRESS · VERIFIED · BLOCKED · DEFERRED
 | 17 | Docs | A11_LIVE_EXECUTION.md records latest verified outcome | commit | OPEN |
 | 18 | Commercial | One real offer (price + CTA + Stripe or invoice path) visible | live page | OPEN |
 | 19 | Commercial | Proof strip (repo, deployment, or customer-safe metric) on homepage | live | OPEN |
-| 20 | Commercial | Founder / Trust page lists what is live / fixture / blocked / verified | public path | OPEN |
+| 20 | Commercial | Founder / Trust page lists what is live / fixture / blocked / verified | public path | IN-PROGRESS |
 | 21 | Operator | Operator Dashboard shows last evidence URL + status of top 10 targets | public or protected | OPEN |
 | 22 | Operator | 43 targets visible, filterable by status | this file or UI | OPEN |
 | 23 | Automation | Daily pulse automation leaves evidence note | log or commit | OPEN |
@@ -52,8 +52,8 @@ Status vocabulary: OPEN · IN-PROGRESS · VERIFIED · BLOCKED · DEFERRED
 | 35 | Zero-404 | Custom not-found / branded 404 on retained public projects | live | OPEN |
 | 36 | Consolidation | Vercel project inventory mapped to GitHub source | docs or issue | OPEN |
 | 37 | Consolidation | Duplicate/ERROR projects classified KEEP / RETIRE / SANDBOX | issue update | OPEN |
-| 38 | Trust | Founder identity and organisation stated once, consistently | live | OPEN |
-| 39 | Trust | Explicit statement of what is fixture vs live vs blocked | live | OPEN |
+| 38 | Trust | Founder identity and organisation stated once, consistently | live | IN-PROGRESS |
+| 39 | Trust | Explicit statement of what is fixture vs live vs blocked | live | IN-PROGRESS |
 | 40 | Monitoring | Health or status endpoint returns factual release identity | live | OPEN |
 | 41 | Communications | One outbound or draft outreach evidence captured (no auto-send) | draft id | OPEN |
 | 42 | Research | One frontier or opportunity note with evidence confidence | file or issue | OPEN |
@@ -73,3 +73,4 @@ Status vocabulary: OPEN · IN-PROGRESS · VERIFIED · BLOCKED · DEFERRED
 
 - 2026-08-25 | Seed created and committed. Master record already VERIFIED (target 15). Next: advance targets 18–22 (commercial + Operator/Trust surfaces).
 - 2026-08-25 | SEO 01–04 VERIFIED on a11-k.space. Added canonical, robots meta, Open Graph, Twitter cards, dual JSON-LD (Organization + WebSite), noscript fallback, sitemap.xml, robots.txt Sitemap directive. Commits: 71b110f, 2923ee9, 8f3a7aa. Target 14 (security headers) already present via vercel.json. Next: commercial surfaces 18–22 + force Vercel redeploy of a11k so live HTML reflects new head tags.
+- 2026-08-25 | Founder/Trust section added to foundation.js (nav + #trust with Builder / Live / Fixture / Blocked / Verified matrix). Targets 20, 38, 39 → IN-PROGRESS. Commit a6e535c. Becomes VERIFIED once the project serving a11-k.space is redeployed and the section is visible live.
