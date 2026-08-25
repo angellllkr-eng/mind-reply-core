@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#143740">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="A11 private live monitoring — surfaces, commercial status, agent hierarchy, targets. Owner-only operational view.">
+  <title>A11 · Live Monitor · CEO A.K.</title>
+  <link rel="stylesheet" href="/foundation.css">
+  <style>
+    .monitor { padding: 40px max(4vw, 24px) 80px; max-width: 1200px; margin: 0 auto; }
+    .monitor h1 { font: 400 clamp(36px, 5vw, 64px)/.95 var(--serif); letter-spacing: -.04em; margin: 0 0 8px; }
+    .monitor .lede { color: var(--muted); max-width: 640px; line-height: 1.7; margin: 0 0 36px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 28px; }
+    .card { background: #faf7ef; border: 1px solid var(--line); padding: 20px 22px; }
+    .card .label { font: 500 8px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--brass); margin: 0 0 10px; }
+    .card h2 { font: 400 22px/1.1 var(--serif); margin: 0 0 10px; }
+    .card p, .card li { font-size: 13px; line-height: 1.65; color: var(--muted); margin: 0; }
+    .card ul { margin: 8px 0 0; padding-left: 18px; }
+    .status { display: inline-block; font: 600 8px var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 4px 8px; border-radius: 2px; }
+    .status.live { background: rgba(20,55,64,.12); color: var(--ink); }
+    .status.verified { background: rgba(168,122,47,.15); color: #76521f; }
+    .status.progress { background: rgba(201,89,60,.12); color: var(--coral); }
+    .status.gated { background: #eee; color: #666; }
+    .bar { height: 6px; background: var(--line); margin: 12px 0 6px; border-radius: 2px; overflow: hidden; }
+    .bar > i { display: block; height: 100%; background: var(--ink); }
+    .commercial { border-left: 3px solid var(--coral); }
+    .footer-note { font: 500 10px/1.6 var(--mono); color: var(--muted); margin-top: 40px; border-top: 1px solid var(--line); padding-top: 18px; }
+    a.inline { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <header id="nav">
+    <a class="wordmark" href="/">A11<span>–</span>K <small>Live monitor · CEO only</small></a>
+    <div class="top-links">
+      <a href="/">Foundation</a>
+      <a href="/#trust">Trust</a>
+      <a href="/monitor">Monitor</a>
+    </div>
+  </header>
+  <main class="monitor">
+    <p class="micro">Private operational view · Angel L. Krastev</p>
+    <h1>Live presence & results</h1>
+    <p class="lede">Real status only. Surfaces, commercial path, agent hierarchy, and the 43-target machine — updated from verified evidence. No invented balances. No secret values.</p>
+
+    <div class="grid">
+      <article class="card">
+        <p class="label">Public surfaces</p>
+        <h2>Domain health</h2>
+        <p><span class="status live">Live check</span></p>
+        <ul>
+          <li><strong>a11-k.space</strong> — HTTP 200 (primary foundation)</li>
+          <li><strong>mind-reply.com</strong> — HTTP 200 (commercial root)</li>
+          <li>SEO + Trust + sitemap — <strong>VERIFIED in monorepo</strong>; live domain update requires a11-k-core redeploy</li>
+        </ul>
+      </article>
+
+      <article class="card commercial">
+        <p class="label">Commercial · assets path</p>
+        <h2>Offers & funds visibility</h2>
+        <p><span class="status verified">Evidence-led</span></p>
+        <ul>
+          <li><strong>Profit Audit</strong> — €3,000 · live Stripe booking path on estate README</li>
+          <li>Agent products — documented hierarchy only (no unrestricted remote control sold)</li>
+          <li>Balances / payouts — never shown here; Stripe Dashboard is source of truth</li>
+          <li>Asset names — see PINS asset-map (secret <em>names</em> only)</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <p class="label">43-target machine</p>
+        <h2>Operating progress</h2>
+        <p>Source: <code>docs/43_TARGETS.md</code></p>
+        <div class="bar" title="Approx share VERIFIED / IN-PROGRESS"><i style="width:35%"></i></div>
+        <p>SEO 01–04 + security headers + master record + daily doc update → <strong>VERIFIED</strong>. Trust section → <strong>IN-PROGRESS</strong> (awaiting live redeploy). Remainder OPEN by design.</p>
+      </article>
+
+      <article class="card">
+        <p class="label">Private agents</p>
+        <h2>Hierarchy</h2>
+        <p><span class="status verified">Smoke VERIFIED</span></p>
+        <ul>
+          <li><code>a11_ceo_private</code> (root)</li>
+          <li>workstation · implementation · security · research</li>
+          <li>robotics · fulfillment · opportunity</li>
+          <li>Security & robotics: <strong>plan-only / blocked</strong></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <p class="label">Visual & performance</p>
+        <h2>Long-term Google readiness</h2>
+        <ul>
+          <li>Distinctive system locked (parchment / teal / brass / coral)</li>
+          <li>Real-live-only media policy</li>
+          <li>Core Web Vitals targets defined</li>
+          <li>OG image 1200×630 — next asset to produce</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <p class="label">Infrastructure gates</p>
+        <h2>Cloud & spend</h2>
+        <p><span class="status gated">Approval required</span></p>
+        <ul>
+          <li>GCP project referenced: <code>mind-reply-496111</code></li>
+          <li>GKE + TensorBoard plan — sealed, not applied</li>
+          <li>No cluster create, no API enable, no spend without your explicit go</li>
+          <li>VPC-SC / PSC / ADK Runtime — same gate</li>
+        </ul>
+      </article>
+    </div>
+
+    <article class="card">
+      <p class="label">Next highest-value moves</p>
+      <h2>Ordered for you</h2>
+      <ol style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7">
+        <li>Redeploy <strong>a11-k-core</strong> so a11-k.space serves current SEO + Trust + monitor.</li>
+        <li>Produce one OG image (1200×630) in the locked visual system.</li>
+        <li>Keep Profit Audit as the single live high-ticket CTA until a second offer is VERIFIED.</li>
+        <li>Only if you want diagnostics spend: review sealed GKE plan in <code>docs/GKE_TENSORBOARD_PLAN.md</code> and approve in writing before any <code>gcloud</code> apply.</li>
+      </ol>
+    </article>
+
+    <p class="footer-note">
+      A11 Live Monitor · Owner-only · Updated from monorepo evidence ·
+      <a class="inline" href="https://github.com/angellllkr-eng/mind-reply-core">mind-reply-core</a> ·
+      No secret values · Fail closed
+    </p>
+  </main>
+</body>
+</html>
