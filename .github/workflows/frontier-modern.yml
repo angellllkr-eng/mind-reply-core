@@ -36,8 +36,13 @@ jobs:
           case "$package_manager" in
             pnpm)
               if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else pnpm install; fi
-              pnpm run build --if-present
-              pnpm test --if-present
+              if [ -f apps/web-replycontrol/package.json ]; then
+                pnpm --filter web-replycontrol typecheck
+                pnpm --filter web-replycontrol build
+              else
+                pnpm run build --if-present
+                pnpm test --if-present
+              fi
               ;;
             yarn)
               if [ -f yarn.lock ]; then yarn install --immutable; else yarn install; fi

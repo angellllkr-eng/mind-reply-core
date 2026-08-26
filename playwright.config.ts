@@ -17,11 +17,12 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
-  webServer: process.env.PLAYWRIGHT
-    ? undefined
-    : {
-        command: 'pnpm dev',
-        url: 'http://localhost:3000',
-        reuseExistingServer: !process.env.CI,
-      },
+  webServer:
+    process.env.PLAYWRIGHT || process.env.PLAYWRIGHT_TEST_BASE_URL
+      ? undefined
+      : {
+          command: process.env.PLAYWRIGHT_WEB_SERVER_COMMAND || 'pnpm dev',
+          url: 'http://localhost:3000',
+          reuseExistingServer: !process.env.CI,
+        },
 });

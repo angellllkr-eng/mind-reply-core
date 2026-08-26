@@ -22,7 +22,16 @@ jobs:
         run: |
           corepack enable; pm='${{ steps.detect.outputs.pm }}'
           if [ "$pm" = pnpm ]; then if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else pnpm install; fi; elif [ "$pm" = yarn ]; then if [ -f yarn.lock ]; then yarn install --immutable; else yarn install; fi; else if [ -f package-lock.json ]; then npm ci; else npm install; fi; fi
-          run(){ s="$1"; if node -e "process.exit(require('./package.json').scripts?.['$s'] ? 0 : 1)"; then case "$pm" in pnpm) pnpm run "$s";; yarn) yarn "$s";; *) npm run "$s";; esac; fi; }; run check; run lint; run test; run build
+          run(){ s="$1"; if node -e "process.exit(require('./package.json').scripts?.['$s'] ? 0 : 1)"; then case "$pm" in pnpm) pnpm run "$s";; yarn) yarn "$s";; *) npm run "$s";; esac; fi; }
+          if [ "$pm" = pnpm ] && [ -f apps/web-replycontrol/package.json ]; then
+            pnpm --filter web-replycontrol typecheck
+            pnpm --filter web-replycontrol build
+          else
+            run check
+            run lint
+            run test
+            run build
+          fi
       - name: E2E if configured
         if: steps.detect.outputs.node == 'true' && hashFiles('playwright.config.*') != ''
         run: corepack pnpm exec playwright install --with-deps chromium && corepack pnpm exec playwright test

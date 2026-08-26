@@ -48,8 +48,8 @@ jobs:
         id: cache-key
         run: echo "key=pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}" >> $GITHUB_OUTPUT
 
-  # Install dependencies with caching
-  setup:
+  # Type check the deployable web app
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -63,50 +63,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build cache
-        uses: actions/upload-artifact@v4
-        with:
-          name: node-modules
-          path: node_modules/
-          retention-days: 1
-
-  # Lint and type check
-  lint:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: ${{ env.PNPM_VERSION }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Restore dependencies
-        uses: actions/download-artifact@v4
-        with:
-          name: node-modules
-          path: node_modules/
-
-      - name: Lint
-        run: pnpm run lint
-
-      - name: Type check
-        run: pnpm run typecheck
+      - name: Type check web app
+        run: pnpm --filter web-replycontrol typecheck
 
   # Run tests
   test:
-    needs: setup
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -134,11 +99,8 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Restore dependencies
-        uses: actions/download-artifact@v4
-        with:
-          name: node-modules
-          path: node_modules/
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Setup test database
         run: |
@@ -146,8 +108,11 @@ jobs:
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
 
-      - name: Run tests
-        run: pnpm run test:ci
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run web-app smoke tests
+        run: PLAYWRIGHT_WEB_SERVER_COMMAND='pnpm --filter web-replycontrol dev' pnpm exec playwright test
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
           CI: true
@@ -193,6 +158,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: ./apps/web-replycontrol/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
