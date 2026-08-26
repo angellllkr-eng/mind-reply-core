@@ -11,9 +11,10 @@ Every agent output: finding -> evidence -> risk -> change -> verification -> rem
 Never claim live, secure, certified, compliant, revenue-ready or deployed without current evidence.
 
 ## Skill Mesh (permanent)
-The three core skills operate as one wired system:
+The four core skills operate as one wired system:
 - **human-gate-closer** — execution spine for every human gate.
-- **a11-seo** — live web popularization of Angel L. Krastev / A11-K.
+- **a11-seo** — technical SEO and silent live-web popularization.
+- **a11-public-proof-engine** — public proof, brand hub, portfolio launch, attributable presence.
 - **a11-ios-zero-interruption** — absolute zero iOS interruptions.
 
 See: `.agents/skills/a11-ceo-skill-mesh/SKILL.md`
