@@ -1,133 +1,122 @@
-# Personal GitHub → Vercel Portfolio Architecture
+# Personal GitHub → Vercel Production Portfolio
 
 Date: 2026-08-26
-Owner: angellllkr-eng
-Vercel team: mindreply / angelk
+Owner: A.K. / `angellllkr-eng`
+Vercel team: `mindreply`
 
-## Source of truth
+## Objective
 
-GitHub is the canonical source repository and history. Vercel is the production deployment layer. A repository may feed more than one Vercel project only when the applications have intentionally independent domains, security boundaries, deployment lifecycles, or root directories.
-
-Do not create a Vercel project merely because a new page or feature exists.
+Reduce the personal GitHub/Vercel estate from duplicated and thin deployments into a small number of strong platforms. Build substantive pages and product experiences inside canonical platforms instead of creating a new site/project for every page.
 
 ## Canonical production platforms
 
-| Platform | Canonical source | Vercel strategy | Status |
+| Platform | Canonical GitHub source | Canonical Vercel project | Decision |
 |---|---|---|---|
-| MindReply | angellllkr-eng/mind-reply-core | 1 canonical production project; shared monorepo surfaces | KEEP |
-| ResellerPro | angellllkr-eng/resellerpro-platform | 1 canonical production project | KEEP / CONSOLIDATE |
-| A11-K | angellllkr-eng/mind-reply-core + a11k-surface where useful | core + deliberate public surface only | KEEP / CONSOLIDATE |
-| PatchTalk | angellllkr-eng/patchtalk | 1 canonical product project | KEEP |
-| Aurel | angellllkr-eng/agent-control-plane | independent product/domain boundary | KEEP / VERIFY |
-| Revenue/Sales | revenuepulse, leadrevive, empirepulse, marginpilot, leadatlas, dealforge | consolidate into a platform before multiplying deployments | CONSOLIDATE |
-| Automation/Tools | docparse, auditforge-brand, cloudtrim, intentrank, uptimepilot | consolidate/validate before independent production projects | CONSOLIDATE |
+| MindReply | `angellllkr-eng/mind-reply-core` | `mindreply` | KEEP |
+| ResellerPro | `angellllkr-eng/resellerpro-platform` | `resellerpro-platform` | KEEP / CONSOLIDATE |
+| A11-K | `angellllkr-eng/mind-reply-core` + `a11k-surface` | `a11-k-live-foundation` + deliberate public surface | KEEP / REPAIR |
+| PatchTalk | `angellllkr-eng/patchtalk` | `patchtalk` | KEEP |
+| Aurel | `angellllkr-eng/agent-control-plane` | `agent-control-plane-vezr` | KEEP / VERIFY |
+| Revenue/Sales | validated revenue repositories | future canonical platform | CONSOLIDATE |
+| Automation/Tools | validated tool repositories | future canonical platform | CONSOLIDATE |
 
-## Personal GitHub repository disposition
+## Vercel reconciliation
 
-### Core / production
+### Canonical projects
 
-- mind-reply-core — CANONICAL CORE
-- resellerpro-platform — CANONICAL PRODUCT
-- patchtalk — CANONICAL PRODUCT
-- agent-control-plane — CANONICAL AUREL CANDIDATE
-- a11k-surface — A11-K PUBLIC SURFACE CANDIDATE
-- mindreply — KEEP / compare against core before further development
+- `mindreply` → `Mind-Reply/mind-reply-core`
+- `resellerpro-platform` → `angellllkr-eng/resellerpro-platform`
+- `patchtalk` → `angellllkr-eng/patchtalk`
+- `a11-k-live-foundation` → `angellllkr-eng/mind-reply-core`
+- `a11k-surface` → `angellllkr-eng/a11k-surface`
+- `agent-control-plane-vezr` → `angellllkr-eng/agent-control-plane`
+- `private-opportunity-core` → `angellllkr-eng/private-opportunity-core`
 
-### Internal control systems
+### ResellerPro duplicates
 
-- mindreply-control — KEEP INTERNAL; migrate useful capability into canonical control plane when stable
-- private-opportunity-core — KEEP PRIVATE; repair build before production
-- a11k-operator-desk — KEEP PRIVATE; use as operator surface
-- registrar-control-plane — KEEP INTERNAL; no public deployment unless justified
+`resellerpro-platform-u16a`, `resellerpro-platform-8psz`, `resellerpro-platform11`, `resellerpro-platform-fqnz`, and `resellerpro-platform-original` all point to the same repository as `resellerpro-platform`.
 
-### A11-K / platform experiments
+**Target:** one canonical production project. Retire duplicates only after domain, environment, webhook, alias and rollback verification.
 
-- a11-k-multiverse — ABSORB useful work into A11-K; no standalone deployment by default
-- a11-k-multiverse-5d — ABSORB useful work into A11-K; preserve as source until migration verified
-- copy-of-a11-k-command-center — ABSORB/ARCHIVE after feature comparison
-- a11-enterprise — EMPTY/EXPERIMENT; no deployment
-- nexus-core — ABSORB if capability is required; otherwise archive later
-- forge — ABSORB if capability is required; otherwise archive later
+### MindReply org-site duplicates
 
-### Revenue candidates
+`mindreply-org-site`, `mindreply-org-site1`, and `mindreply-org-site-zrvr` all point to `angellllkr-eng/mindreply-org-site`.
 
-- revenuepulse
-- leadrevive
-- empirepulse
-- uptimepilot
-- marginpilot
-- leadatlas
-- dealforge
+**Target:** absorb useful content into MindReply and retain at most one justified standalone surface.
 
-These remain source assets. They should become routes/modules inside a coherent revenue platform unless usage, customers, or domain strategy proves that one deserves an independent product.
+### Public-site duplicates
 
-### Tool candidates
+`public-site` and `public-site-kmcc` both point to `angellllkr-eng/mindreply-control`.
 
-- docparse
-- auditforge-brand
-- cloudtrim
-- intentrank
+**Target:** one owner/control surface; no duplicate deployment.
 
-Treat as validated-feature candidates first; avoid thin standalone sites.
+### Unlinked Vercel projects requiring explicit decision
 
-### Preserve / evaluate
+- `brushworks-seo-surface` — PAUSE; brand/IP verification required.
+- `site-aurel` — absorb into Aurel unless independent lifecycle is proven.
+- `site-letreseller` — absorb into ResellerPro if still relevant.
+- `site-mindreply` — absorb into MindReply.
+- `a11k-seo-surface` — absorb into A11-K; no SEO-only deployment.
+- `a11-k-core` — reconcile with `a11-k-live-foundation`; one core only.
+- `mindreply-real-estate-recovery` — REVIEW.
+- `a11k-public-support-proxy-validation` — temporary validation only.
+- `a11k-operator-desk` / `a11k-operator-desk-public` — retain only the justified private/public split and connect to source.
+- `mindreply-ops-ledger` / `mindreply-priority-dashboard` — internal apps; connect to source or absorb into owner control plane.
+- `brushworks` — PAUSE.
 
-- brushworks — PAUSE. Verify naming/IP and intended business relationship before commercialization.
-- openmontage — KEEP SEPARATE; substantial codebase and unrelated product boundary.
-- openmontage-source-mirror — MIRROR ONLY; do not deploy.
-- unapolagetic-cosmetics — SEPARATE EXPERIMENT; do not merge into MindReply without explicit product decision.
-- SMS — SEPARATE TECH/EXPERIMENT unless incorporated into a canonical messaging platform.
-- own / Own1 — inspect before any Vercel promotion; do not treat as PatchTalk automatically.
+### Special source mismatch
 
-### Archived / low-priority source
+`whatsapp-ai-router` currently points to `angellllkr-eng/own`, not `patchtalk`. Do not silently relink. Review `own`; if it is PatchTalk functionality, migrate intentionally into `patchtalk`, validate, then retire the old deployment.
 
-- chatbot — ARCHIVED
-- chatbot1 — ARCHIVED
-- linear-card-interaction — ARCHIVED
-- source1 — EMPTY
-- source2 — EMPTY
-- Own1 — EMPTY
-- a11-enterprise — EMPTY
-- megaagent-pc-builder — EMPTY
-- mind-repl — EMPTY
+### Other Vercel projects
 
-Do not delete repositories solely from this document. Archive/retire only after confirming no unique source, domain, deployment, credential, or customer dependency.
+`docparse`, `auditforge-brand`, `intentrank`, `revenuepulse`, `empirepulse`, `cloudtrim`, `dealforge`, `uptimepilot`, `leadrevive`, `marginpilot`, and `leadatlas` are useful source assets. They should become modules/routes in consolidated platforms unless evidence proves an independent product deserves its own lifecycle.
 
-## Vercel project policy
+## GitHub source policy
 
-### KEEP
+1. `angellllkr-eng/mind-reply-core` is the shared MindReply/A11-K platform source.
+2. Independent commercial products retain independent repositories when domain, security or deployment lifecycle genuinely differs.
+3. Never create a repository merely for a page.
+4. Never create a Vercel project merely for a page.
+5. Prefer branches and pull requests over duplicated repositories.
+6. Production repositories require README/security hygiene appropriate to their visibility.
 
-- mindreply
-- canonical resellerpro-platform
-- canonical patchtalk
-- canonical A11-K project/surface
-- Aurel production project when domain ownership is verified
-- selected internal control-plane projects
+## Platform page standard
 
-### CONSOLIDATE
+Each platform should target approximately 10–30 substantive pages only when justified:
 
-- resellerpro-platform-* duplicates → resellerpro-platform
-- mindreply-org-site* → one canonical surface or absorb into MindReply
-- public-site* → one canonical surface or absorb into MindReply
-- duplicate Brushworks surfaces → pause pending IP decision
-- duplicate A11-K surfaces → core/public/operator separation only where justified
+- product
+- solutions
+- use cases
+- industry/workflow pages
+- tools/calculators/demos
+- comparisons
+- guides
+- documentation
+- research/benchmarks
+- case studies/proof
+- pricing
+- conversion/contact
 
-### ARCHIVE CANDIDATES
+No doorway pages or keyword-only variants.
 
-Old experiments, empty deployments, source mirrors, failed templates, and projects with no domain or recent deployment after dependency/domain verification.
+## Production safety gate before retirement
 
-## Safety gates before retiring any Vercel project
+A Vercel project or repository may only be retired after:
 
-1. Enumerate custom domains.
-2. Check latest production deployment.
-3. Check GitHub source and branch.
-4. Check environment-variable dependency at a metadata level; never copy secrets into documentation.
-5. Verify redirects/canonical domains.
-6. Verify no external webhook/API points at the project.
-7. Confirm replacement deployment is READY.
-8. Keep rollback path until replacement has been validated.
+- custom domains mapped and verified
+- production alias identified
+- latest successful deployment identified
+- environment dependency mapped without exposing secrets
+- webhook/integration dependency mapped
+- analytics/observability dependency mapped
+- source repository/branch confirmed
+- replacement deployment READY
+- redirects/canonical URLs prepared
+- rollback path retained
+- no unique production/customer functionality remains
 
-## Target state
+## Target architecture
 
 ```text
 PERSONAL GITHUB
@@ -141,8 +130,7 @@ PERSONAL GITHUB
     ├── agent-control-plane
     ├── internal control repositories
     └── validated product source
-             |
-             v
+             ↓
           VERCEL
     ├── MindReply
     ├── ResellerPro
@@ -154,4 +142,4 @@ PERSONAL GITHUB
 
 ## Operating principle
 
-Build fewer, substantially better platforms. A page must earn its existence through user value, product functionality, evidence, useful information, or conversion purpose. Optimize for qualified usage and business outcomes rather than project count or URL count.
+Build fewer, substantially better platforms. A page must earn its existence through user value, product functionality, evidence, useful information, or conversion purpose. Optimize for qualified usage, product usage, conversion, retention and search/AI visibility—not project or URL count.
