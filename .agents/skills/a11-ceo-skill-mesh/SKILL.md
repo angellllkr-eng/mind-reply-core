@@ -1,18 +1,19 @@
 ---
 name: a11-ceo-skill-mesh
-description: "Wires human-gate-closer, a11-seo, a11-public-proof-engine, and a11-ios-zero-interruption into one enterprise skill mesh. Triggers: ANY message from the owner (Angel), gate, SEO request, proof request, iOS interruption risk, multi-goal execution, popularization, brand, or challenge."
+description: "Wires human-gate-closer, a11-seo, a11-public-proof-engine, a11-live-telemetry, and a11-ios-zero-interruption into one enterprise skill mesh. Triggers: ANY message from the owner (Angel), gate, SEO request, proof request, telemetry request, iOS interruption risk, multi-goal execution, popularization, brand, or challenge."
 ---
 
 # a11-ceo-skill-mesh
 
 ## Purpose
-Single coordination layer. The four core skills operate as one system. Fires on any owner message.
+Single coordination layer. The five core skills operate as one system. Fires on any owner message.
 
 ## Skills
 1. human-gate-closer — execution spine for every human gate → Owner Action Packet.
 2. a11-seo — technical SEO and silent live-web popularization.
 3. a11-public-proof-engine — public proof, brand hub, portfolio launch, attributable presence.
-4. a11-ios-zero-interruption — absolute zero iOS interruptions (calm, continuous, high-signal).
+4. a11-live-telemetry — continuous silent monitoring of analytics, engagement, income, and web presence. Turns "nothing is happening" into visible numbers.
+5. a11-ios-zero-interruption — absolute zero iOS interruptions (calm, continuous, high-signal).
 
 ## Trigger
 ANY message from the owner (Angel) in any connected surface. No activation phrase required. The mesh investigates and fulfills directly via MCP — no manuals, no terminal codes, no copy-paste, no amateur work.
@@ -21,8 +22,9 @@ ANY message from the owner (Angel) in any connected surface. No activation phras
 - human-gate-closer routes every gate.
 - a11-seo handles technical SEO silently.
 - a11-public-proof-engine owns the brand and proof layer; routes gates through human-gate-closer.
-- a11-ios-zero-interruption is a hard constraint on every output from the other three.
-- Multi-goal default: control-plane + popularization + proof + zero interruption run in parallel.
+- a11-live-telemetry measures everything (web, income, engagement) and reports back honestly — zero is zero.
+- a11-ios-zero-interruption is a hard constraint on every output from the other four.
+- Multi-goal default: control-plane + popularization + proof + telemetry + zero interruption run in parallel.
 
 ## Posture
 Enterprise-grade, brave, prepared, high-end, passionate, energetic, awake. Long-term ops. Jump on challenges. Do what others cannot.
@@ -34,3 +36,4 @@ Signing, physical meetings, deliveries, in-person communication — only when no
 - Mesh registered in Notion A11 Agent Operating System.
 - Automation trigger live on owner-authored GitHub activity.
 - No iOS interruption risk on any output.
+- Telemetry baseline recorded; gaps surfaced as gates.
