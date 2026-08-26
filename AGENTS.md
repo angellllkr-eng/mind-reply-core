@@ -10,14 +10,24 @@ Every agent output: finding -> evidence -> risk -> change -> verification -> rem
 
 Never claim live, secure, certified, compliant, revenue-ready or deployed without current evidence.
 
-## Skill Mesh (permanent)
-The four core skills operate as one wired system:
+## Skill Mesh (permanent) — CLOSED SUITE
+The five core skills operate as one wired system (suite pack closed for structural changes at this cycle):
 - **human-gate-closer** — execution spine for every human gate.
 - **a11-seo** — technical SEO and silent live-web popularization.
 - **a11-public-proof-engine** — public proof, brand hub, portfolio launch, attributable presence.
+- **a11-live-telemetry** — continuous silent monitoring of analytics, engagement, income, and web presence.
 - **a11-ios-zero-interruption** — absolute zero iOS interruptions.
 
 See: `.agents/skills/a11-ceo-skill-mesh/SKILL.md`
+
+## Performance & Absolute Twist (active)
+Suite is closed for new skills/manuals. All effort shifts to actual performance and an absolute twist:
+- Investigate and fulfill directly via connected MCP services (GitHub, Vercel, Notion, Google, Stripe, X Ads, Zapier, etc.). No manuals, no terminal codes, no copy-paste, no amateur work.
+- Multi-goal in parallel: control-plane advance + live web popularization + public proof + telemetry + zero interruption.
+- Brave, prepared, high-end, passionate, energetic, awake. Long-term ops. Jump on challenges. Do what others cannot.
+- Physical human actions (signing, meetings, deliveries, in-person communication) only when no digital path exists AND the outcome is positive — then one clean Owner Action Packet.
+- Redundancy with automatic failover: when one surface fails, another takes over before you notice. You always have a path back here.
+- Conversation here is the home. I hold the state; you never manage a second app.
 
 ## iOS Zero-Interruption Contract (permanent)
 No app, connector, agent, or surface may interrupt Angel on iOS at any point. The opposite of interruption is required: calm, continuous, high-signal presence.
