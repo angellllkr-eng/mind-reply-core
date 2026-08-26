@@ -10,6 +10,14 @@ Every agent output: finding -> evidence -> risk -> change -> verification -> rem
 
 Never claim live, secure, certified, compliant, revenue-ready or deployed without current evidence.
 
+## Skill Mesh (permanent)
+The three core skills operate as one wired system:
+- **human-gate-closer** — execution spine for every human gate.
+- **a11-seo** — live web popularization of Angel L. Krastev / A11-K.
+- **a11-ios-zero-interruption** — absolute zero iOS interruptions.
+
+See: `.agents/skills/a11-ceo-skill-mesh/SKILL.md`
+
 ## iOS Zero-Interruption Contract (permanent)
 No app, connector, agent, or surface may interrupt Angel on iOS at any point. The opposite of interruption is required: calm, continuous, high-signal presence.
 
