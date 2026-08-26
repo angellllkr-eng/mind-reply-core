@@ -5,7 +5,8 @@
   "engines": {"node": ">=24 <25"},
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "tsx lib/db/migrate && next build",
+    "build": "next build",
+    "build:with-migrations": "tsx lib/db/migrate && next build",
     "start": "next start",
     "check": "ultracite check",
     "fix": "ultracite fix",
