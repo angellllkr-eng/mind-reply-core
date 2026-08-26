@@ -8,6 +8,10 @@
   "scripts": {
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "@mind-reply/lumenforge": "workspace:*",
+    "@mind-reply/veridex": "workspace:*"
+  },
   "devDependencies": {
     "typescript": "^5.0.0"
   }

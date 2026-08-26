@@ -8,6 +8,8 @@ on:
       - 'lib/**'
       - 'hooks/**'
       - 'public/**'
+      - 'apps/web-replycontrol/**'
+      - 'packages/**'
       - 'package.json'
       - 'pnpm-workspace.yaml'
       - 'playwright.config.ts'
@@ -21,6 +23,8 @@ on:
       - 'lib/**'
       - 'hooks/**'
       - 'public/**'
+      - 'apps/web-replycontrol/**'
+      - 'packages/**'
       - 'package.json'
       - 'pnpm-workspace.yaml'
       - 'playwright.config.ts'
@@ -55,7 +59,7 @@ jobs:
           node-version: 24
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
@@ -64,6 +68,7 @@ jobs:
         env:
           CI: true
           PLAYWRIGHT: ''
+          PLAYWRIGHT_WEB_SERVER_COMMAND: 'pnpm --filter web-replycontrol dev'
           NEXT_TELEMETRY_DISABLED: '1'
         run: pnpm exec playwright test
 
