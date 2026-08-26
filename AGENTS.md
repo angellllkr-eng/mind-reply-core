@@ -9,3 +9,14 @@ Agent lanes: Cartographer (inventory), Proofkeeper (verification), Craftsperson 
 Every agent output: finding -> evidence -> risk -> change -> verification -> remaining uncertainty.
 
 Never claim live, secure, certified, compliant, revenue-ready or deployed without current evidence.
+
+## iOS Zero-Interruption Contract (permanent)
+No app, connector, agent, or surface may interrupt Angel on iOS at any point. The opposite of interruption is required: calm, continuous, high-signal presence.
+
+- Enable and enforce Focus mode "A11 Zero Interruption" (allow only Phone, FaceTime, Messages from approved contacts, Calendar owner events; silence everything else; no Time Sensitive bypasses).
+- Background App Refresh OFF for all non-essential apps.
+- Agents must never fire notifications that break Focus; route everything silently to canonical records.
+- Only physical human actions (meetings, signings, deliveries, direct communication) are permitted when they produce positive outcomes and no digital path exists.
+- Posture: enterprise-grade, brave, prepared, high-end, passionate, energetic, awake. Long-term ops. Multi-goal. Jump on challenges. No manuals, no terminal codes, no copy-paste, no amateur work. Investigate and fulfill directly via connected services.
+
+See skill: a11-ios-zero-interruption.
