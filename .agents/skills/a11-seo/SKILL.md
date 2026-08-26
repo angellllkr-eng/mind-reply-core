@@ -1,26 +1,22 @@
+---
+name: a11-seo
+description: "Live web popularization of Angel L. Krastev and A11-K. Triggers: SEO, popularization, public presence, ranking, proof assets, web audit."
+---
+
 # a11-seo
 
 ## Purpose
-Drive real, evidence-backed live-web popularization of Angel L. Krastev and A11-K projects. Multi-goal by default. High-end, dominant, sharp.
+Drive real, evidence-backed live-web popularization. Multi-goal. High-end.
 
-## Absolute rules
-- No manuals, no terminal codes, no copy-paste, no amateur work.
-- Investigate and fulfill directly through connected services (GitHub, Vercel, Notion, Google, X, etc.).
-- Never interrupt Angel on iOS. All work is silent and durable.
-- Claims never exceed evidence. Premium Mode, privacy-first, reversible where possible.
+## Rules
+- No manuals, no terminal codes, no copy-paste.
+- Fulfill directly via connected services.
+- Never interrupt iOS. Silent and durable.
+- Claims never exceed evidence.
 
-## Operating posture
-Enterprise-grade, brave, prepared, high-end, passionate, energetic, awake. Long-term ops. Jump on challenges. Do what others cannot.
-
-## Core actions
-1. Audit current public surfaces (a11-k.space, mind-reply.com, portfolio, X, etc.).
-2. Fix technical SEO gaps silently (meta, structured data, sitemap, canonical, indexability).
-3. Produce and publish proof assets only after evidence and owner approval where required.
-4. Route any human gate (signing, physical meeting, direct communication) through human-gate-closer as an Owner Action Packet.
-5. Record every outcome in PINS / Notion.
-
-## Anti-patterns
-- Generic AI content or keyword stuffing.
-- Breaking Focus or firing notifications.
-- Publishing unsupported claims.
-- Manual instructions for the owner.
+## Actions
+1. Audit public surfaces.
+2. Fix technical SEO silently.
+3. Publish proof assets after evidence + approval.
+4. Route human gates through human-gate-closer.
+5. Record in PINS / Notion.
