@@ -20,6 +20,5 @@
   "functions": {
     "api/**": {"maxDuration":300,"memory":1024},
     "api/webhooks/**": {"maxDuration":300,"memory":512}
-  },
-  "integrations": [{"service":"@vercel/analytics"},{"service":"@vercel/web-analytics"},{"service":"@vercel/otel"}]
+  }
 }
