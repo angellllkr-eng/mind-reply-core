@@ -3,13 +3,18 @@
  * For maximum performance and SEO
  */
 
+import { notFound } from 'next/navigation';
 import { cache } from 'react';
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '');
 
 // Reusable data fetching function with React cache
 const getData = cache(async (id: string) => {
+  if (!API_BASE_URL) return null;
+
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/data/${id}`,
+      `${API_BASE_URL}/api/data/${id}`,
       {
         next: {
           revalidate: parseInt(process.env.ISR_REVALIDATE_SECONDS || '3600', 10),
@@ -26,12 +31,11 @@ const getData = cache(async (id: string) => {
 });
 
 // ===== STATIC PAGE EXAMPLE =====
-export default async function Page({ params }: { params: { id: string } }) {
-  const data = await getData(params.id);
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const data = await getData(id);
 
-  if (!data) {
-    return <div>Data not found</div>;
-  }
+  if (!data) notFound();
 
   return (
     <div>
@@ -43,8 +47,10 @@ export default async function Page({ params }: { params: { id: string } }) {
 
 // Static params generation for SSG
 export async function generateStaticParams() {
+  if (!API_BASE_URL) return [];
+
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/data/all`);
+    const res = await fetch(`${API_BASE_URL}/api/data/all`);
     const data = await res.json();
 
     return data.map((item: any) => ({
@@ -57,8 +63,9 @@ export async function generateStaticParams() {
 }
 
 // Metadata generation for SEO
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const data = await getData(params.id);
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const data = await getData(id);
 
   if (!data) {
     return {
@@ -85,4 +92,4 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 }
 
 // Revalidate on-demand
-export const revalidate = parseInt(process.env.ISR_REVALIDATE_SECONDS || '3600', 10);
+export const revalidate = 3600;

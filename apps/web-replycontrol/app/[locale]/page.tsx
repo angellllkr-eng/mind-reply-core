@@ -4,7 +4,9 @@ import { PublicHome } from "../components/PublicHome";
 import { copy, normalizeLocale, supportedLocales } from "../lib/locales";
 
 export const dynamicParams = false;
-export function generateStaticParams() { return supportedLocales.map((locale) => ({ locale })); }
+export function generateStaticParams() {
+  return supportedLocales.filter((locale) => locale !== "en").map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const locale = normalizeLocale((await params).locale);
