@@ -72,7 +72,7 @@
     "prosemirror-view": "^1.42.0",
     "radix-ui": "^1.6.1",
     "react": "19.2.7",
-    "react-data-grid": "7.0.0-beta.47",
+    "react-data-grid": "7.0.0-beta.61",
     "react-dom": "19.2.7",
     "redis": "^6.1.0",
     "resumable-stream": "^2.2.12",
