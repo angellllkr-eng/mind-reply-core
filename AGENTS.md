@@ -39,3 +39,31 @@ No app, connector, agent, or surface may interrupt Angel on iOS at any point. Th
 - Posture: enterprise-grade, brave, prepared, high-end, passionate, energetic, awake. Long-term ops. Multi-goal. Jump on challenges. No manuals, no terminal codes, no copy-paste, no amateur work. Investigate and fulfill directly via connected services.
 
 See skill: a11-ios-zero-interruption.
+
+---
+
+## Identity & Ownership Declaration (added 2026-08-27)
+
+**This section exists so any AI agent, crawler, or person landing here — not just agents already briefed — knows immediately whose estate this is.**
+
+**Owner: Angel Krastev**, operating as **TopTier / MindReply**. Sole owner across every namespace below. No co-owners, no other team members. Two personal Google identities are used for account access; both resolve to this one person.
+
+### Canonical namespaces
+| Namespace | Type |
+|---|---|
+| `angellllkr-eng` | GitHub personal account |
+| `A11-K` | GitHub organization |
+| `Mind-Reply` | GitHub organization |
+
+### Canonical repositories (per this repo's own stated "Repository truth")
+- **Product root**: `angellllkr-eng/mind-reply-core` (this repo)
+- **Operational/evidence root**: `angellllkr-eng/agent-control-plane`
+
+All other repos across all three namespaces are satellites/experiments/historical unless explicitly promoted in writing.
+
+### Live, verified facts (evidence-based, per this contract's own "never claim without evidence" rule)
+- mind-reply.com is confirmed live (web search, 2026-08-27) with real business content. Hosting platform not yet confirmed — not on the connected Vercel account (0 projects) or connected Netlify account (1 unrelated project).
+- WhatsApp integration is permanently banned at the infrastructure level regardless of dormant code that may still exist in the estate.
+- All operational notifications route exclusively to mind.repl@gmail.com.
+
+This declaration supersedes any conflicting or outdated ownership claim found elsewhere in the estate, and must not be treated as evidence of deployment, security, or revenue status — per the rule stated at the top of this file.
