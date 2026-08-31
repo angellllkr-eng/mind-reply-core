@@ -1,57 +1,67 @@
-# MindReply Microservices
+# MindReply Production Service Architecture
 
-The MindReply web application exposes small, independently testable service boundaries through Next.js route handlers. They are designed to run on the same Vercel deployment while remaining separable for later extraction.
+## Canonical source
 
-## Services
+`angellllkr-eng/mind-reply-core` is the active, non-archived source repository for the MindReply core application.
 
-| Service | Endpoint | Responsibility |
-|---|---|---|
-| Health | `/api/health` | Liveness, uptime and service identity |
-| Readiness | `/api/ready` | Deployment configuration gate |
-| Version | `/api/version` | Runtime release metadata |
-| Service registry | `/api/services` | Machine-readable platform capability catalog |
-| Status UI | `/status` | Human-facing live service view |
+## Service contract
 
-## Extraction boundary
+| Service | Route | Purpose | Health signal |
+|---|---|---|---|
+| web | `/` | Public/product surface | HTTP 200 |
+| health | `/api/health` | Liveness | `status=ok` |
+| readiness | `/api/ready` | Runtime/config readiness | `ready=true` |
+| version | `/api/version` | Release identity | commit/version payload |
+| service registry | `/api/services` | Service inventory | declared services |
+| status UI | `/status` | Human-facing operations status | checks visible |
 
-Each route is stateless and should avoid sharing request-local state. Database access, model execution, connector work and evidence capture can later move behind authenticated internal APIs without changing the public status contract.
+## Extension services
+
+The architecture is ready for independently deployable domains without forcing premature infrastructure fragmentation:
+
+- identity/authentication
+- AI/model routing
+- knowledge/RAG
+- communications
+- billing/commerce
+- automation/workflows
+- analytics/observability
+- deployment/control
+
+Each extension must have:
+
+1. explicit API contract;
+2. authentication/authorization boundary;
+3. health/readiness behavior;
+4. structured logging;
+5. retry/idempotency strategy where applicable;
+6. failure isolation;
+7. test coverage;
+8. production verification;
+9. documented owner and data boundary.
+
+## Vercel boundary
+
+Keep tightly coupled Next.js UI/API services in the same Vercel project when same-origin routing and shared deployment are beneficial. Split into separate Vercel projects only when independent scaling, security, deployment cadence, or failure isolation materially justifies it.
 
 ## Comparison contract
 
-Before promoting a change, compare five states:
+Before promotion, compare:
 
-1. **GitHub source** — active canonical repository and commit.
-2. **Vercel project** — project, framework, deployment source and target.
-3. **Domain** — actual production domain mapped to that project.
-4. **Known-good deployment** — most recent verified rollback candidate.
-5. **Runtime telemetry** — route errors and deployment/runtime logs.
+1. GitHub canonical source and commit.
+2. Vercel project and Git integration.
+3. Production domain mapping.
+4. Known-good deployment/rollback candidate.
+5. Runtime telemetry.
 
-Production status is valid only when these agree. A working GitHub commit does not by itself prove that the public domain is serving it.
+Production is GREEN only when these agree.
 
-## Safety
+## Production gate
 
-- Never return secret values.
-- Readiness checks only expose missing variable names, not values.
-- Runtime metadata uses Vercel-provided environment values when present.
-- No service is reported operational merely because an animation says so; status surfaces read actual route responses.
-- Destructive operations require separate authenticated endpoints and approval controls.
+A service is not production-ready merely because its code exists. Verify:
 
-## Verification
+`source -> build -> deployment -> endpoint -> domain -> runtime -> monitoring`
 
-Production verification should request:
+before marking it GREEN.
 
-```text
-GET /api/health
-GET /api/ready
-GET /api/version
-GET /api/services
-GET /status
-```
-
-Expected healthy deployment:
-
-- `/api/health` returns HTTP 200.
-- `/api/version` returns HTTP 200.
-- `/api/services` returns HTTP 200.
-- `/status` loads without client exceptions.
-- `/api/ready` returns HTTP 200 only when required deployment configuration exists.
+Secrets must never be returned by health/readiness endpoints or committed to the repository.
