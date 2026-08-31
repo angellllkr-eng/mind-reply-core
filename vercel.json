@@ -11,7 +11,8 @@
   "trailingSlash": false,
   "headers": [
     {"source":"/api/(.*)","headers":[{"key":"Cache-Control","value":"no-cache, no-store, must-revalidate"},{"key":"X-Content-Type-Options","value":"nosniff"},{"key":"X-Frame-Options","value":"SAMEORIGIN"},{"key":"X-XSS-Protection","value":"1; mode=block"}]},
-    {"source":"/static/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]}
+    {"source":"/static/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]},
+    {"source":"/(.*)","headers":[{"key":"X-A11-K-Production","value":"a11-k.space"}]}
   ],
   "redirects": [{"source":"/old-path","destination":"/new-path","permanent":true}],
   "rewrites": [{"source":"/api/v1/(.*)","destination":"https://api.mind-reply.com/v1/$1"}],
