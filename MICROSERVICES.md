@@ -16,6 +16,18 @@ The MindReply web application exposes small, independently testable service boun
 
 Each route is stateless and should avoid sharing request-local state. Database access, model execution, connector work and evidence capture can later move behind authenticated internal APIs without changing the public status contract.
 
+## Comparison contract
+
+Before promoting a change, compare five states:
+
+1. **GitHub source** — active canonical repository and commit.
+2. **Vercel project** — project, framework, deployment source and target.
+3. **Domain** — actual production domain mapped to that project.
+4. **Known-good deployment** — most recent verified rollback candidate.
+5. **Runtime telemetry** — route errors and deployment/runtime logs.
+
+Production status is valid only when these agree. A working GitHub commit does not by itself prove that the public domain is serving it.
+
 ## Safety
 
 - Never return secret values.
