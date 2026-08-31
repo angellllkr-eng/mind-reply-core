@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Script from "next/script";
 import "./globals.css";
 import "./mission-control.css";
+import "./frontend-polish.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mind-reply.com"),
