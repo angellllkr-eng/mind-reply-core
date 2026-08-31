@@ -12,6 +12,10 @@ const modules = [
   ["06", "Control", "Keep release, configuration and rollback decisions under clear ownership.", "/control"],
 ];
 
+const secondary = [
+  ["Platform", "/platform"], ["Integrations", "/integrations"], ["Pricing", "/pricing"], ["Resources", "/resources"], ["Contact", "/contact"],
+];
+
 export function PublicHome({ locale }: { locale: SupportedLocale }) {
   const t = copy[locale];
   return <main className="mc-page">
@@ -32,22 +36,20 @@ export function PublicHome({ locale }: { locale: SupportedLocale }) {
       </div>
       <aside className="mc-console" aria-label="MindReply operating state">
         <div className="mc-console-top"><span>PROOFLINE / CURRENT STATE</span><b>VERIFIED PATH</b></div>
-        <div className="mc-console-main">
-          <span className="mc-console-label">Decision posture</span>
-          <div className="mc-verdict"><strong>Human authority retained.</strong><span>READY</span></div>
-          <div className="mc-lanes">
-            <div className="mc-lane"><span>Intent</span><div className="mc-lane-bar"><i style={{width:"96%"}}/></div><b>COMPILED</b></div>
-            <div className="mc-lane"><span>Evidence</span><div className="mc-lane-bar"><i style={{width:"91%"}}/></div><b>TRACEABLE</b></div>
-            <div className="mc-lane"><span>Release</span><div className="mc-lane-bar"><i style={{width:"88%"}}/></div><b>GATED</b></div>
-            <div className="mc-lane"><span>Rollback</span><div className="mc-lane-bar"><i style={{width:"100%"}}/></div><b>AVAILABLE</b></div>
-          </div>
-        </div>
+        <div className="mc-console-main"><span className="mc-console-label">Decision posture</span><div className="mc-verdict"><strong>Human authority retained.</strong><span>READY</span></div><div className="mc-lanes">
+          {[['Intent','96%','COMPILED'],['Evidence','91%','TRACEABLE'],['Release','88%','GATED'],['Rollback','100%','AVAILABLE']].map(([label,width,state]) => <div className="mc-lane" key={label}><span>{label}</span><div className="mc-lane-bar"><i style={{width}}/></div><b>{state}</b></div>)}
+        </div></div>
       </aside>
     </section>
 
     <section className="mc-section" id="platform" aria-labelledby="platform-title">
       <div className="mc-section-head"><span>THE MINDREPLY PLATFORM</span><h2 id="platform-title">One operating layer for the work between intent and outcome.</h2></div>
       <div className="mc-rail">{modules.map(([code, title, body, href]) => <article className="mc-module" key={code}><span className="num">{code}</span><h3>{title}</h3><p>{body}</p><a href={href}>{title} ↗</a></article>)}</div>
+    </section>
+
+    <section className="mc-section" aria-labelledby="capabilities-title">
+      <div className="mc-section-head"><span>EXPLORE THE SYSTEM</span><h2 id="capabilities-title">A product surface built to explain itself.</h2></div>
+      <div className="mc-link-grid">{secondary.map(([title, href]) => <a className="mc-link-card" href={href} key={href}><span>{title}</span><b>↗</b></a>)}</div>
     </section>
 
     <section className="mc-section" id="principles" aria-labelledby="principles-title">
@@ -57,6 +59,6 @@ export function PublicHome({ locale }: { locale: SupportedLocale }) {
     </section>
 
     <section className="mc-closing"><p className="mc-kicker"><i/>REALITY DELTA</p><h2>{t.closing.title}</h2><p>{t.closing.body}</p><a className="mc-primary" href="/platform">Enter MindReply ↗</a></section>
-    <footer className="mc-footer"><span>MindReply</span><span>OPERATE · EVIDENCE · RELEASE</span><a href="/status">System status ↗</a></footer>
+    <footer className="mc-footer"><span>MindReply</span><span>OPERATE · EVIDENCE · RELEASE</span><div className="mc-footer-links"><a href="/status">System status ↗</a><a href="/contact">Contact ↗</a></div></footer>
   </main>;
 }
