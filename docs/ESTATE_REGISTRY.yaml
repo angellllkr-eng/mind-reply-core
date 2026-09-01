@@ -1,0 +1,60 @@
+version: 1
+canonical_repo: angellllkr-eng/mind-reply-core
+canonical_branch: main
+policy: consolidate-overlap-preserve-complexity
+
+canonical_apps:
+  - id: mindreply
+    path: apps/web-replycontrol
+    domain: mind-reply.com
+  - id: a11k
+    path: apps/a11k
+    domain: mind-reply.com/a11k
+  - id: studio
+    path: apps/studio
+  - id: owner
+    path: apps/owner
+  - id: opportunities
+    path: apps/opportunities
+  - id: experiments
+    path: apps/experiments
+
+merge_groups:
+  mindreply:
+    repos: [mindreply, Mind-Reply/mindreply, Mind-Reply/mind-reply.com, Mind-Reply/Mind-Reply, Mind-Reply/Mind-Reply-1, Mind-Reply/mindreply-org-site, mindreply-org-site]
+    action: consolidate
+  a11k:
+    repos: [a11k-surface, a11-homepage, a11-evidence-surface, a11k-operator-desk, a11k-orchestration, a11-k-multiverse, a11-k-multiverse-5d, copy-of-a11-k-command-center, a11-enterprise, a11-rag-platform, a11-live-cloud-execution]
+    action: consolidate
+  control:
+    repos: [mr, mind-repl, mindreply-control, mindreply-production-pack, mr-touch, own, Own1]
+    action: consolidate
+  chat:
+    repos: [chatbot, chatbot1, Mind-Reply/chatbot, Mind-Reply/chatneo]
+    action: consolidate
+  micro_products:
+    repos: [revenuepulse, leadrevive, leadatlas, dealforge, intentrank, marginpilot, empirepulse, cloudtrim, uptimepilot, auditforge-brand]
+    action: consolidate-as-modules
+  opportunity:
+    repos: [opportunity-radar, private-opportunity-core, enterprise-engine-radar]
+    action: consolidate-engine-and-surface
+
+standalone:
+  - resellerpro-platform
+  - reseller-pro-enterprise
+  - patchtalk
+  - unapolagetic-cosmetics
+  - openmontage
+  - globalSpeed
+  - chrome-devtools-mcp
+  - next-devtools-mcp
+  - Understand-Anything
+  - FixCode
+  - cli
+  - compose-for-agents
+  - alphaevolve-on-googlecloud
+  - megaagent-pc-builder
+
+migration_states:
+  rule: never-delete-source-before-verified-cutover
+  states: [inventory, mapped, migrated, tested, deployed, verified, archived]
