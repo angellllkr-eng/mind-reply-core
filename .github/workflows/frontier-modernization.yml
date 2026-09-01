@@ -34,4 +34,6 @@ jobs:
           fi
       - name: E2E if configured
         if: steps.detect.outputs.node == 'true' && hashFiles('playwright.config.*') != ''
+        env:
+          PLAYWRIGHT_WEB_SERVER_COMMAND: pnpm --filter web-replycontrol dev
         run: corepack pnpm exec playwright install --with-deps chromium && corepack pnpm exec playwright test
