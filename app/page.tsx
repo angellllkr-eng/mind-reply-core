@@ -12,12 +12,19 @@ const games: Game[] = [
   { title: 'Solaris Blackjack', provider: 'Velvet Table', category: 'Table Games', art: '♠', tone: 'red' },
   { title: 'Moonlit Wins', provider: 'Northstar Studios', category: 'Slots', art: '☾', tone: 'cyan' },
   { title: 'Jade Dragon', provider: 'Eastline Games', category: 'Jackpots', art: '龍', tone: 'green', tag: 'MEGA' },
+  { title: 'Royal Rush', provider: 'Crown & Thorn', category: 'Slots', art: '♛', tone: 'gold', tag: 'HOT' },
+  { title: 'Orbit Dice', provider: 'Northstar Studios', category: 'Table Games', art: '⚄', tone: 'blue' },
+  { title: 'Velvet Baccarat', provider: 'Velvet Table', category: 'Live Casino', art: 'A', tone: 'red' },
+  { title: 'Aurora Gems', provider: 'Eastline Games', category: 'Jackpots', art: '◆', tone: 'cyan' },
+  { title: 'Lucky Lanterns', provider: 'Eastline Games', category: 'Slots', art: '8', tone: 'green' },
+  { title: 'Golden 21', provider: 'Velvet Table', category: 'Table Games', art: '21', tone: 'violet', tag: 'NEW' },
 ]
 const categories = ['All games', 'Slots', 'Live Casino', 'Table Games', 'Jackpots']
 
 export default function Page() {
   const [category, setCategory] = useState('All games')
   const [query, setQuery] = useState('')
+  const [currency, setCurrency] = useState('EUR')
   const [favorites, setFavorites] = useState<string[]>([])
   const [modal, setModal] = useState<'login' | 'register' | null>(null)
   const [launch, setLaunch] = useState<Game | null>(null)
@@ -30,7 +37,7 @@ export default function Page() {
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="NOVA home"><span className="wordmark-mark">N</span><span>NOVA<span className="wordmark-dot">.</span></span></a>
         <nav className="desktop-nav" aria-label="Primary navigation"><a className="active" href="#games">Casino</a><a href="#live">Live tables</a><a href="#jackpot">Jackpots</a><a href="#rewards">Rewards</a></nav>
-        <div className="header-actions"><button className="login-button" onClick={() => setModal('login')}>Log in</button><button className="button button-small" onClick={() => setModal('register')}>Create account <ArrowRight size={15} /></button><button className="menu-button" aria-label="Open menu"><Menu size={20} /></button></div>
+        <div className="header-actions"><select className="currency-select" value={currency} onChange={(event) => setCurrency(event.target.value)} aria-label="Select currency"><option>EUR</option><option>GBP</option><option>USD</option></select><span className="demo-balance">{currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$'}0.00 demo</span><button className="login-button" onClick={() => setModal('login')}>Log in</button><button className="button button-small" onClick={() => setModal('register')}>Create account <ArrowRight size={15} /></button><button className="menu-button" aria-label="Open menu"><Menu size={20} /></button></div>
       </header>
 
       <section className="hero" id="top"><div className="hero-copy"><p className="eyebrow"><Sparkles size={15} /> THE NOVA WELCOME</p><h1>Find your<br /><em>lucky</em> moment.</h1><p className="hero-description">A brighter way to play. Discover handpicked games, beautiful tables, and rewards that feel genuinely yours.</p><div className="hero-actions"><button className="button" onClick={() => document.getElementById('games')?.scrollIntoView({ behavior: 'smooth' })}>Explore the lobby <ArrowRight size={17} /></button><button className="text-button" onClick={() => setLaunch(games[1])}><span className="play-icon"><Play size={12} fill="currentColor" /></span> See how it works</button></div></div><div className="hero-art" aria-hidden="true"><div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" /><div className="hero-card"><span className="hero-card-label">TONIGHT'S FEATURE</span><strong>40</strong><span>TREASURES</span><small>DIAMOND TREE</small><div className="hero-card-stars">✦　✦　✦</div></div><div className="hero-chip">NOVA<br /><span>♣</span></div></div><div className="hero-foot"><span>Trusted by 24,000+ players</span><span className="hero-foot-line" /><span>Licensed & secure</span><ShieldCheck size={16} /></div></section>
