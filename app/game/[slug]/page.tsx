@@ -43,6 +43,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
             <p className="drawer-label">About the studio</p>
             <strong>{provider.name}</strong>
             <p className="drawer-sub">{provider.tier} partner · founded {provider.founded} · {provider.hq}. {games.filter((g) => g.providerId === provider.id).length} games in the Nova lobby.</p>
+            <Link href={`/studio/${provider.id}`} className="drawer-link">All {provider.name} games</Link>
           </div>
         </div>
       </section>

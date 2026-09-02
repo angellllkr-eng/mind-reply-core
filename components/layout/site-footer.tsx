@@ -4,8 +4,8 @@ import { Clock, CreditCard, Landmark, ShieldCheck, Smartphone, Wallet } from 'lu
 const columns = [
   { title: 'Casino', links: [['Lobby', '/'], ['Slots', '/?cat=Slots#games'], ['Jackpots', '/?cat=Jackpots#games'], ['Megaways', '/?cat=Megaways#games'], ['New releases', '/?cat=New#games']] },
   { title: 'Live', links: [['Live floor', '/live'], ['Roulette', '/live?type=Roulette'], ['Blackjack', '/live?type=Blackjack'], ['Baccarat', '/live?type=Baccarat'], ['Game shows', '/live?type=Game%20Shows']] },
-  { title: 'Rewards', links: [['Promotions', '/promotions'], ['Loyalty tiers', '/rewards'], ['Account', '/account'], ['Transactions', '/account#transactions'], ['Limits & tools', '/account#limits']] },
-  { title: 'Help', links: [['Help centre', '/account#help'], ['Safer gambling', '/account#limits'], ['Self-exclusion', '/account#limits'], ['Terms (demo)', '/account#help'], ['Privacy (demo)', '/account#help']] },
+  { title: 'Rewards', links: [['Promotions', '/promotions'], ['Loyalty tiers', '/rewards'], ['Account', '/account'], ['Transactions', '/account#transactions'], ['Game studios', '/studios']] },
+  { title: 'Help', links: [['Help centre', '/help'], ['Safer gambling', '/safer-gambling'], ['Self-exclusion', '/safer-gambling'], ['Terms (demo)', '/help'], ['Privacy (demo)', '/help']] },
 ]
 
 export function SiteFooter() {
@@ -29,8 +29,8 @@ export function SiteFooter() {
       <div className="footer-safer">
         <div className="safer-badges" aria-label="Safer gambling">
           <span className="age-badge">18+</span>
-          <Link href="/account#limits" className="safer-link"><ShieldCheck size={15} /> Safer gambling tools</Link>
-          <Link href="/account#limits" className="safer-link"><Clock size={15} /> Take a break</Link>
+          <Link href="/safer-gambling" className="safer-link"><ShieldCheck size={15} /> Safer gambling tools</Link>
+          <Link href="/safer-gambling" className="safer-link"><Clock size={15} /> Take a break</Link>
           <span className="safer-link muted">Self-exclusion support</span>
           <span className="safer-link muted">Gambling support helplines</span>
         </div>

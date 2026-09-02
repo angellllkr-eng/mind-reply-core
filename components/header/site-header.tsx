@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { Gift, Home, Menu, Radio, Search, Trophy, User, Wallet, X } from 'lucide-react'
 import { actions, useLobbyState } from '@/lib/store'
@@ -15,28 +15,21 @@ const nav = [
   { href: '/?cat=Jackpots#games', label: 'Jackpots' },
   { href: '/promotions', label: 'Promotions' },
   { href: '/rewards', label: 'Rewards' },
+  { href: '/studios', label: 'Studios' },
 ]
 
 const ribbon = ['All games', 'Slots', 'Live Casino', 'Table Games', 'Jackpots', 'Megaways', 'Instant Win', 'New', 'Exclusives']
 
 export function SiteHeader() {
   const s = useLobbyState()
-  const router = useRouter()
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [q, setQ] = useState('')
-
-  const submitSearch = () => {
-    if (!q.trim()) return
-    router.push(`/?q=${encodeURIComponent(q.trim())}#games`)
-    setQ('')
-  }
 
   return (
     <>
       <div className="utility">
         <span><span className="status-dot" /> Studio preview · Demo credits only · Play responsibly</span>
-        <span className="utility-links">18+　|　<Link href="/account">Help centre</Link>　|　EN</span>
+        <span className="utility-links"><Link href="/safer-gambling">18+ Safer gambling</Link>　|　<Link href="/help">Help centre</Link>　|　EN</span>
       </div>
       <header className="site-header">
         <div className="header-primary">
@@ -44,10 +37,9 @@ export function SiteHeader() {
           <nav className="desktop-nav" aria-label="Primary navigation">
             {nav.map((n) => <Link key={n.label} href={n.href} className={pathname === n.href.split('?')[0].split('#')[0] && !n.href.includes('?') ? 'active' : ''}>{n.label}</Link>)}
           </nav>
-          <label className="header-search">
-            <Search size={16} /><span className="sr-only">Search games</span>
-            <input value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229) submitSearch() }} placeholder="Search 170+ games" />
-          </label>
+          <button className="header-search" onClick={actions.openSearch} aria-label="Search games and studios">
+            <Search size={16} /><span className="header-search-text">Search 170+ games</span><kbd>/</kbd>
+          </button>
           <div className="header-actions">
             {s.user ? (
               <>

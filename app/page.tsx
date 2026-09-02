@@ -9,6 +9,7 @@ import { PromoCarousel } from '@/components/promos/promo-carousel'
 import { LiveTableCard } from '@/components/live/live-table-card'
 import { PersonalRails } from '@/components/lobby/personal-rails'
 import { JackpotMeter } from '@/components/lobby/jackpot-meter'
+import { WinnersTicker } from '@/components/lobby/winners-ticker'
 
 const moods = [
   { label: 'Slots', art: '7', cat: 'Slots' },
@@ -47,6 +48,8 @@ export default function Page() {
         </div>
         <div className="hero-foot"><span>{games.length} games</span><span className="hero-foot-line" /><span>{liveTables.length} live tables</span><span className="hero-foot-line" /><span>Demo only</span><ShieldCheck size={16} /></div>
       </section>
+
+      <WinnersTicker />
 
       <div className="lobby-section stack">
         <PromoCarousel />

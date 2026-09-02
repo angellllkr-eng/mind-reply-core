@@ -21,10 +21,9 @@ export function AccountDrawer() {
   const todayDeposits = s.transactions.filter((t) => t.type === 'deposit' && Date.now() - new Date(t.at).getTime() < 86400000).reduce((a, t) => a + t.amount, 0)
 
   const deposit = () => {
-    if (excluded) return setNotice('Deposits are paused while a break is active.')
-    if (s.limits.dailyDeposit !== null && todayDeposits + amount > s.limits.dailyDeposit) return setNotice(`This would exceed your daily deposit limit of ${money(s.limits.dailyDeposit, s.currency)}.`)
-    actions.deposit(amount)
-    setNotice(`${money(amount, s.currency)} demo credits added.`)
+    const res = actions.deposit(amount)
+    if (!res.ok) return setNotice(res.reason ?? 'Deposit declined.')
+    setNotice(`${money(amount, s.currency)} demo credits added.${s.limits.dailyDeposit !== null ? ` ${money(Math.max(0, s.limits.dailyDeposit - todayDeposits - amount), s.currency)} of today's limit remaining.` : ''}`)
   }
 
   return (

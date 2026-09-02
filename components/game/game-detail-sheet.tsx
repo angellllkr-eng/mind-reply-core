@@ -30,27 +30,27 @@ export function PlayPanel({ game }: { game: Game }) {
   const excluded = isExcluded(s)
   const favourite = s.favourites.includes(game.id)
 
-  const play = () => {
+  const quickSpin = () => {
     if (!s.user) return actions.openAuth('login')
-    if (excluded) return
     setSpinning(true)
-    const before = s.balance
-    actions.playDemo(game.id, game.title)
+    const out = actions.playDemo(game.id, game.title, 2, game.volatility)
     window.setTimeout(() => {
       setSpinning(false)
-      setResult('spun')
-      void before
+      setResult(out.ok ? (out.win > 0 ? `Win! ${money(out.win, s.currency)} (${out.multiplier}x)` : `No win this spin. Stake ${money(out.stake, s.currency)}.`) : out.reason)
     }, 700)
   }
 
   return (
     <div className="play-panel">
-      <button className="button" onClick={play} disabled={spinning || excluded}>
-        <Play size={15} fill="currentColor" /> {spinning ? 'Spinning…' : s.user ? 'Play demo spin' : 'Log in to play demo'}
-      </button>
+      {s.user ? (
+        <Link href={`/play/${game.slug}`} className="button" onClick={() => { actions.closeDetail() }} aria-disabled={excluded}><Play size={15} fill="currentColor" /> Launch game</Link>
+      ) : (
+        <button className="button" onClick={() => actions.openAuth('login')}><Play size={15} fill="currentColor" /> Log in to play demo</button>
+      )}
+      {s.user && <button className="outline-button" onClick={quickSpin} disabled={spinning || excluded}>{spinning ? 'Spinning…' : `Quick spin (${money(2, s.currency)})`}</button>}
       <button className={`outline-button ${favourite ? 'is-fav' : ''}`} onClick={() => actions.toggleFavourite(game.id)} aria-pressed={favourite}><Heart size={15} fill={favourite ? 'currentColor' : 'none'} /> {favourite ? 'Favourited' : 'Favourite'}</button>
       {excluded && <p className="drawer-warning"><ShieldAlert size={14} /> Play is paused while your break is active.</p>}
-      {result && s.user && <p className="drawer-notice" role="status">Demo spin recorded. Balance: {money(s.balance, s.currency)} · {s.points.toLocaleString()} points</p>}
+      {result && s.user && <p className="drawer-notice" role="status">{result} Balance: {money(s.balance, s.currency)}</p>}
     </div>
   )
 }
