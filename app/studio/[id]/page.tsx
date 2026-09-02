@@ -12,7 +12,8 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
-  const p = providers.find((x) => x.id === (await params).id)
+  const { id } = await params
+  const p = providers.find((x) => x.id === id)
   return p ? { title: `${p.name} games`, description: `All ${p.name} titles in the Nova lobby.` } : { title: 'Studio not found' }
 }
 

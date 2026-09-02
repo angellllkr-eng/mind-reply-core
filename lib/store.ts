@@ -47,12 +47,14 @@ function emit() {
 }
 
 function persist() {
-  if (typeof window === 'undefined') return
+  // Never write un-hydrated defaults over a saved session.
+  if (typeof window === 'undefined' || !state.hydrated) return
   const { ui: _ui, hydrated: _h, ...rest } = state
   window.localStorage.setItem(KEY, JSON.stringify(rest))
 }
 
 function set(patch: Partial<LobbyState> | ((s: LobbyState) => Partial<LobbyState>)) {
+  hydrate()
   const next = typeof patch === 'function' ? patch(state) : patch
   state = { ...state, ...next }
   persist()
