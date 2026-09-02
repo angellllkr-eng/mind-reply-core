@@ -5,6 +5,7 @@ import { ChevronRight, Zap } from 'lucide-react'
 import { gameBySlug, games, similarGames } from '@/lib/data/games'
 import { providerById } from '@/lib/data/providers'
 import { GameFacts, PlayPanel } from '@/components/game/game-detail-sheet'
+import { GameArt } from '@/components/game/game-art'
 import { GameRail } from '@/components/lobby/game-rail'
 
 export function generateStaticParams() {
@@ -28,8 +29,8 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
     <div className="lobby-section page stack">
       <nav className="crumbs" aria-label="Breadcrumb"><Link href="/">Lobby</Link><ChevronRight size={13} /><Link href={`/?cat=${encodeURIComponent(game.category)}#games`}>{game.category}</Link><ChevronRight size={13} /><span aria-current="page">{game.title}</span></nav>
       <section className="game-page">
-        <div className={`game-stage art-${game.tone}`}>
-          <strong>{game.art}</strong><span>{game.title}</span>
+        <div className="game-stage has-image">
+          <GameArt game={game} lockup sizes="(max-width: 1024px) 100vw, 60vw" priority />
           <div className="stage-note">Demo stage · no real-money play</div>
         </div>
         <div className="game-page-side">

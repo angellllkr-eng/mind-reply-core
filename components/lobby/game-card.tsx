@@ -1,6 +1,7 @@
 'use client'
 
 import { Heart, Info, Play } from 'lucide-react'
+import { GameArt } from '@/components/game/game-art'
 import type { Game } from '@/lib/data/games'
 import { providerById } from '@/lib/data/providers'
 import { actions, useLobby } from '@/lib/store'
@@ -17,10 +18,8 @@ export function GameCard({ game, compact = false }: { game: Game; compact?: bool
       <button className={`favorite ${favourite ? 'favorited' : ''}`} onClick={() => actions.toggleFavourite(game.id)} aria-label={`${favourite ? 'Remove' : 'Add'} ${game.title} ${favourite ? 'from' : 'to'} favourites`} aria-pressed={favourite}>
         <Heart size={15} fill={favourite ? 'currentColor' : 'none'} />
       </button>
-      <button className={`game-art art-${game.tone}`} onClick={() => actions.openDetail(game.slug)} aria-label={`Open ${game.title}`}>
-        <strong>{game.art}</strong>
-        <span className="game-art-word">{game.title}</span>
-        <span className="game-art-shine" />
+      <button className="game-art has-image" onClick={() => actions.openDetail(game.slug)} aria-label={`Open ${game.title}`}>
+        <GameArt game={game} />
         <span className="play-hover"><Play size={18} fill="currentColor" /></span>
         {tag && <span className={`game-tag tag-${tag.toLowerCase()}`}>{tag}</span>}
         {game.jackpot && <span className="game-jackpot">{money(game.jackpot, currency)}</span>}

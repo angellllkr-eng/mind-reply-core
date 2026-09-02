@@ -12,6 +12,8 @@ export type Game = {
   category: Category
   tags: string[]
   art: string
+  image: string
+  theme: string
   tone: Tone
   rtp: number
   volatility: Volatility
@@ -50,6 +52,29 @@ const tones: Tone[] = ['violet', 'gold', 'blue', 'red', 'cyan', 'green', 'rose',
 const vols: Volatility[] = ['Low', 'Medium', 'High', 'Very High']
 const tagPool = ['Free spins', 'Multipliers', 'Cascading', 'Buy bonus', 'Sticky wilds', 'Expanding reels', 'Cluster pays', 'Respins', 'Wheel bonus', 'Pick & click']
 
+// Original, generated key art (public/games/*.png). Each title resolves to one theme deterministically.
+const themeWords: Record<string, string[]> = {
+  dragon: ['Dragon', 'Lanterns', 'Temple', 'Kingdom', 'Empire', 'Jade', 'Ancient'],
+  gems: ['Gems', 'Jewels', 'Riches', 'Vault', 'Heist', 'Sapphire', 'Emerald', 'Crimson'],
+  crown: ['Crown', 'Legends', 'Quest', 'Odyssey', 'Royal', 'Velvet', 'Ivory'],
+  fruit: ['Harvest', 'Garden', 'Carnival', 'Tropic', 'Lucky', 'Bonanza', 'Fever'],
+  ocean: ['Tides', 'Cascade', 'Treasure', 'Arctic', 'Frost', 'Moonlit', 'Twilight'],
+  storm: ['Storm', 'Thunder', 'Blazing', 'Ember', 'Wild', 'Express', 'Phantom'],
+  cosmic: ['Cosmic', 'Aurora', 'Solar', 'Neon', 'Mystic', 'Midnight'],
+  sevens: ['Flares', 'Wins', 'Rush', 'Reels', 'Fortune', 'Spins', 'Golden', 'Silver', 'Copper', 'Amber'],
+}
+function resolveTheme(title: string, category: Category): string {
+  if (category === 'Jackpots') return 'jackpot'
+  if (category === 'Table Games') return 'table'
+  if (category === 'Live Casino') return 'live'
+  if (category === 'Instant Win') return 'instant'
+  if (category === 'Megaways') return 'cosmic'
+  const words = title.split(/\s+/)
+  for (const w of words) for (const [theme, list] of Object.entries(themeWords)) if (list.includes(w)) return theme
+  return 'sevens'
+}
+export const themeImage = (theme: string) => `/games/${theme}.png`
+
 const slugify = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
 function build(): Game[] {
@@ -68,7 +93,10 @@ function build(): Game[] {
     const month = 1 + Math.floor(r() * 12)
     const rtp = category === 'Live Casino' || category === 'Table Games' ? 98.5 + r() * 1.1 : isJackpot ? 92 + r() * 3 : 94 + r() * 3.2
     const pop = Math.round(20 + r() * 80)
+    const theme = resolveTheme(t, category)
     out.push({
+      theme,
+      image: themeImage(theme),
       id: `g${out.length + 1}`,
       slug: slugify(t),
       title: t,

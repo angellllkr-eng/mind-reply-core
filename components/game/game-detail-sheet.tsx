@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { ArrowRight, Heart, Play, ShieldAlert, X, Zap } from 'lucide-react'
+import { GameArt } from '@/components/game/game-art'
 import { gameBySlug, similarGames, type Game } from '@/lib/data/games'
 import { providerById } from '@/lib/data/providers'
 import { actions, isExcluded, useLobbyState } from '@/lib/store'
@@ -66,7 +67,7 @@ export function GameDetailSheet() {
     <div className="modal-backdrop" role="presentation" onClick={actions.closeDetail}>
       <section className="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={actions.closeDetail} aria-label="Close game details"><X size={19} /></button>
-        <div className={`launch-art art-${game.tone}`}><strong>{game.art}</strong><span>{game.title}</span></div>
+        <div className="launch-art has-image"><GameArt game={game} lockup sizes="300px" priority /></div>
         <div className="sheet-body">
           <p className="eyebrow"><Zap size={14} /> {game.category} · {provider.name}</p>
           <h2 id="sheet-title">{game.title}</h2>
@@ -76,7 +77,7 @@ export function GameDetailSheet() {
           <PlayPanel game={game} />
           <div className="sheet-similar">
             <p className="drawer-label">Similar games</p>
-            <div className="similar-row">{similar.map((g) => <button key={g.id} className={`similar-tile art-${g.tone}`} onClick={() => actions.openDetail(g.slug)}><strong>{g.art}</strong><span>{g.title}</span></button>)}</div>
+            <div className="similar-row">{similar.map((g) => <button key={g.id} className="similar-tile has-image" onClick={() => actions.openDetail(g.slug)} aria-label={g.title}><GameArt game={g} sizes="140px" /><span>{g.title}</span></button>)}</div>
           </div>
           <Link href={`/game/${game.slug}`} className="all-link" onClick={actions.closeDetail}>Full game page <ArrowRight size={15} /></Link>
         </div>
