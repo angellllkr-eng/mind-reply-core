@@ -1,10 +1,14 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { Suspense } from 'react'
+import { SiteHeader } from '@/components/header/site-header'
+import { SiteFooter } from '@/components/layout/site-footer'
+import { Overlays } from '@/components/layout/overlays'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Nova Play — Find your lucky moment',
-  description: 'An original casino lobby experience for discovering games, tables, rewards, and jackpots.',
+  title: { default: 'Nova Play — Find your lucky moment', template: '%s · Nova Play' },
+  description: 'An original demo casino lobby: 170+ seeded games, a live floor, promotions, loyalty tiers and a demo wallet. No real money.',
   generator: 'v0.app',
 }
 
@@ -18,7 +22,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className="bg-background">
       <body className="antialiased">
-        {children}
+        <Suspense fallback={null}><SiteHeader /></Suspense>
+        <main className="min-h-screen bg-background text-foreground">{children}</main>
+        <SiteFooter />
+        <Overlays />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
