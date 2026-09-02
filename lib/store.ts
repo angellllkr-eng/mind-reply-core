@@ -98,12 +98,12 @@ export const actions = {
   deposit: (amount: number) =>
     set((s) => ({
       balance: Math.round((s.balance + amount) * 100) / 100,
-      transactions: [{ id: id(), type: 'deposit', amount, note: 'Demo deposit', at: now() }, ...s.transactions].slice(0, 100),
+      transactions: [{ id: id(), type: 'deposit' as const, amount, note: 'Demo deposit', at: now() }, ...s.transactions].slice(0, 100),
     })),
   withdraw: (amount: number) =>
     set((s) => {
       const a = Math.min(amount, s.balance)
-      return { balance: Math.round((s.balance - a) * 100) / 100, transactions: [{ id: id(), type: 'withdrawal', amount: a, note: 'Demo withdrawal', at: now() }, ...s.transactions].slice(0, 100) }
+      return { balance: Math.round((s.balance - a) * 100) / 100, transactions: [{ id: id(), type: 'withdrawal' as const, amount: a, note: 'Demo withdrawal', at: now() }, ...s.transactions].slice(0, 100) }
     }),
   playDemo: (gameId: string, title: string) =>
     set((s) => {
