@@ -1,23 +1,26 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Suspense } from 'react'
 import { ArrowRight, ShieldCheck, Sparkles, Trophy } from 'lucide-react'
 import { byNewest, byPopularity, categories, games, totalJackpot } from '@/lib/data/games'
 import { liveTables } from '@/lib/data/live-tables'
 import { GameGrid } from '@/components/lobby/game-grid'
 import { GameRail } from '@/components/lobby/game-rail'
+import { GameArt } from '@/components/game/game-art'
 import { PromoCarousel } from '@/components/promos/promo-carousel'
 import { LiveTableCard } from '@/components/live/live-table-card'
 import { PersonalRails } from '@/components/lobby/personal-rails'
 import { JackpotMeter } from '@/components/lobby/jackpot-meter'
 import { WinnersTicker } from '@/components/lobby/winners-ticker'
+import { TrustSection } from '@/components/lobby/trust-section'
 
 const moods = [
-  { label: 'Slots', art: '7', cat: 'Slots' },
-  { label: 'Live Casino', art: '\u2660', cat: 'Live Casino' },
-  { label: 'Table Games', art: '21', cat: 'Table Games' },
-  { label: 'Jackpots', art: '\u25c6', cat: 'Jackpots' },
-  { label: 'Megaways', art: '\u26a1', cat: 'Megaways' },
-  { label: 'Instant Win', art: '\u2605', cat: 'Instant Win' },
+  { label: 'Slots', image: '/games/sevens.png', cat: 'Slots' },
+  { label: 'Live Casino', image: '/games/live.png', cat: 'Live Casino' },
+  { label: 'Table Games', image: '/games/table.png', cat: 'Table Games' },
+  { label: 'Jackpots', image: '/games/jackpot.png', cat: 'Jackpots' },
+  { label: 'Megaways', image: '/games/cosmic.png', cat: 'Megaways' },
+  { label: 'Instant Win', image: '/games/instant.png', cat: 'Instant Win' },
 ]
 
 export default function Page() {
@@ -42,9 +45,13 @@ export default function Page() {
           </div>
         </div>
         <div className="hero-art" aria-hidden="true">
-          <div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" />
-          <div className="hero-card"><span className="hero-card-label">TONIGHT&apos;S FEATURE</span><strong>40</strong><span>TREASURES</span><small>DIAMOND TREE</small><div className="hero-card-stars">✦　✦　✦</div></div>
-          <div className="hero-chip">NOVA<br /><span>♣</span></div>
+          <div className="hero-visual">
+            <Image src="/games/hero.png" alt="" fill priority sizes="(max-width: 720px) 100vw, 45vw" className="hero-img" draggable={false} />
+            <span className="hero-glow" />
+          </div>
+          <div className="hero-float hero-float-a"><GameArt game={featured[0]} lockup sizes="150px" priority /></div>
+          <div className="hero-float hero-float-b"><GameArt game={featured[1]} lockup sizes="150px" priority /></div>
+          <div className="hero-badge"><ShieldCheck size={15} /><span>Bank-grade<br />protection</span></div>
         </div>
         <div className="hero-foot"><span>{games.length} games</span><span className="hero-foot-line" /><span>{liveTables.length} live tables</span><span className="hero-foot-line" /><span>Demo only</span><ShieldCheck size={16} /></div>
       </section>
@@ -57,7 +64,7 @@ export default function Page() {
         <div className="quick-overview" aria-label="Quick game categories">
           <div className="quick-overview-copy"><p className="eyebrow">START HERE</p><h2>Pick a mood.</h2><p>Jump straight into the kind of play you feel like today.</p></div>
           <div className="quick-overview-actions six">
-            {moods.map((m) => <Link key={m.label} href={`/?cat=${encodeURIComponent(m.cat)}#games`} className="quick-pick"><span>{m.art}</span><strong>{m.label}</strong><small>{games.filter((g) => g.category === m.cat).length} games</small></Link>)}
+            {moods.map((m) => <Link key={m.label} href={`/?cat=${encodeURIComponent(m.cat)}#games`} className="quick-pick has-image"><Image src={m.image} alt="" fill sizes="(max-width: 720px) 50vw, 200px" className="stage-backdrop pick-backdrop" draggable={false} /><strong>{m.label}</strong><small>{games.filter((g) => g.category === m.cat).length} games</small></Link>)}
           </div>
         </div>
 
@@ -65,6 +72,8 @@ export default function Page() {
         <GameRail id="featured" eyebrow="HANDPICKED" title="Featured this week" games={featured} href="/?cat=All%20games#games" />
         <GameRail eyebrow="JUST LANDED" title="New releases" games={fresh} href="/?cat=New#games" />
         <GameRail eyebrow="TRENDING" title="Most played right now" games={popular} href="/#games" />
+
+        <TrustSection />
 
         <section className="live-strip" id="live">
           <div className="rail-head">

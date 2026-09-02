@@ -5,6 +5,7 @@ import { Trophy } from 'lucide-react'
 import { byPopularity, games } from '@/lib/data/games'
 import { actions, useLobby } from '@/lib/store'
 import { money } from '@/lib/format'
+import { GameArt } from '@/components/game/game-art'
 
 const handles = ['Ell***', 'Jam***', 'Pri***', 'Tom***', 'Ais***', 'Mo***', 'Kat***', 'Dan***', 'Sof***', 'Ben***', 'Nia***', 'Owe***']
 const towns = ['Leeds', 'Cardiff', 'Glasgow', 'Bristol', 'Belfast', 'Norwich', 'Sheffield', 'Brighton', 'Derby', 'Dundee', 'Swansea', 'Exeter']
@@ -47,7 +48,7 @@ export function WinnersTicker() {
           {items.map((w, i) => (
             <li key={`${w.id}-${i}`}>
               <button onClick={() => actions.openDetail(w.game.slug)}>
-                <span className={`ticker-art art-${w.game.tone}`}>{w.game.art}</span>
+                <span className="ticker-art has-image"><GameArt game={w.game} sizes="24px" /></span>
                 <span className="ticker-text"><strong>{w.handle}</strong> from {w.town} won <b>{money(w.amount, currency)}</b> on {w.game.title}</span>
               </button>
             </li>
