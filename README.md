@@ -2,7 +2,7 @@
 
 **Owner-governed automation, GitHub release engineering, and evidence-led Python systems.**
 
-MindReply Proofline is the canonical product repository for building reliable operational software: verified checkout paths, protected releases, observable services, and human-approved automation. It replaces vague “AI platform” language with concrete functions readers and search engines can understand.
+MindReply Proofline is the canonical product repository for building reliable operational software: verified checkout paths, protected releases, observable services, and human-approved automation.
 
 ## What lives here
 
@@ -11,14 +11,16 @@ MindReply Proofline is the canonical product repository for building reliable op
 | **ReplyControl** | Revenue page and customer-facing web experience | `apps/web-replycontrol/` |
 | **A11-K Dialogue Console** | Owner-facing conversation and operations interface | `apps/a11k/` |
 | **Asset Bridge** | Python service for evidence, asset and transaction workflows | `services/rwa-bridge/` |
-| **Crownline Kernel** | Internal orchestration and operating controls | `infrastructure/nexus/` |
+| **Crownline integration boundary** | Product-side integration point to the private control root | `infrastructure/nexus/` |
 | **Patternwright** | Visual-system and component experimentation | `apps/experimental/brushworks/` |
 | **Venture Foundry** | Concept-to-deployment workflow experiments | `apps/experimental/forge/` |
+
+The private operational control root is `angellllkr-eng/agent-control-plane`. This product repository must not become a second owner-control plane.
 
 ## Operating docs
 
 - [`docs/OPERATING_MODEL.md`](docs/OPERATING_MODEL.md) — product vs operations boundary and state vocabulary
-- [`docs/AUTOMATION_MESH.md`](docs/AUTOMATION_MESH.md) — n8n, Zapier, vector search, and sub-agent roles
+- [`docs/AUTOMATION_MESH.md`](docs/AUTOMATION_MESH.md) — workflow automation and bounded operator roles
 - [`docs/DOMAIN_AND_SEO_POLICY.md`](docs/DOMAIN_AND_SEO_POLICY.md) — domain selection and indexable surface rules
 - [`docs/AGENT_FLEET_TEMPLATE.md`](docs/AGENT_FLEET_TEMPLATE.md) — template for bounded sub-agents
 
@@ -72,7 +74,7 @@ See [`docs/PROTECTED_RELEASE_RUNBOOK.md`](docs/PROTECTED_RELEASE_RUNBOOK.md).
 
 ## Repository truth
 
-This repository is the active product root. `agent-control-plane` is the operational and evidence root. Satellite repositories are experiments, historical sources, or migration pointers unless explicitly promoted.
+This repository is the **active product root**. `agent-control-plane` is the **private operational root**. `a11-live-cloud-execution` is the **A11 execution service**. Satellite repositories are experiments, historical sources, or migration pointers unless explicitly promoted in the canonical estate registry.
 
 ## License
 
