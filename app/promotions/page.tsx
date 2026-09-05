@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight, CalendarClock, Gift } from 'lucide-react'
 import { promotions } from '@/lib/data/promotions'
 import { PromoCarousel } from '@/components/promos/promo-carousel'
@@ -26,7 +25,7 @@ export default function PromotionsPage() {
             <div className="promo-grid">
               {items.map((p) => (
                 <article key={p.id} id={p.slug} className="promo-card">
-                  <div className={`promo-thumb art-${p.tone}`} aria-hidden="true"><Image src={p.image} alt="" fill sizes="130px" className="stage-backdrop promo-backdrop" draggable={false} /><strong>{p.art}</strong></div>
+                  <div className={`promo-thumb art-${p.tone}`} aria-hidden="true"><strong>{p.art}</strong></div>
                   <div className="promo-card-body">
                     <p className="eyebrow">{p.title}</p>
                     <h3>{p.headline}</h3>

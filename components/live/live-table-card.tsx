@@ -1,8 +1,7 @@
 'use client'
 
-import Image from 'next/image'
 import { Users } from 'lucide-react'
-import { liveImage, type LiveTable } from '@/lib/data/live-tables'
+import type { LiveTable } from '@/lib/data/live-tables'
 import { actions, useLobby } from '@/lib/store'
 import { money } from '@/lib/format'
 
@@ -12,7 +11,6 @@ export function LiveTableCard({ table }: { table: LiveTable }) {
   const open = table.status === 'Open'
   return (
     <article className={`live-card art-${table.tone} ${open ? '' : 'live-closed'}`}>
-      <Image src={liveImage(table.type)} alt="" fill sizes="(max-width: 720px) 100vw, 33vw" className="stage-backdrop live-backdrop" draggable={false} />
       <div className="live-top">
         <span className={`live-badge ${open ? 'on' : ''}`}>{open ? <><span className="live-dot" /> LIVE</> : table.status.toUpperCase()}</span>
         <span className="live-lang">{table.language}</span>

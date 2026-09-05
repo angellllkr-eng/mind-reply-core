@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { ArrowRight, ChevronRight } from 'lucide-react'
 import { providers, type ProviderTier } from '@/lib/data/providers'
 import { games } from '@/lib/data/games'
-import { GameArt } from '@/components/game/game-art'
 
 export const metadata: Metadata = { title: 'Game studios', description: 'Every studio in the Nova lobby, from premium partners to boutique teams.' }
 
@@ -45,7 +44,7 @@ export default function StudiosPage() {
                       <h3>{p.name}</h3>
                       <p>{p.hq} · est. {p.founded}</p>
                       <dl className="studio-stats"><div><dt>Games</dt><dd>{catalogue.length}</dd></div><div><dt>Avg RTP</dt><dd>{avgRtp}%</dd></div><div><dt>Jackpots</dt><dd>{catalogue.filter((g) => g.jackpot).length}</dd></div></dl>
-                      <div className="studio-top">{top.map((g) => <span key={g.id} className="similar-tile has-image" title={g.title}><GameArt game={g} sizes="34px" /></span>)}</div>
+                      <div className="studio-top">{top.map((g) => <span key={g.id} className={`similar-tile art-${g.tone}`}><strong>{g.art}</strong></span>)}</div>
                     </div>
                     <span className="studio-go"><ArrowRight size={16} /></span>
                   </Link>

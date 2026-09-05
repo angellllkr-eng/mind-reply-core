@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { ArrowLeft, Clock, Heart, Info, Minus, Plus, Play, ShieldAlert, Volume2, VolumeX, Wallet, X } from 'lucide-react'
 import type { Game } from '@/lib/data/games'
@@ -106,7 +105,6 @@ export function GameLauncher({ game }: { game: Game }) {
       </div>
 
       <div className={`launcher-stage art-${game.tone}`}>
-        <Image src={game.image} alt="" fill sizes="100vw" priority className="stage-backdrop" draggable={false} />
         <div className="reels" aria-live="polite" aria-label="Reels">
           {reels.map((r, i) => (
             <div key={i} className={`reel ${r.spinning ? 'spinning' : ''}`}>

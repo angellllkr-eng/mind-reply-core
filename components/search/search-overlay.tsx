@@ -7,7 +7,6 @@ import { ArrowRight, Building2, CornerDownLeft, Search, X } from 'lucide-react'
 import { byPopularity, games } from '@/lib/data/games'
 import { providers } from '@/lib/data/providers'
 import { actions, useLobbyState } from '@/lib/store'
-import { GameArt } from '@/components/game/game-art'
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 const quick = ['Megaways', 'Jackpot', 'Roulette', 'Blackjack', 'Live', 'Free spins']
@@ -85,7 +84,7 @@ export function SearchOverlay() {
             {results.games.map((g, i) => (
               <li key={g.id} role="option" aria-selected={cursor === i} className={cursor === i ? 'selected' : ''} onMouseEnter={() => setCursor(i)}>
                 <button onClick={() => go(i)}>
-                  <span className="similar-tile has-image"><GameArt game={g} sizes="44px" /></span>
+                  <span className={`similar-tile art-${g.tone}`}><strong>{g.art}</strong></span>
                   <span className="search-text"><strong>{g.title}</strong><small>{g.category} · {providers.find((p) => p.id === g.providerId)?.name} · RTP {g.rtp}%</small></span>
                   {cursor === i && <CornerDownLeft size={14} />}
                 </button>
