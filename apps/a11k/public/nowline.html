@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a1628">
+  <meta name="description" content="Nowline — latest 23 verified tech launches and high-leverage features. Live pulse for A11-K / Angel L. Krastev.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Angel L. Krastev / A11-K">
+  <link rel="canonical" href="https://www.a11-k.space/nowline">
+  <link rel="manifest" href="/nowline.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Nowline">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.a11-k.space/nowline">
+  <meta property="og:title" content="Nowline — 23 Latest Tech Launches">
+  <meta property="og:description" content="Single clean briefing of the latest verified tech launches and high-leverage features. Synced by A11 Master-Index pulse.">
+  <meta property="og:site_name" content="A11-K">
+  <title>Nowline — 23 Latest Tech Launches | A11-K</title>
+  <style>
+    :root {
+      --bg: #0a1628;
+      --card: #111f33;
+      --text: #e8f0ff;
+      --muted: #8ba3c7;
+      --accent: #3d8bfd;
+      --border: #1e3a5f;
+      --success: #2dd4a8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100dvh;
+      padding: 1.25rem;
+    }
+    header {
+      max-width: 720px;
+      margin: 0 auto 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .pulse-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(45, 212, 168, 0.12);
+      color: var(--success);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(45, 212, 168, 0.25);
+    }
+    .pulse-badge::before {
+      content: "";
+      width: 6px; height: 6px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 1.6s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .intro {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    ol {
+      list-style: none;
+      counter-reset: item;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    li {
+      counter-increment: item;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem 1rem 3rem;
+      position: relative;
+    }
+    li::before {
+      content: counter(item);
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      opacity: 0.9;
+    }
+    li strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+    li span {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    footer {
+      max-width: 720px;
+      margin: 2.5rem auto 1rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    #status {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 1.25rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Nowline</h1>
+      <div class="meta">23 latest verified tech launches · A11-K pulse</div>
+    </div>
+    <div class="pulse-badge">Live</div>
+  </header>
+
+  <main>
+    <p class="intro">Single clean briefing of the latest high-leverage tech launches and features that matter to builders and operators. Synced automatically by the A11 Master-Index pulse. Exclusive surface for Angel L. Krastev.</p>
+
+    <ol id="launches">
+      <!-- PULSE_CONTENT_START -->
+      <li><strong>Pulse initialising…</strong><span>First full 23-item briefing will land on the next hourly run (Europe/Sofia). Content is AI-curated from real public signals only.</span></li>
+      <!-- PULSE_CONTENT_END -->
+    </ol>
+
+    <p id="status">Last sync: awaiting first pulse · Europe/Sofia</p>
+  </main>
+
+  <footer>
+    <a href="https://www.a11-k.space/">A11-K</a> · Nowline · PWA-ready · Exclusive to A.K.
+  </footer>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/nowline-sw.js').catch(function(){});
+    }
+  </script>
+</body>
+</html>
