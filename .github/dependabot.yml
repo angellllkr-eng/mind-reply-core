@@ -1,6 +1,6 @@
 version: 2
-# Advanced maintenance: group updates, monthly cadence, keep security responsive.
-# See docs/COMPETITIVE_STRUCTURE.md
+# Advanced maintenance: grouped updates, monthly cadence (security still prioritized by Dependabot).
+# Competitive ops: docs/COMPETITIVE_STRUCTURE.md
 updates:
   - package-ecosystem: npm
     directory: /
@@ -8,6 +8,7 @@ updates:
       interval: monthly
       day: monday
     open-pull-requests-limit: 5
+    labels: [dependencies, security]
     groups:
       production-deps:
         dependency-type: production
@@ -21,9 +22,35 @@ updates:
     schedule:
       interval: monthly
       day: monday
+    open-pull-requests-limit: 5
+    labels: [dependencies, ci]
     groups:
       actions:
         patterns: ["*"]
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: monthly
+      day: monday
+    open-pull-requests-limit: 3
+    labels: [dependencies, docker]
+
+  - package-ecosystem: docker
+    directory: /apps/web-replycontrol
+    schedule:
+      interval: monthly
+      day: monday
+    open-pull-requests-limit: 3
+    labels: [dependencies, docker]
+
+  - package-ecosystem: docker
+    directory: /services/rwa-bridge
+    schedule:
+      interval: monthly
+      day: monday
+    open-pull-requests-limit: 3
+    labels: [dependencies, docker]
 
   - package-ecosystem: npm
     directory: /apps/a11k
@@ -31,6 +58,7 @@ updates:
       interval: monthly
       day: monday
     open-pull-requests-limit: 3
+    labels: [dependencies]
     groups:
       a11k-deps:
         patterns: ["*"]
