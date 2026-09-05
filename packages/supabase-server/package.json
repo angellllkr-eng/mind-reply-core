@@ -13,8 +13,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@supabase/server": "^1.4.1",
-    "@supabase/supabase-js": "^2.105.4"
+    "@supabase/server": "^1.5.2",
+    "@supabase/supabase-js": "^2.114.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
