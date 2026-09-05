@@ -1,56 +1,36 @@
 version: 2
+# Advanced maintenance: group updates, monthly cadence, keep security responsive.
+# See docs/COMPETITIVE_STRUCTURE.md
 updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
       day: monday
-      time: "08:30"
-    open-pull-requests-limit: 10
-    labels:
-      - dependencies
-      - security
+    open-pull-requests-limit: 5
+    groups:
+      production-deps:
+        dependency-type: production
+        patterns: ["*"]
+      development-deps:
+        dependency-type: development
+        patterns: ["*"]
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
       day: monday
-      time: "08:45"
-    open-pull-requests-limit: 10
-    labels:
-      - dependencies
-      - ci
+    groups:
+      actions:
+        patterns: ["*"]
 
-  - package-ecosystem: docker
-    directory: /
+  - package-ecosystem: npm
+    directory: /apps/a11k
     schedule:
-      interval: weekly
+      interval: monthly
       day: monday
-      time: "09:00"
-    open-pull-requests-limit: 5
-    labels:
-      - dependencies
-      - docker
-
-  - package-ecosystem: docker
-    directory: /apps/web-replycontrol
-    schedule:
-      interval: weekly
-      day: monday
-      time: "09:15"
-    open-pull-requests-limit: 5
-    labels:
-      - dependencies
-      - docker
-
-  - package-ecosystem: docker
-    directory: /services/rwa-bridge
-    schedule:
-      interval: weekly
-      day: monday
-      time: "09:30"
-    open-pull-requests-limit: 5
-    labels:
-      - dependencies
-      - docker
+    open-pull-requests-limit: 3
+    groups:
+      a11k-deps:
+        patterns: ["*"]
