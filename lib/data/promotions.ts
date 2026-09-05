@@ -10,9 +10,12 @@ export type Promotion = {
   category: 'Welcome' | 'Slots' | 'Live' | 'Weekly' | 'Loyalty'
   endsAt: string
   featured: boolean
+  image: string
 }
 
-export const promotions: Promotion[] = [
+const promoImage: Record<Promotion['category'], string> = { Welcome: '/games/sevens.png', Slots: '/games/cosmic.png', Live: '/games/live.png', Weekly: '/games/jackpot.png', Loyalty: '/games/crown.png' }
+
+const base: Omit<Promotion, 'image'>[] = [
   { id: 'p1', slug: 'welcome-package', title: 'Nova Welcome', headline: '100 demo spins on us', summary: 'New to Nova? Claim 100 demo spins on Fortune Flares to try the lobby with no real money involved.', terms: 'Demo credits only. No real-money value. 18+.', tone: 'violet', art: '100', category: 'Welcome', endsAt: '2026-12-31', featured: true },
   { id: 'p2', slug: 'jackpot-drop', title: 'Daily Jackpot Drop', headline: 'A must-drop jackpot every night at 22:00', summary: 'The Nova daily meter must drop before midnight. Any eligible jackpot spin qualifies.', terms: 'Demo balance only. Meter is illustrative.', tone: 'gold', art: '\u2606', category: 'Weekly', endsAt: '2026-12-31', featured: true },
   { id: 'p3', slug: 'live-cashback', title: 'Live Cashback Mondays', headline: '10% demo cashback on live tables', summary: 'Play any live table on Monday and receive 10% of net demo losses back on Tuesday morning.', terms: 'Max 50 demo credits. Demo only.', tone: 'red', art: '10%', category: 'Live', endsAt: '2026-11-30', featured: true },
@@ -22,6 +25,8 @@ export const promotions: Promotion[] = [
   { id: 'p7', slug: 'new-release-spins', title: 'New Release Spins', headline: '25 demo spins on every new game', summary: 'Try each new release the week it lands with 25 free demo spins.', terms: 'One claim per release. Demo only.', tone: 'violet', art: 'NEW', category: 'Slots', endsAt: '2026-12-31', featured: false },
   { id: 'p8', slug: 'birthday-bonus', title: 'Birthday Bonus', headline: 'A gift on your day', summary: 'Nova members receive a surprise demo-credit gift on their birthday.', terms: 'Demo only. Verified members.', tone: 'gold', art: '\u2740', category: 'Loyalty', endsAt: '2026-12-31', featured: false },
 ]
+
+export const promotions: Promotion[] = base.map((p) => ({ ...p, image: p.slug === 'live-cashback' || p.slug === 'table-tuesday' ? '/games/table.png' : promoImage[p.category] }))
 
 export type Tier = { name: string; minPoints: number; perks: string[]; tone: string }
 

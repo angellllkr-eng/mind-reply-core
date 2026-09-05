@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { promotions } from '@/lib/data/promotions'
@@ -16,6 +17,7 @@ export function PromoCarousel() {
   return (
     <section className="promo-carousel" aria-roledescription="carousel" aria-label="Featured promotions">
       <div className={`promo-slide art-${p.tone}`} key={p.id}>
+        <Image src={p.image} alt="" fill sizes="100vw" priority className="stage-backdrop promo-backdrop" draggable={false} />
         <div className="promo-art" aria-hidden="true"><strong>{p.art}</strong></div>
         <div className="promo-copy">
           <p className="eyebrow">{p.category} · {p.title}</p>

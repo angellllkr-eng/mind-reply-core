@@ -16,6 +16,7 @@ export type LiveTable = {
 }
 
 export const liveTypes: LiveType[] = ['Roulette', 'Blackjack', 'Baccarat', 'Game Shows', 'Poker']
+export const liveImage = (type: LiveType) => (type === 'Game Shows' ? '/games/live.png' : '/games/table.png')
 
 const dealers = ['Amara', 'Tomas', 'Elif', 'Rowan', 'Ines', 'Kwame', 'Mira', 'Luca', 'Priya', 'Jonas', 'Sofia', 'Dario', 'Nadia', 'Felix', 'Hana', 'Oscar', 'Zara', 'Mateo', 'Leah', 'Arun', 'Bea', 'Noor', 'Iker', 'Wren']
 
