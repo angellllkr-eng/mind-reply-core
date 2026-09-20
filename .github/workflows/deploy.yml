@@ -1,0 +1,255 @@
+name: NOVA Gaming CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "feature/**"
+  pull_request:
+    branches:
+      - main
+      - develop
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # Lint & Type Check
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint & Type Check
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run TypeScript compiler
+        run: npx tsc --noEmit
+
+  # Build Test
+  build:
+    runs-on: ubuntu-latest
+    name: Build Application
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js
+        run: npm run build
+        env:
+          NEXT_PUBLIC_MARKET: UK
+          NEXT_PUBLIC_API_URL: http://localhost:3001
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-output
+          path: .next/
+
+  # Security Scanning
+  security:
+    runs-on: ubuntu-latest
+    name: Security & Dependency Audit
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Run npm audit
+        run: npm audit --production
+        continue-on-error: true
+
+      - name: Run secret scanning
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --debug
+        continue-on-error: true
+
+  # Docker Build & Push (on main merge)
+  docker-build:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    name: Docker Build & Push
+    needs: build
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=sha,prefix={{branch}}-
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            NEXT_PUBLIC_MARKET=UK
+            NEXT_PUBLIC_API_URL=http://localhost:3001
+
+  # Deploy to Staging (UK)
+  deploy-staging-uk:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    name: Deploy to Staging (UK)
+    needs: build
+    environment:
+      name: staging-uk
+      url: https://staging.novagaming.co.uk
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Vercel (UK Staging)
+        uses: vercel/action@v4
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_UK }}
+          scope: ${{ secrets.VERCEL_ORG_ID }}
+
+  # Deploy to Staging (Bulgaria)
+  deploy-staging-bg:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    name: Deploy to Staging (Bulgaria)
+    needs: build
+    environment:
+      name: staging-bg
+      url: https://staging.novagaming.bg
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Vercel (Bulgaria Staging)
+        uses: vercel/action@v4
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_BG }}
+          scope: ${{ secrets.VERCEL_ORG_ID }}
+
+  # Deploy to Production (UK)
+  deploy-production-uk:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    name: Deploy to Production (UK)
+    needs: [build, security, docker-build]
+    environment:
+      name: production-uk
+      url: https://novagaming.co.uk
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Vercel (UK Production)
+        uses: vercel/action@v4
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_UK_PROD }}
+          scope: ${{ secrets.VERCEL_ORG_ID }}
+
+  # Deploy to Production (Bulgaria)
+  deploy-production-bg:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    name: Deploy to Production (Bulgaria)
+    needs: [build, security, docker-build]
+    environment:
+      name: production-bg
+      url: https://novagaming.bg
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Vercel (Bulgaria Production)
+        uses: vercel/action@v4
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_BG_PROD }}
+          scope: ${{ secrets.VERCEL_ORG_ID }}
+
+  # Post-Deployment Smoke Test
+  smoke-test:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    name: Post-Deploy Smoke Test
+    needs: [deploy-staging-uk, deploy-staging-bg]
+    continue-on-error: true
+    steps:
+      - name: Health check (Staging UK)
+        run: |
+          curl -f https://staging.novagaming.co.uk/ || exit 1
+          echo "✓ UK staging healthy"
+
+      - name: Health check (Staging Bulgaria)
+        run: |
+          curl -f https://staging.novagaming.bg/ || exit 1
+          echo "✓ Bulgaria staging healthy"
+
+      - name: Notify Slack (Success)
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "✅ NOVA Gaming deployment successful",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Branch: ${{ github.ref }}\nCommit: ${{ github.sha }}\nDeploy: Staging"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_DEPLOYS }}

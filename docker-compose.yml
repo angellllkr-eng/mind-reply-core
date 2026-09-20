@@ -1,0 +1,111 @@
+# NOVA Gaming — Docker Compose for Local Development
+# Frontend: Next.js 16 + React 19
+# Backend: Placeholder (separate service)
+# Database: PostgreSQL
+# Cache: Redis
+
+version: '3.8'
+
+services:
+  # Frontend (Next.js)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_MARKET: UK
+        NEXT_PUBLIC_API_URL: http://localhost:3001
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_MARKET: ${MARKET:-UK}
+      NEXT_PUBLIC_CURRENCY: ${CURRENCY:-GBP}
+      NEXT_PUBLIC_API_URL: ${API_URL:-http://localhost:3001}
+      DATABASE_URL: postgresql://user:password@postgres:5432/novagaming
+      REDIS_URL: redis://redis:6379
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - novagaming
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # Backend API (placeholder — teams will implement)
+  # Replace with actual Node/Express or Python/FastAPI service
+  backend:
+    image: node:18-alpine
+    working_dir: /app
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      DATABASE_URL: postgresql://user:password@postgres:5432/novagaming
+      REDIS_URL: redis://redis:6379
+      MARKET: ${MARKET:-UK}
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/app:ro
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - novagaming
+    command: node -e "console.log('Backend API placeholder. Implement with Express/FastAPI.')" || tail -f /dev/null
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: novagaming
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - novagaming
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d novagaming"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - novagaming
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  novagaming:
+    driver: bridge
