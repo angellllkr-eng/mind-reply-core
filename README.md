@@ -1,33 +1,57 @@
-# vercel-domains-documentation
+# NOVA Gaming — Digital Hall
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+NOVA is currently a **free-play/demo Digital Hall** built with Next.js, React and TypeScript.
 
-## Built with v0
+The repository contains the lobby experience, game catalogue UI, live-table UI, promotions, rewards, account flows, game detail pages and supporting design system.
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
+## Current truth
 
-[Continue working on v0 →](https://v0.app/chat/projects/prj_6fRlfq1UyhyhdRplDwVLuBeTrWrg)
+- Digital Hall UI: **VERIFIED IN SOURCE**
+- Demo/mock game data: **PRESENT**
+- Real-money wallet: **NOT IMPLEMENTED**
+- Production KYC/AML: **NOT IMPLEMENTED**
+- Real-money payment processing: **NOT IMPLEMENTED**
+- Production game-provider integrations: **NOT VERIFIED**
+- Gambling licence status: **UNVERIFIED**
+- ResellerPro deployment: **NOT VERIFIED**
+- Cloudflare production: **NOT VERIFIED**
+- Real-money activation: **NOT READY**
 
-## Getting Started
+The current application explicitly treats balances, spins and prizes as illustrative/demo functionality. Do not represent the demo as a licensed real-money gambling service.
 
-First, run the development server:
+## Deployment direction
+
+Canonical target:
+
+**GitHub → ResellerPro → Cloudflare → verified environment**
+
+Vercel references in older project documents are legacy and are not the current deployment target.
+
+## Compliance
+
+See:
+- `COMPLIANCE_EVIDENCE_MATRIX.md`
+- `DEPLOYMENT_POLICY.md`
+- `PROJECT_STATE.md`
+- `GO_LIVE_READINESS.md`
+
+Compliance and licensing documents are preparation material only and require qualified counsel/regulatory confirmation before filing or publication.
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm build
+```
 
-## Learn More
+## Product boundary
 
-To learn more, take a look at the following resources:
+The Digital Hall can continue as a free-play/demo experience while the separate legal, licensing, payments, KYC/AML, responsible-gambling, security and regulated-infrastructure tracks are prepared.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+Real-money activation requires verified evidence for the applicable operating entity, licences/authorisations, suppliers, payment provider, technical controls, legal documentation, security assurance and market access controls.
