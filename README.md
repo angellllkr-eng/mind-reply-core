@@ -1,33 +1,60 @@
-# vercel-domains-documentation
+# NOVA Gaming — Digital Hall
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+NOVA is a **commercial-grade Digital Hall target** with a current free-play/demo frontend foundation built with Next.js, React and TypeScript.
 
-## Built with v0
+The product direction is benchmarked against established UK and Bulgarian operator experiences such as Sky Vegas, Betfred, Winbet, AlphaWin and Palms Bet for common UX patterns: discovery, navigation, game categories, promotions, rewards, search/filtering, account surfaces, mobile usability and safer-gaming access.
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
+The benchmark is for product patterns and information architecture only. NOVA uses its own branding, visual language, assets and copy.
 
-[Continue working on v0 →](https://v0.app/chat/projects/prj_6fRlfq1UyhyhdRplDwVLuBeTrWrg)
+## Current truth
 
-## Getting Started
+- Digital Hall UI: **VERIFIED IN SOURCE**
+- Demo/mock game data: **PRESENT**
+- Commercial-grade UX target: **DEFINED**
+- Real-money wallet: **NOT IMPLEMENTED**
+- Production KYC/AML: **NOT IMPLEMENTED**
+- Real-money payment processing: **NOT IMPLEMENTED**
+- Production game-provider integrations: **NOT VERIFIED**
+- Gambling licence status: **UNVERIFIED**
+- ResellerPro deployment: **NOT VERIFIED**
+- Cloudflare production: **NOT VERIFIED**
+- Real-money activation: **NOT READY**
 
-First, run the development server:
+The current application explicitly treats balances, spins and prizes as illustrative/demo functionality. Do not represent the demo as a licensed real-money gambling service.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Deployment direction
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Canonical target:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**GitHub → ResellerPro → Cloudflare → verified environment**
 
-## Learn More
+Vercel references in older project documents are legacy and are not the current deployment target.
 
-To learn more, take a look at the following resources:
+## Product benchmark
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+See `PRODUCT_UX_BENCHMARK.md` for the commercial Digital Hall benchmark and implementation boundary.
+
+## Compliance
+
+See:
+- `COMPLIANCE_EVIDENCE_MATRIX.md`
+- `DEPLOYMENT_POLICY.md`
+- `PRODUCT_UX_BENCHMARK.md`
+- `PROJECT_STATE.md`
+- `GO_LIVE_READINESS.md`
+
+Compliance and licensing documents are preparation material only and require qualified counsel/regulatory confirmation before filing or publication.
+
+## Development
+
+`pnpm install`
+`pnpm dev`
+
+Build:
+`pnpm build`
+
+## Product boundary
+
+The Digital Hall can continue as a free-play/demo experience while the separate legal, licensing, payments, KYC/AML, responsible-gambling, security and regulated-infrastructure tracks are prepared.
+
+Real-money activation requires verified evidence for the applicable operating entity, licences/authorisations, suppliers, payment provider, technical controls, legal documentation, security assurance and market access controls.
