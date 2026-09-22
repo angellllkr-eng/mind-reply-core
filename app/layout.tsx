@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Suspense } from 'react'
 import { SiteHeader } from '@/components/header/site-header'
@@ -8,8 +7,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: { default: 'Nova Play — Find your lucky moment', template: '%s · Nova Play' },
-  description: 'An original demo casino lobby: 170+ seeded games, a live floor, promotions, loyalty tiers and a demo wallet. No real money.',
-  generator: 'v0.app',
+  description: 'Nova Play is a free-play Digital Hall with demo games, a live-floor interface, promotions and rewards. No real money.',
 }
 
 export const viewport: Viewport = {
@@ -26,7 +24,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main className="min-h-screen bg-background text-foreground">{children}</main>
         <SiteFooter />
         <Overlays />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )

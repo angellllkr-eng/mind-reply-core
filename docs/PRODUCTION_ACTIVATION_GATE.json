@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "product": "NOVA Gaming",
+  "mode": "fail-closed",
+  "defaultState": "DEMO",
+  "allowedStates": ["DEMO", "STAGING_SYNTHETIC", "PRODUCTION_REGULATED"],
+  "productionRequirements": [
+    "OPERATING_ENTITY_VERIFIED",
+    "LICENSES_VERIFIED_FOR_EACH_MARKET",
+    "GAME_SUPPLIER_CONTRACTS_VERIFIED",
+    "PAYMENT_PROVIDER_APPROVAL_VERIFIED",
+    "KYC_PROVIDER_VERIFIED",
+    "AML_CONTROLS_VERIFIED",
+    "RESPONSIBLE_GAMBLING_CONTROLS_VERIFIED",
+    "PLAYER_FUNDS_LEDGER_VERIFIED",
+    "TECHNICAL_TESTING_VERIFIED",
+    "SECURITY_ASSURANCE_VERIFIED",
+    "LEGAL_DOCUMENTS_APPROVED",
+    "MARKET_ACCESS_CONTROLS_VERIFIED",
+    "DEPLOYMENT_DNS_TLS_VERIFIED",
+    "INCIDENT_RESPONSE_ROLLBACK_VERIFIED"
+  ],
+  "forbiddenBeforeProductionEvidence": [
+    "realMoneyDeposits",
+    "realMoneyWithdrawals",
+    "cashOut",
+    "regulatedWagering",
+    "licensedStatusClaims",
+    "unverifiedMarketAccess"
+  ],
+  "evidenceRule": "A document, route, UI element, mock integration, SDK reference or plan is not production evidence by itself."
+}
