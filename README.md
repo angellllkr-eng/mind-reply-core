@@ -1,13 +1,16 @@
 # NOVA Gaming — Digital Hall
 
-NOVA is currently a **free-play/demo Digital Hall** built with Next.js, React and TypeScript.
+NOVA is a **commercial-grade Digital Hall target** with a current free-play/demo frontend foundation built with Next.js, React and TypeScript.
 
-The repository contains the lobby experience, game catalogue UI, live-table UI, promotions, rewards, account flows, game detail pages and supporting design system.
+The product direction is benchmarked against established UK and Bulgarian operator experiences such as Sky Vegas, Betfred, Winbet, AlphaWin and Palms Bet for common UX patterns: discovery, navigation, game categories, promotions, rewards, search/filtering, account surfaces, mobile usability and safer-gaming access.
+
+The benchmark is for product patterns and information architecture only. NOVA uses its own branding, visual language, assets and copy.
 
 ## Current truth
 
 - Digital Hall UI: **VERIFIED IN SOURCE**
 - Demo/mock game data: **PRESENT**
+- Commercial-grade UX target: **DEFINED**
 - Real-money wallet: **NOT IMPLEMENTED**
 - Production KYC/AML: **NOT IMPLEMENTED**
 - Real-money payment processing: **NOT IMPLEMENTED**
@@ -27,11 +30,16 @@ Canonical target:
 
 Vercel references in older project documents are legacy and are not the current deployment target.
 
+## Product benchmark
+
+See `PRODUCT_UX_BENCHMARK.md` for the commercial Digital Hall benchmark and implementation boundary.
+
 ## Compliance
 
 See:
 - `COMPLIANCE_EVIDENCE_MATRIX.md`
 - `DEPLOYMENT_POLICY.md`
+- `PRODUCT_UX_BENCHMARK.md`
 - `PROJECT_STATE.md`
 - `GO_LIVE_READINESS.md`
 
@@ -39,16 +47,11 @@ Compliance and licensing documents are preparation material only and require qua
 
 ## Development
 
-```bash
-pnpm install
-pnpm dev
-```
+`pnpm install`
+`pnpm dev`
 
 Build:
-
-```bash
-pnpm build
-```
+`pnpm build`
 
 ## Product boundary
 
