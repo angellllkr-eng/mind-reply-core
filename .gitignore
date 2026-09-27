@@ -46,3 +46,8 @@ next-env.d.ts
 # test artifacts
 test-results/
 playwright-report/
+# local/build caches — never commit generated workspace state
+.cache/
+**/.cache/
+cache/
+**/cache/
