@@ -3,3 +3,7 @@
 
 # Production workflows and deployment configuration require explicit owner review.
 .github/workflows/ @angellllkr-eng
+
+# Security and compliance policy files require explicit owner review.
+/SECURITY.md @angellllkr-eng
+/COMPLIANCE.md @angellllkr-eng
