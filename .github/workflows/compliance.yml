@@ -1,0 +1,39 @@
+name: Compliance Gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+  security-events: write
+
+jobs:
+  compliance:
+    name: Security and repository compliance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Repository hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          forbidden='(^|/)(\.env|\.env\.[^.]*)$|(^|/)(id_rsa|id_ed25519|.*\.pem|.*\.key)$'
+          if git ls-files | grep -E "$forbidden"; then
+            echo "Forbidden credential/environment files are tracked."
+            exit 1
+          fi
+
+      - name: Secret scan
+        uses: gitleaks/gitleaks-action@v2
+
+      - name: Dependency review
+        if: github.event_name == 'pull_request'
+        uses: actions/dependency-review-action@v4
