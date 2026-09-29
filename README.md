@@ -33,6 +33,6 @@ No credentials belong in Git history.
 
 ## Runtime truth
 
-**SOURCE ONLY / NOT A PRODUCTION AUTHORITY / RUNTIME UNVERIFIED**
+**SOURCE ONLY / NOT A PRODUCTION AUTHORITY / RUNTIME pending_evidence**
 
 Repository state is not proof of a live deployment.
