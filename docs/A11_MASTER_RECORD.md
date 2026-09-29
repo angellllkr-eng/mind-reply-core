@@ -46,7 +46,7 @@ Core principles:
 3. **Execute** — make the smallest useful change; preserve the original where practical.
 4. **Verify** — test the result locally and check for malformed content or failed steps.
 5. **Record** — save a concise evidence note with timestamp, status, files changed, and next action.
-6. **Handoff** — report VERIFIED, READY, BLOCKED, FAILED, or UNVERIFIED — never guess.
+6. **Handoff** — report VERIFIED, READY, BLOCKED, FAILED, or pending_evidence — never guess.
 
 ## 4. Accounting / enterprise assurance canon
 
