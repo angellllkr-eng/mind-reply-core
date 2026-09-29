@@ -35,7 +35,7 @@ CEO = AgentDef(
         "Proof or it did not happen. Fail closed. Never claim live cloud, payment, DNS, "
         "IAM, or production changes without verified evidence and an explicit owner approval. "
         "Prefer the smallest reversible next action. Report status as VERIFIED, READY, "
-        "BLOCKED, FAILED, or UNVERIFIED — never guess."
+        "BLOCKED, FAILED, or pending_evidence — never guess."
     ),
     default_mode="govern",
     mutation_policy="owner_approval_token_required",
