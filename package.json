@@ -94,7 +94,7 @@
     "@tailwindcss/postcss": "^4.3.2",
     "@tailwindcss/typography": "^0.5.20",
     "@types/d3-scale": "^4.0.9",
-    "@types/node": "^26.6.2",
+    "@types/node": "^26.6.3",
     "@types/papaparse": "^5.5.2",
     "@types/pdf-parse": "^1.1.5",
     "@types/react": "^19",
@@ -102,12 +102,12 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "drizzle-kit": "^0.31.11",
     "husky": "^9.1.7",
-    "lint-staged": "^17.5.1",
+    "lint-staged": "^17.6.0",
     "postcss": "^8",
     "tailwindcss": "^4.3.2",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "ultracite": "^7.12.0"
+    "ultracite": "^7.12.1"
   },
   "lint-staged": {"*": "corepack pnpm run fix --"},
   "packageManager": "pnpm@10.32.1"
