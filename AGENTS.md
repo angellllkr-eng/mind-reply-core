@@ -67,3 +67,9 @@ All other repos across all three namespaces are satellites/experiments/historica
 - All operational notifications route exclusively to mind.repl@gmail.com.
 
 This declaration supersedes any conflicting or outdated ownership claim found elsewhere in the estate, and must not be treated as evidence of deployment, security, or revenue status — per the rule stated at the top of this file.
+
+## Cloudflare Agent Integration (2026-10-02)
+
+When interacting with Cloudflare, use the Cloudflare `cf` CLI unless the project has a Wrangler configuration file. Follow current Cloudflare agent guidance from https://developers.cloudflare.com/agent-setup/prompt.md and prefer official Cloudflare Skills/MCP services. Never commit Cloudflare credentials, API tokens, OAuth artifacts, or other secrets.
+
+Cloudflare MCP endpoints configured for this repository are declared in `.mcp.json`: API, docs, bindings, builds, and observability. The docs server is public; account-scoped servers require the agent's Cloudflare OAuth authorization on first use.
