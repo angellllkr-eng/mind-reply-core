@@ -1,38 +1,17 @@
-# MindReply Proofline — migration source
+# MindReply Core — Migration Source
 
-**Status:** SOURCE-FREEZE / MIGRATION SOURCE  
-**Canonical MindReply product repository:** `Mind-Reply/mindreply-app`
+**Status:** SOURCE-FREEZE / MIGRATION SOURCE
 
-This repository contains historical/core MindReply implementation material that is being reconciled into the single canonical organization product root.
+**Canonical MindReply production repository:** `Mind-Reply/mind-reply-core`
 
-## Authority rule
+This repository is not a second active MindReply production root. Preserve unique history and implementation material here only until reconciliation is complete.
 
-Do not treat this repository as a second MindReply production root.
+## Authority
+- Production source: `Mind-Reply/mind-reply-core`
+- Engineering/migration source: this repository
+- No new product implementation should be started here.
+- Valuable unique code, documentation, workflows and evidence must be reconciled into the canonical repository before retirement.
 
-- New MindReply product work belongs in `Mind-Reply/mindreply-app`.
-- Reusable implementation material must be reviewed, migrated and verified before being considered authoritative.
-- Preserve this repository for provenance until the final GitHub administration step is available.
-- Do not claim production runtime health from repository contents alone.
+**One product → one active repository → one deployment authority.**
 
-## Current product boundary
-
-`Mind-Reply/mindreply-app` is the canonical MindReply product root.
-
-Separate intentional boundaries remain:
-
-- `Mind-Reply/resellerpro` — ResellerPro product repository.
-- `Mind-Reply/whatsapp-ai-router` — PatchTalk / WhatsApp edge runtime.
-- `Mind-Reply/A11-K` — A11-K product and owner-operations surface.
-- `angellllkr-eng/a11-nowline` — Nova Hall source repository; public product identity is Nova Hall.
-
-## Migration rule
-
-Before retiring this source, reconcile unique code, documentation, configuration and evidence into the appropriate canonical destination. The migration is not complete merely because repositories share a README or product vocabulary.
-
-No credentials belong in Git history.
-
-## Runtime truth
-
-**SOURCE ONLY / NOT A PRODUCTION AUTHORITY / RUNTIME pending_evidence**
-
-Repository state is not proof of a live deployment.
+Repository contents alone do not prove live runtime status. No credentials belong in Git history.
