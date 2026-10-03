@@ -43,7 +43,7 @@ Suggested domain: `studio.a11-k.space` (already referenced in estate nav).
 
 1. Add optional BYOK model endpoint for richer section copy (still export-owned).
 2. Persist approved shells under `evidence/studio/` via control-plane.
-3. Crownline approval gate before any production publish.
+3. Crownline approval control before any production publish.
 
 ## Boundary (unchanged)
 
