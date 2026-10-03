@@ -9,7 +9,7 @@
 ## Organizational repository
 
 - `Mind-Reply/mindreply-app` is the organizational application repository.
-- It remains non-canonical for production until it contains the validated application and passes the migration gate.
+- It remains non-canonical for production until it contains the validated application and has migration verification recorded.
 
 ## Vercel requirement
 
