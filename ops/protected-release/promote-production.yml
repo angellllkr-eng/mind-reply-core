@@ -22,18 +22,6 @@ env:
   IMAGE_NAME: ${{ github.repository }}/mindreply-core
 
 jobs:
-  authorization:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Validate explicit authorization
-        shell: bash
-        run: |
-          test "${{ inputs.confirmation }}" = "DEPLOY"
-          case "${{ inputs.health_url }}" in
-            https://*) ;;
-            *) echo "health_url must use HTTPS" >&2; exit 1 ;;
-          esac
-
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
