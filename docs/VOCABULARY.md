@@ -9,8 +9,8 @@ Create a recognizable language without sacrificing comprehension, search relevan
 | Branded term | Plain meaning | Use for | Do not use for |
 |---|---|---|---|
 | **Proofline** | Evidence path from code change to verified outcome | CI, release, audit, fulfillment evidence | Generic project management |
-| **Crownline** | Owner-governed command and approval layer | permissions, approvals, policy, production gates | Unrestricted automation |
-| **ProofGate** | Blocking validation checkpoint | tests, security checks, deployment approval | Non-blocking reports |
+| **Crownline** | Owner-governed command and approval layer | permissions, approvals, policy, execution controls | Unrestricted automation |
+| **ProofGate** | Verification checkpoint | tests, security checks, deployment evidence | Non-blocking reports |
 | **Continuity Ledger** | Durable context and decision record | memory, decisions, provenance, handoffs | raw secrets or private credentials |
 | **ReplyRail** | Approved communication and delivery workflow | Twilio, WhatsApp, notifications, fulfillment | unsolicited outreach |
 | **Operator Guild** | Bounded specialist automation set | role-based agents with explicit permissions | autonomous production authority |
