@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The canonical frontend lives in `mind-reply-core`. Frontend changes must be validated with a real browser smoke gate before merge or production release.
+The canonical frontend lives in `mind-reply-core`. Frontend changes must be validated with a real browser smoke verification before merge or production release.
 
 ## Baseline
 
@@ -18,7 +18,7 @@ The canonical frontend lives in `mind-reply-core`. Frontend changes must be vali
 
 Keep the existing shadcn/ui New York component source as the production baseline. Do not replace the primitive layer as part of routine dependency upgrades. A future Base UI migration must be isolated, visually tested, and reviewed as a separate change.
 
-## Required E2E gate
+## Required E2E verification
 
 Every frontend-changing PR should:
 
@@ -30,7 +30,7 @@ Every frontend-changing PR should:
 
 ## Production safety
 
-E2E success is necessary but not sufficient for production deployment. Production deployment must additionally pass build, security, environment, database, and deployment-health checks.
+E2E success is necessary but not sufficient for production deployment. Build, security, environment, database, and deployment-health checks should also be recorded as verification evidence.
 
 ## Known repository hygiene rule
 
