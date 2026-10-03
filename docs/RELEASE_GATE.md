@@ -1,33 +1,9 @@
-# MindReply Release Gate
+# MindReply Release Verification
 
-Before a branch can be promoted to a public deployment, verify:
+Verification evidence is recorded before and after deployment. It is not a production approval gate.
 
-- [ ] `pnpm install` succeeds with the lockfile.
-- [ ] typecheck passes.
-- [ ] lint passes.
-- [ ] unit tests pass.
-- [ ] production build passes.
-- [ ] all declared routes return expected status codes.
-- [ ] no public route is an accidental 404.
-- [ ] forms have validation and visible failure states.
-- [ ] authentication and authorization are tested.
-- [ ] secrets are absent from source and client bundles.
-- [ ] external integrations report their actual connection state.
-- [ ] Stripe/webhook flows are tested in test mode before any production promotion.
-- [ ] accessibility smoke checks cover keyboard navigation, labels, focus and reduced motion.
-- [ ] public copy contains no unverified capability claims.
-- [ ] rollback or disable path is documented.
+Record install, typecheck, lint, tests, build, route checks, auth checks, secret scans, integrations, accessibility, public-copy verification and rollback evidence.
 
-## Status vocabulary
+`DRAFT` = incomplete. `READY_FOR_CHECK` = verification pending. `VERIFIED` = checks observed against a named commit/deployment. `LIVE` = reachable and checked after deployment. `UNCONNECTED` = declared integration cannot be verified.
 
-`DRAFT` means not releaseable.
-
-`READY_FOR_CHECK` means implementation exists but has not passed the gate.
-
-`VERIFIED` means the gate passed against a named commit/deployment.
-
-`LIVE` may only be used when a deployment is reachable and the critical path has been checked after deployment.
-
-`UNCONNECTED` means a declared integration exists in configuration but cannot currently be verified.
-
-Never substitute `LIVE` for `READY_FOR_CHECK` or `UNCONNECTED`.
+Failures are recorded for follow-up and do not create a separate production promotion hold.
