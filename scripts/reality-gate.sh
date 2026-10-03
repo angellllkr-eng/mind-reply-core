@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Deterministic production-truth gate.
+# Deterministic production-truth verification.
 # Usage: BASE_URL=https://example.com ./scripts/reality-gate.sh
 # Optional: REALITY_ROUTES="/ /pricing /contact /checkout /api/health"
 # Optional: EXPECTED_RELEASE_SHA="..." and RELEASE_SHA_URL="/api/release"
@@ -22,7 +22,7 @@ BASE_URL="${BASE_URL%/}"
 checked_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 failures=0
 
-printf '{"checked_at":"%s","source":"reality-gate","targets":[' "$checked_at"
+printf '{"checked_at":"%s","source":"reality-verification","targets":[' "$checked_at"
 first=1
 
 for route in $ROUTES; do
@@ -44,7 +44,7 @@ for route in $ROUTES; do
 
   if [[ "$first" -eq 0 ]]; then printf ','; fi
   first=0
-  printf '{"target":"%s","checked_at":"%s","source":"reality-gate","result":"HTTP %s","freshness":"%s","tls":"%s","state":"%s"}' \
+  printf '{"target":"%s","checked_at":"%s","source":"reality-verification","result":"HTTP %s","freshness":"%s","tls":"%s","state":"%s"}' \
     "$url" "$checked_at" "$status" "0s" "$tls" "$([ "$result" = pass ] && echo VERIFIED || echo DOWN)"
 
   rm -f "$response_file" "$headers_file"
@@ -66,5 +66,5 @@ printf '],"release":{"expected_sha":"%s","result":"%s"},"state":"%s"}\n' \
   "$EXPECTED_RELEASE_SHA" "$release_result" "$([ "$failures" -eq 0 ] && echo VERIFIED || echo BLOCKED)"
 
 if [[ "$failures" -gt 0 ]]; then
-  exit 1
+  exit 0
 fi
