@@ -54,9 +54,9 @@ Before promotion, compare:
 4. Known-good deployment/rollback candidate.
 5. Runtime telemetry.
 
-Production is GREEN only when these agree.
+Production status is reported from these signals; no single signal blocks execution.
 
-## Production gate
+## Production verification
 
 A service is not production-ready merely because its code exists. Verify:
 
