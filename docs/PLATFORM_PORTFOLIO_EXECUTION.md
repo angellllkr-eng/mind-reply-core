@@ -83,7 +83,7 @@ Existing A11-K application surfaces are retained as capabilities and consolidate
 - Superseded site experiments
 - Duplicate deployment shells
 
-## Migration gate
+## Migration verification
 
 A legacy project can be retired only after all are true:
 
