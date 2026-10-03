@@ -1,5 +1,4 @@
 import type { NextConfig } from 'next';
-import { withSentryConfig } from '@sentry/nextjs';
 
 const config: NextConfig = {
   // Optimization
@@ -10,22 +9,22 @@ const config: NextConfig = {
   generateEtags: true,
 
   // Build output
-  output: 'standalone',
+  output: 'standalone' as const,
 
   // Images optimization
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '*.vercel.app',
+        protocol: 'https' as const,
+        hostname: '*.vercel.app' as const,
       },
       {
-        protocol: 'https',
-        hostname: '*.mind-reply.com',
+        protocol: 'https' as const,
+        hostname: '*.mind-reply.com' as const,
       },
       {
-        protocol: 'https',
-        hostname: 'cdn.*.vercel.com',
+        protocol: 'https' as const,
+        hostname: 'cdn.*.vercel.com' as const,
       },
     ],
     formats: ['image/avif', 'image/webp'],
@@ -37,7 +36,7 @@ const config: NextConfig = {
   // Internationalization (if needed)
   i18n: {
     locales: ['en', 'de', 'fr'],
-    defaultLocale: 'en',
+    defaultLocale: 'en' as const,
   },
 
   // Headers
@@ -47,28 +46,28 @@ const config: NextConfig = {
         source: '/:path*',
         headers: [
           {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
+            key: 'X-DNS-Prefetch-Control' as const,
+            value: 'on' as const,
           },
           {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
+            key: 'X-Frame-Options' as const,
+            value: 'SAMEORIGIN' as const,
           },
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: 'X-Content-Type-Options' as const,
+            value: 'nosniff' as const,
           },
           {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
+            key: 'X-XSS-Protection' as const,
+            value: '1; mode=block' as const,
           },
           {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
+            key: 'Referrer-Policy' as const,
+            value: 'strict-origin-when-cross-origin' as const,
           },
           {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
+            key: 'Permissions-Policy' as const,
+            value: 'camera=(), microphone=(), geolocation=()'
           },
         ],
       },
@@ -76,8 +75,8 @@ const config: NextConfig = {
         source: '/api/(.*)',
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'no-cache, no-store, must-revalidate',
+            key: 'Cache-Control' as const,
+            value: 'no-cache, no-store, must-revalidate' as const,
           },
         ],
       },
@@ -88,9 +87,9 @@ const config: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/old-pricing',
-        destination: '/pricing',
-        permanent: true,
+        source: '/old-pricing' as const,
+        destination: '/pricing' as const,
+        permanent: true as const,
       },
     ];
   },
@@ -100,18 +99,18 @@ const config: NextConfig = {
     return {
       beforeFiles: [
         {
-          source: '/sitemap.xml',
-          destination: '/api/sitemap',
+          source: '/sitemap.xml' as const,
+          destination: '/api/sitemap' as const,
         },
         {
-          source: '/robots.txt',
-          destination: '/api/robots',
+          source: '/robots.txt' as const,
+          destination: '/api/robots' as const,
         },
       ],
       afterFiles: [
         {
-          source: '/api/v1/:path*',
-          destination: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/v1/:path*`,
+          source: '/api/v1/:path*' as const,
+          destination: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/v1/:path*` as const,
         },
       ],
       fallback: [],
@@ -122,14 +121,14 @@ const config: NextConfig = {
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
       Object.assign(config.optimization, {
-        runtimeChunk: 'single',
+        runtimeChunk: 'single' as const,
         splitChunks: {
-          chunks: 'all',
+          chunks: 'all' as const,
           cacheGroups: {
             default: false,
             vendors: false,
             vendor: {
-              filename: 'chunks/vendor.js',
+              filename: 'chunks/vendor.js' as const,
               test: /node_modules/,
               priority: 10,
               reuseExistingChunk: true,
@@ -159,8 +158,8 @@ const config: NextConfig = {
 
   // Environment variables
   env: {
-    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000' as const,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000' as const,
   },
 
   // Custom server config
@@ -176,18 +175,34 @@ const config: NextConfig = {
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },
+
+  // NOTE: Sentry wrapper removed from this branch.
+  // Root cause: next.config.ts imported withSentryConfig from '@sentry/nextjs', but
+  // that package is absent from package.json and the pnpm lockfile. Every Vercel
+  // build failed with MODULE_NOT_FOUND during next.config.ts load, so production
+  // has been red across the last 10+ deployments (PRs #101, #105, x31-worktree).
+  //
+  // Two paths forward (owner decision required):
+  // 1. Add @sentry/nextjs as a real dependency and regenerate the lockfile.
+  // 2. Keep this guard and re-enable Sentry only when the DSN/auth token exist.
+  //
+  // The previous withSentryConfig(...) call is preserved below as a commented
+  // reference so the Sentry org/project settings are not lost.
+  //
+  // import { withSentryConfig } from '@sentry/nextjs';
+  // const withSentry = withSentryConfig(config, {
+  //   org: 'mind-reply', project: 'mind-reply-core', silent: true,
+  //   widenClientFileUpload: true, tunnelRoute: '/monitoring', disableLogger: true,
+  //   autoSessionTracking: true,
+  // });
+  // export default withSentry;
+
+  return config;
+
+  // Legacy Sentry settings (kept for reference):
+  // org: 'mind-reply', project: 'mind-reply-core', silent: true,
+  // widenClientFileUpload: true, tunnelRoute: '/monitoring', disableLogger: true,
+  // autoSessionTracking: true,
 };
 
-// Sentry configuration
-const withSentry = withSentryConfig(config, {
-  org: 'mind-reply',
-  project: 'mind-reply-core',
-  silent: true,
-  widenClientFileUpload: true,
-  transpileClientSDK: true,
-  tunnelRoute: '/monitoring',
-  disableLogger: true,
-  autoSessionTracking: true,
-});
-
-export default withSentry;
+export default config;
