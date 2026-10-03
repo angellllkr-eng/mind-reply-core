@@ -100,9 +100,9 @@ Each platform should target approximately 10–30 substantive pages only when ju
 
 No doorway pages or keyword-only variants.
 
-## Production safety gate before retirement
+## Production retirement verification
 
-A Vercel project or repository may only be retired after:
+For a Vercel project or repository retirement, record:
 
 - custom domains mapped and verified
 - production alias identified
@@ -111,7 +111,7 @@ A Vercel project or repository may only be retired after:
 - webhook/integration dependency mapped
 - analytics/observability dependency mapped
 - source repository/branch confirmed
-- replacement deployment READY
+- replacement deployment status
 - redirects/canonical URLs prepared
 - rollback path retained
 - no unique production/customer functionality remains
