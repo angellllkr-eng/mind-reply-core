@@ -1,6 +1,6 @@
 # MindReply Release Verification
 
-Verification evidence is recorded before and after deployment. It is not a production approval gate.
+Verification evidence is recorded before and after deployment. It is an observational verification record; it does not block production execution.
 
 Record install, typecheck, lint, tests, build, route checks, auth checks, secret scans, integrations, accessibility, public-copy verification and rollback evidence.
 
