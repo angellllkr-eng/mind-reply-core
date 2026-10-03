@@ -20,7 +20,7 @@ Every page must have a real purpose: product capability, tool, solution, use cas
 
 No page should exist solely to target a keyword variant.
 
-## Quality gate
+## Quality verification
 A page is production-ready only when it has:
 - clear audience and intent
 - original/useful information or functionality
